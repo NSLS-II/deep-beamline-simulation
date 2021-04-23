@@ -1,7 +1,0 @@
-sources:
-  local:
-    driver: bluesky-mongo-normalized-catalog
-    args:
-      metadatastore_db: mongodb://localhost:27017/mds
-      asset_registry_db: mongodb://localhost:27017/ar
-
