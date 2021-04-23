@@ -30,7 +30,7 @@ Installation
 
    bash Miniconda3-latest-Linux-x86_64.sh
 
-- Create a conda environment 
+- Close and reload the VM. Create a conda environment 
 .. code:: bash
 
    conda create -n sirepo_bluesky python=3.8
@@ -43,14 +43,17 @@ Installation
 
    pip install sirepo-bluesky
    git clone https://github.com/NSLS-II/sirepo-bluesky/
-   cd sirepo_bluesky/
+   cd sirepo-bluesky/
 
-- Create a directory ``mkdir /home/temp/sirepo-docker-run`` and run the docker container
+- Outside of the conda environement, create a directory ``mkdir /home/temp/sirepo-docker-run`` and run the docker container
 .. code:: bash
 
   docker run -it --rm -e SIREPO_AUTH_METHODS=bluesky:guest -e SIREPO_AUTH_BLUESKY_SECRET=bluesky -e SIREPO_SRDB_ROOT=/sirepo -e SIREPO_COOKIE_IS_SECURE=false -p 8000:8000 -v $HOME/sirepo_srdb_root:/sirepo radiasoft/sirepo:20200220.135917 bash -l -c "sirepo service http"
 
 - Open a new terminal window, ``vagrant up``, ``vagrant ssh``, activate the conda environment, and enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
+
+- In order to run a grid scan create a directory ``mkdir /tmp/data/YYYY/MM/DD``
+ 
 
 .. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
 .. _SRW: https://www.esrf.fr/Accelerators/Groups/InsertionDevices/Software/SRW
