@@ -17,6 +17,7 @@ Purpose
 -------
 
 Use machine learning to simulate beamlines similar to SRW with lower computational costs.
+The goal is to determine whether or not a neural network can construct a beamline simulation given data from sirepo-bluesky.
 
 Installation
 ------------
@@ -56,7 +57,7 @@ Installation
 
 - Open a new terminal window, ``vagrant up``, ``vagrant ssh``, activate the conda environment, and enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
 
-- In order to run a grid scan create a directory ``mkdir /tmp/data/YYYY/MM/DD``.
+- In order to run a grid scan create a directory ``mkdir /tmp/data/YYYY/MM/DD``, where 'YYYY/MM/DD' represents the current date.
  
 
 .. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
