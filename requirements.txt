@@ -8,3 +8,4 @@ pyqt5>=5.9,<5.12
 requests
 srwpy
 unyt
+numconv
