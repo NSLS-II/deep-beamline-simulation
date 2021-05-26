@@ -4,7 +4,7 @@ ipython
 matplotlib
 ophyd
 pymongo
-pyqt5>=5.9,<5.12
+pyqt5
 requests
 srwpy
 unyt
