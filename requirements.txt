@@ -9,3 +9,4 @@ requests
 srwpy
 unyt
 numconv
+vcrpy
