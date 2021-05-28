@@ -43,12 +43,6 @@ Vagrant.configure("2") do |config|
     systemctl start mongod
     systemctl enable mongod
 
-    # install local.yml
-    # this will not be needed if we can use an entrypoint
-    mkdir -p /home/vagrant/.local/share/intake
-    chown -Rv vagrant:vagrant /home/vagrant/.local
-    cp /vagrant/local.yml /home/vagrant/.local/share/intake
-
     # create this directory now or it will be created by the sirepo
     # docker container with root ownership
     mkdir -p /home/vagrant/sirepo_srdb_root
