@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: start Sirepo-Bluesky container
-      run: docker run --rm -e SIREPO_AUTH_METHODS=bluesky:guest -e SIREPO_AUTH_BLUESKY_SECRET=bluesky -e SIREPO_SRDB_ROOT=/sirepo -e SIREPO_COOKIE_IS_SECURE=false -p 8000:8000 -v $HOME/sirepo_srdb_root:/sirepo radiasoft/sirepo:20200220.135917 bash -l -c "sirepo service http"
+      run: bash start_docker.sh
 
     - name: is Sirepo-Bluesky running?
       run: docker ps -a
@@ -42,5 +42,5 @@ jobs:
       shell: bash -l {0}
       run: |
         set -vxeuo pipefail
-        coverage run -m pytest -s -v
+        coverage run pytest tests/
         coverage report
