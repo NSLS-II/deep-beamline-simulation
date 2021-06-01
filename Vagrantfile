@@ -60,17 +60,17 @@ Vagrant.configure("2") do |config|
     chown -R vagrant:vagrant sirepo-bluesky/
 
   SHELL
-  # ssh into the VM and run the Sirepo docker container like this:
-  #   mkdir -p .local/share/intake
-  #
-  #   mkdir -p $HOME/tmp/sirepo-docker-run
-  #
-  #   try this, it may not help
-  #     mkdir sirepo_srdb_root
-  #   if you have permission problems with directory sirepo_srdb_root
-  #     sudo chown vagrant:vagrant sirepo_srdb_root
-  #
-  #   docker run -it --rm -e SIREPO_AUTH_METHODS=bluesky:guest -e SIREPO_AUTH_BLUESKY_SECRET=bluesky -e SIREPO_SRDB_ROOT=/sirepo -e SIREPO_COOKIE_IS_SECURE=false -p 8000:8000 -v $HOME/sirepo_srdb_root:/sirepo radiasoft/sirepo:20200220.135917 bash -l -c "sirepo service http"
+  # ssh into the VM
+  #   $ vagrant ssh
+  # install miniconda
+  #        # bash Miniconda3-latest-Linux-x86_64.sh
+  # log out of the VM and log back in to get the changes to .bashrc
+  # create and activate a conda virtual environment
+  #        # conda create -n dbs python=3.8
+  #        ...
+  #        # conda activate dbs
+  # run the Sirepo docker container like this:
+  #  (dbs) # bash start_docker.sh
   #
   # from the host go to http://10.10.10.10:8000
 end
