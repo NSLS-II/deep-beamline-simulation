@@ -4,14 +4,14 @@ month=$(date +"%m")
 day=$(date +"%d")
 year=$(date +"%Y")
 
-today="./../tmp/data/${year}/${month}/${day}"
+today="tmp/data/${year}/${month}/${day}"
 
-if [ -d "./../tmp/data/${year}/${month}/${day}" ]
+if [ -d "tmp/data/${year}/${month}/${day}" ]
 then
-    echo "Directory /path/to/dir exists."
+    echo "Directory ${today} exists."
 else
-    echo "Creating Directory"
-    mkdir "${today}"
+    echo "Creating Directory ${today}"
+    mkdir -p "${today}"
 fi
 
 pip install sirepo-bluesky
