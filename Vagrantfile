@@ -43,10 +43,22 @@ Vagrant.configure("2") do |config|
     systemctl start mongod
     systemctl enable mongod
 
+    # create some directories for the sirepo docker container to use
+    cd /home/vagrant
+    mkdir -p .local/share/intake
+    chown -R vagrant:vagrant .local/share/intake
+    mkdir -p tmp/sirepo-docker-run
+    chown -R vagrant:vagrant tmp/sirepo-docker-run
+
     # create this directory now or it will be created by the sirepo
     # docker container with root ownership
-    mkdir -p /home/vagrant/sirepo_srdb_root
-    chown vagrant:vagrant /home/vagrant/sirepo_srdb_root
+    mkdir sirepo_srdb_root
+    chown vagrant:vagrant sirepo_srdb_root
+  
+    # clone sirepo-bluesky to save a step later
+    git clone https://github.com/NSLS-II/sirepo-bluesky.git
+    chown -R vagrant:vagrant sirepo-bluesky/
+
   SHELL
   # ssh into the VM and run the Sirepo docker container like this:
   #   mkdir -p .local/share/intake
