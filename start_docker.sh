@@ -4,15 +4,19 @@ month=$(date +"%m")
 day=$(date +"%d")
 year=$(date +"%Y")
 
-today="tmp/data/${year}/${month}/${day}"
+today="$HOME/tmp/data/${year}/${month}/${day}"
 
-if [ -d "tmp/data/${year}/${month}/${day}" ]
+if [ -d "$HOME/tmp/data/${year}/${month}/${day}" ]
 then
     echo "Directory ${today} exists."
 else
     echo "Creating Directory ${today}"
     mkdir -p "${today}"
 fi
+
+mkdir -p $HOME/tmp/sirepo-docker-run
+
+ls -l $HOME/tmp
 
 # specify -it or -d on the command line
 docker run $1 --init --rm --name sirepo \
