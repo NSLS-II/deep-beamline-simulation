@@ -43,28 +43,34 @@ Vagrant.configure("2") do |config|
     systemctl start mongod
     systemctl enable mongod
 
-    # install local.yml
-    # this will not be needed if we can use an entrypoint
-    mkdir -p /home/vagrant/.local/share/intake
-    chown -Rv vagrant:vagrant /home/vagrant/.local
-    cp /vagrant/local.yml /home/vagrant/.local/share/intake
+    # create some directories for the sirepo docker container to use
+    cd /home/vagrant
+    mkdir -p .local/share/intake
+    chown -R vagrant:vagrant .local/share/intake
+    mkdir -p tmp/sirepo-docker-run
+    chown -R vagrant:vagrant tmp/sirepo-docker-run
 
     # create this directory now or it will be created by the sirepo
     # docker container with root ownership
-    mkdir -p /home/vagrant/sirepo_srdb_root
-    chown vagrant:vagrant /home/vagrant/sirepo_srdb_root
+    mkdir sirepo_srdb_root
+    chown vagrant:vagrant sirepo_srdb_root
+  
+    # clone sirepo-bluesky to save a step later
+    git clone https://github.com/NSLS-II/sirepo-bluesky.git
+    chown -R vagrant:vagrant sirepo-bluesky/
+
   SHELL
-  # ssh into the VM and run the Sirepo docker container like this:
-  #   mkdir -p .local/share/intake
-  #
-  #   mkdir -p $HOME/tmp/sirepo-docker-run
-  #
-  #   try this, it may not help
-  #     mkdir sirepo_srdb_root
-  #   if you have permission problems with directory sirepo_srdb_root
-  #     sudo chown vagrant:vagrant sirepo_srdb_root
-  #
-  #   docker run -it --rm -e SIREPO_AUTH_METHODS=bluesky:guest -e SIREPO_AUTH_BLUESKY_SECRET=bluesky -e SIREPO_SRDB_ROOT=/sirepo -e SIREPO_COOKIE_IS_SECURE=false -p 8000:8000 -v $HOME/sirepo_srdb_root:/sirepo radiasoft/sirepo:20200220.135917 bash -l -c "sirepo service http"
+  # ssh into the VM
+  #   $ vagrant ssh
+  # install miniconda
+  #        # bash Miniconda3-latest-Linux-x86_64.sh
+  # log out of the VM and log back in to get the changes to .bashrc
+  # create and activate a conda virtual environment
+  #        # conda create -n dbs python=3.8
+  #        ...
+  #        # conda activate dbs
+  # run the Sirepo docker container like this:
+  #  (dbs) # bash start_docker.sh
   #
   # from the host go to http://10.10.10.10:8000
 end
