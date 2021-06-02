@@ -42,5 +42,5 @@ jobs:
       shell: bash -l {0}
       run: |
         set -vxeuo pipefail
-        coverage run pytest
+        coverage run pytest -s -v
         coverage report
