@@ -9,12 +9,52 @@ Deep Beamline Simulation
         :target: https://pypi.python.org/pypi/deep-beamline-simulation
 
 
-Repository for simulations of beamlines in SRW.
+Beamline Simulation using `sirepo-bluesky`_ and Synchrotron Radiation Workshop (`SRW`_).
 
 * Free software: 3-clause BSD license
-* Documentation: (COMING SOON!) https://jennmald.github.io/deep-beamline-simulation.
 
-Features
---------
+Purpose
+-------
 
-* TODO
+Use machine learning to simulate beamlines similar to SRW with lower computational costs.
+The goal is to determine whether or not a neural network can construct a beamline simulation given data from sirepo-bluesky.
+
+Installation
+------------
+
+- Install `VirtualBox`_ on your computer.
+- Install `Vagrant`_ using the terminal.
+- Add the Vagrantfile located in this repository to a new directory.
+- Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``.
+- Once in the VM, finish the Miniconda installation,
+.. code:: bash
+
+   bash Miniconda3-latest-Linux-x86_64.sh
+
+- Close and reload the VM. Create a conda environment, 
+.. code:: bash
+
+   conda create -n sirepo_bluesky python=3.8
+   conda activate sirepo_bluesky
+   sudo apt update
+   sudo apt upgrade
+
+- Install ``sirepo-bluesky``,
+.. code:: bash
+
+   pip install sirepo-bluesky
+   git clone https://github.com/NSLS-II/sirepo-bluesky/
+
+- It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
+
+- In the deep-beamline-simulation repository, use the command ``bash start_docker.sh`` to start the docker container. 
+
+- Open the interative website http://10.10.10.10:8000/srw.
+
+- Open a new terminal window, ``vagrant up``, ``vagrant ssh``, activate the conda environment, and enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
+ 
+
+.. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
+.. _SRW: https://www.esrf.fr/Accelerators/Groups/InsertionDevices/Software/SRW
+.. _VirtualBox: https://www.virtualbox.org/
+.. _Vagrant: https://www.vagrantup.com
