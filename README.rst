@@ -24,7 +24,7 @@ Installation
 
 - Install `VirtualBox`_ on your computer.
 - Install `Vagrant`_ using the terminal.
-- Add the Vagrantfile located in this repository to a new directory.
+- Add the Vagrantfile located in this repository into a new directory.
 - Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``.
 - Once in the VM, finish the Miniconda installation,
 .. code:: bash
@@ -47,14 +47,14 @@ Installation
 
 - It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
 
-- In the deep-beamline-simulation repository, use the command ``bash start_docker.sh`` to start the docker container. 
+- In the deep-beamline-simulation repository, use the command ``bash start_docker.sh`` to start the docker container. The container will run in the background. To verify it is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. 
 
 - Open the interative website http://10.10.10.10:8000/srw.
 
-- Open a new terminal window, ``vagrant up``, ``vagrant ssh``, activate the conda environment, and enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
+- In the activated ``sirepo_bluesky`` conda environment, enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
  
 
 .. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
-.. _SRW: https://www.esrf.fr/Accelerators/Groups/InsertionDevices/Software/SRW
+.. _SRW: https://github.com/ochubar/SRW
 .. _VirtualBox: https://www.virtualbox.org/
 .. _Vagrant: https://www.vagrantup.com
