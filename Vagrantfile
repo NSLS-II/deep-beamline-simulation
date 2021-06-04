@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
     # create some directories for the sirepo docker container to use
     cd /home/vagrant
     mkdir -p .local/share/intake
-    chown -R vagrant:vagrant .local
+    chown -Rv vagrant:vagrant .local
     mkdir -p tmp/sirepo-docker-run
     chown -R vagrant:vagrant tmp
 
@@ -74,4 +74,3 @@ Vagrant.configure("2") do |config|
   #
   # from the host go to http://10.10.10.10:8000
 end
-
