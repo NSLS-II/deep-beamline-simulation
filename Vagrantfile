@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
     apt update
+    apt full-upgrade
     apt install -y python3-pip
     # install X11 for matplotlib
     apt install -y xserver-xorg-core x11-utils
