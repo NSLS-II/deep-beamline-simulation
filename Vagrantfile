@@ -46,9 +46,9 @@ Vagrant.configure("2") do |config|
     # create some directories for the sirepo docker container to use
     cd /home/vagrant
     mkdir -p .local/share/intake
-    chown -R vagrant:vagrant .local/share/intake
+    chown -Rv vagrant:vagrant .local
     mkdir -p tmp/sirepo-docker-run
-    chown -R vagrant:vagrant tmp/sirepo-docker-run
+    chown -Rv vagrant:vagrant tmp
 
     # create this directory now or it will be created by the sirepo
     # docker container with root ownership
@@ -56,8 +56,8 @@ Vagrant.configure("2") do |config|
     chown vagrant:vagrant sirepo_srdb_root
   
     # clone sirepo-bluesky to save a step later
-    git clone https://github.com/NSLS-II/sirepo-bluesky.git
-    chown -R vagrant:vagrant sirepo-bluesky/
+    #git clone https://github.com/NSLS-II/sirepo-bluesky.git
+    #chown -R vagrant:vagrant sirepo-bluesky/
 
   SHELL
   # ssh into the VM
@@ -74,4 +74,3 @@ Vagrant.configure("2") do |config|
   #
   # from the host go to http://10.10.10.10:8000
 end
-
