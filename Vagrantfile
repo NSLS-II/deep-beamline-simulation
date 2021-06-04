@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
     mkdir -p .local/share/intake
     chown -Rv vagrant:vagrant .local
     mkdir -p tmp/sirepo-docker-run
-    chown -R vagrant:vagrant tmp
+    chown -Rv vagrant:vagrant tmp
 
     # create this directory now or it will be created by the sirepo
     # docker container with root ownership
