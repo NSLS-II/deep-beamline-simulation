@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
     apt update
+    apt upgrade
     apt install -y python3-pip
     # install X11 for matplotlib
     apt install -y xserver-xorg-core x11-utils
@@ -26,6 +27,7 @@ Vagrant.configure("2") do |config|
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
     apt update
+    apt upgrade
     apt install -y docker-ce
     # add the vagrant account to the docker group
     # this way the vagrant account can run docker without sudo
@@ -39,6 +41,7 @@ Vagrant.configure("2") do |config|
     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
     apt update
+    apt upgrade
     apt install -y mongodb-org
     systemctl start mongod
     systemctl enable mongod

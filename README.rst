@@ -36,18 +36,10 @@ Installation
 
    conda create -n sirepo_bluesky python=3.8
    conda activate sirepo_bluesky
-   sudo apt update
-   sudo apt upgrade
-
-- Install ``sirepo-bluesky``,
-.. code:: bash
-
-   pip install sirepo-bluesky
-   git clone https://github.com/NSLS-II/sirepo-bluesky/
 
 - It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
 
-- In the deep-beamline-simulation repository, use the command ``bash start_docker.sh`` to start the docker container. The container will run in the background. To verify it is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. 
+- To move into the ``deep-beamline-simulation`` directory use ``cd /vagrant``. Use the command ``bash start_docker.sh`` to start the docker container. To run in the background use ``-d`` at the end of the command or for an interactive version is ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. 
 
 - Open the interative website http://10.10.10.10:8000/srw.
 
