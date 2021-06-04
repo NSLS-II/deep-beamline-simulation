@@ -1,6 +1,5 @@
 bluesky
 databroker
-sirepo-bluesky
 ipython
 matplotlib
 ophyd
@@ -11,3 +10,5 @@ srwpy
 unyt
 numconv
 vcrpy
+chardet==4.0
+sirepo-bluesky
