@@ -56,8 +56,8 @@ Vagrant.configure("2") do |config|
     chown vagrant:vagrant sirepo_srdb_root
   
     # clone sirepo-bluesky to save a step later
-    git clone https://github.com/NSLS-II/sirepo-bluesky.git
-    chown -R vagrant:vagrant sirepo-bluesky/
+    #git clone https://github.com/NSLS-II/sirepo-bluesky.git
+    #chown -R vagrant:vagrant sirepo-bluesky/
 
   SHELL
   # ssh into the VM
