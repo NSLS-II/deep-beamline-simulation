@@ -24,9 +24,9 @@ Installation
 
 - Install `VirtualBox`_ on your computer.
 - Install `Vagrant`_ using the terminal.
-- Add the Vagrantfile located in this repository into a new directory.
-- Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``.
-- Once in the VM, finish the Miniconda installation,
+- Git clone this repository. Then use ``cd deep-beamline-simulation`` to move into the top level directory of this repository.
+- You will see a Vagrantfile containing virtual machine setup information. Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``.
+- Once the virtual machine is running, finish the Miniconda installation,
 .. code:: bash
 
    bash Miniconda3-latest-Linux-x86_64.sh
@@ -39,12 +39,9 @@ Installation
 
 - It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
 
-- To move into the ``deep-beamline-simulation`` directory use ``cd /vagrant``. Use the command ``bash start_docker.sh`` to start the docker container. To run in the background use ``-d`` at the end of the command or for an interactive version is ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. 
+- To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``. Use the command ``bash start_docker.sh`` to start the docker container. To run the docker container in the background use ``-d`` at the end of the command or for an interactive version add ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'. 
 
-- Open the interative website http://10.10.10.10:8000/srw.
-
-- In the activated ``sirepo_bluesky`` conda environment, enter the directory for ``sirepo-bluesky``. Run ``ipython`` to begin simulations.
- 
+- Open the interative website http://10.10.10.10:8000/srw. 
 
 .. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
 .. _SRW: https://github.com/ochubar/SRW
