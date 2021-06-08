@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Running"
+
 month=$(date +"%m")
 day=$(date +"%d")
 year=$(date +"%Y")
