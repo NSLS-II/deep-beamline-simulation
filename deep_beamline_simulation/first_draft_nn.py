@@ -1,23 +1,21 @@
+import time
 import torch
 from torch.autograd import Variable
 from torch.nn import *
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import numpy as np
-
+from sklearn.preprocessing import PolynomialFeatures
 
 # define neural network
 class Neural_Net(torch.nn.Module):
     def __init__(self):
         super(Neural_Net, self).__init__()
         # define layers
-        self.hidden1 = torch.nn.Linear(1, 256)
+        self.hidden1 = torch.nn.Linear(7, 256)
         self.hidden2 = torch.nn.Linear(256, 512)
         self.hidden3 = torch.nn.Linear(512, 512)
-        self.hidden4 = torch.nn.Linear(512, 1024)
-        self.hidden8 = torch.nn.Linear(1024, 1024)
-        self.hidden9 = torch.nn.Linear(1024, 512)
-        self.hidden10 = torch.nn.Linear(512, 256)
+        self.hidden4 = torch.nn.Linear(512, 256)
         self.output = torch.nn.Linear(256, 1)
 
     def forward(self, x):
@@ -26,9 +24,6 @@ class Neural_Net(torch.nn.Module):
         x = F.relu(self.hidden2(x))
         x = F.relu(self.hidden3(x))
         x = F.relu(self.hidden4(x))
-        x = F.relu(self.hidden8(x))
-        x = F.relu(self.hidden9(x))
-        x = F.relu(self.hidden10(x))
         x = self.output(x)
         return x
 
@@ -36,65 +31,74 @@ class Neural_Net(torch.nn.Module):
 # create model object
 model = Neural_Net()
 # display model
+print("Model Structure")
 print(model)
 
 # get data from csv file
 data = np.genfromtxt(
     "Intensity-At-BPM1-38-6904m-Horizontal-Position.csv", delimiter=","
 )
-data = list(data)
-data.pop(0)
-data = np.array(data)
-# split np array
-position, intensity = np.split(data, 2, axis=1)
+data = np.array(data[1:])
+
+position = data[:, 0]
+intensity = data[:, 1]
+
 # find max and min for normalization process
 min_ints = min(intensity)
+print("Min" + str(min_ints))
 max_ints = max(intensity)
+print("Max" + str(max_ints))
 # normalize the intensity
 norm_intensity = (intensity - min_ints) / (max_ints - min_ints)
+
+# apply polynomial preprocessing
+poly = PolynomialFeatures(6)
+x_expanded = np.expand_dims(position, axis=1)
+x_expanded = poly.fit_transform(x_expanded)
+
 # convert numpy array to tensor of input shape
-x_pos = torch.from_numpy(position.reshape(-1, 1)).float()
+x_poly = torch.from_numpy(x_expanded).float()
 y_norm = torch.from_numpy(norm_intensity.reshape(-1, 1)).float()
-# y_plot = torch.from_numpy(intensity.reshape(-1,1)).float()
+
 # optimizer and loss
-optimizer = torch.optim.SGD(model.parameters(), lr=0.6)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
 loss_func = torch.nn.MSELoss()
+
 # change type to Variable (contains gradients)
-inputs = Variable(x_pos)
+inputs = Variable(x_poly)
 outputs = Variable(y_norm)
+
 # define a loss list
 loss_plot = []
 x_loss = []
+
+t_start = time.time()
 # begin training
-for i in range(1000):
+for i in range(10000):
     prediction = model(inputs)
-    # un-normalize predictions
-    np_predictions = prediction.detach().numpy()
-    norm_predictions = np_predictions * max_ints
     loss = loss_func(prediction, outputs)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
     # collect loss per epoch
-    if i % 50 == 0:
+    if i % 500 == 0:
         loss_plot.append(loss.data.numpy())
         x_loss.append(i)
 
     if i % 1000 == 0:
         # plot and show learning process
         plt.cla()
-        plt.scatter(x_pos.data.numpy(), y_norm.data.numpy())
+        plt.plot(position, y_norm.data.numpy())
         plt.title(i)
-        plt.plot(x_pos.data.numpy(), norm_predictions, "r-", lw=0.5)
-        # plt.plot(x.data.numpy(), prediction.data.numpy(), 'r-', lw=0.1)
-        # plt.text(0, 0, 'Loss=%.4f' % loss.data.numpy(), fontdict={'size': 10, 'color':  'red'})
+        plt.plot(position, prediction.data.numpy())
         plt.text(0, 0, "Loss=%.4f" % loss.data.numpy())
         plt.pause(0.1)
-        print(y_norm.data.numpy())
-        print(norm_predictions)
+t_end = time.time()
 
+print("training completed")
+print("Time elapsed: " + str(t_end - t_start))
 plt.show()
-plt.scatter(x_loss, loss_plot)
+plt.plot(x_loss, loss_plot)
 plt.title("Loss plot")
 plt.show()
