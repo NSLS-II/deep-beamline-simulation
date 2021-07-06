@@ -2,8 +2,8 @@ import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 
 loss_list = []
-file_name = 'tensorboard.txt'
-file = open(file_name,'r')
+file_name = "tensorboard.txt"
+file = open(file_name, "r")
 for line in file:
     loss_list.append(line.strip())
 file.close()

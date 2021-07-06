@@ -120,7 +120,7 @@ outputs = Variable(y)
 loss_plot = []
 
 # define data location for tensorboard access
-file_path = '/vagrant/tensorboard.txt'
+file_path = "/vagrant/tensorboard.txt"
 # open file
 file = open(file_path, "w")
 
@@ -166,5 +166,5 @@ t_end = time.time()
 print("Time elapsed: " + str((t_end - t_start) / 60.0))
 
 for element in loss_plot:
-    file.write(str(element)+'\n')
+    file.write(str(element) + "\n")
 file.close()
