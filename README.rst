@@ -38,14 +38,24 @@ Installation
 
 - To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``. Use ``pip install .`` to install all requirements and setup necessary packages. 
 
+- Use the command ``bash start_docker.sh`` to start the docker container. To run the docker container in the background use ``-d`` at the end of the command or for an interactive version add ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'.
+
+- Open the interactive website http://10.10.10.10:8000/srw.
+
+Pytorch
+-------
+
 - To run files requiring pytorch, visit ``https://pytorch.org`` to find a compatible installation command. For this virtual machine it is suggested to use,
 .. code:: bash
 
    conda install pytorch torchvision torchaudio cpuonly -c pytorch
 
-- Use the command ``bash start_docker.sh`` to start the docker container. To run the docker container in the background use ``-d`` at the end of the command or for an interactive version add ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'. 
+- When neural network training is complete, exit the VM and run ``python tensorfile.py``. Then use ``tensorboard --logdir=runs``. This will provide output similar to the following. Copy and paste the link into the web browser to access tensorboard.
 
-- Open the interactive website http://10.10.10.10:8000/srw. 
+..code:: bash
+
+   Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
+   TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 
 .. _sirepo-bluesky: https://github.com/NSLS-II/sirepo-bluesky
 .. _SRW: https://github.com/ochubar/SRW

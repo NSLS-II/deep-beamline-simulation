@@ -118,22 +118,24 @@ outputs = Variable(y)
 
 # define a loss list
 loss_plot = []
-x_loss = []
+
+# define data location for tensorboard access
+file_path = '/vagrant/tensorboard.txt'
+# open file
+file = open(file_path, "w")
 
 # start training time
 t_start = time.time()
 
 # begin training
-for i in range(10000):
+for i in range(5000):
     prediction = model(inputs)
     loss = loss_func(prediction, outputs)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
-    # collect loss per epoch
-    if i % 500 == 0:
-        loss_plot.append(loss.data.numpy())
-        x_loss.append(i)
+    # collect loss
+    loss_plot.append(loss.data.numpy())
 
     if i % 1000 == 0:
         # plot and show learning process
@@ -163,10 +165,6 @@ t_end = time.time()
 # print time in minutes elapsed
 print("Time elapsed: " + str((t_end - t_start) / 60.0))
 
-# plot the loss
-plt.plot(x_loss, loss_plot)
-plt.title("Loss plot")
-plt.show()
-
-# tensor board information
-writer.add_scalar("Loss/train", x_loss, loss_plot)
+for element in loss_plot:
+    file.write(str(element)+'\n')
+file.close()
