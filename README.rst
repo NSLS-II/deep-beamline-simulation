@@ -52,7 +52,7 @@ Pytorch
 
 - When neural network training is complete, exit the VM and run ``python tensorfile.py``. Then use ``tensorboard --logdir=runs``. This will provide output similar to the following. Copy and paste the link into the web browser to access tensorboard.
 
-..code:: bash
+.. code:: bash
 
    Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
    TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
