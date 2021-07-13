@@ -16,7 +16,7 @@ def test_auth(sim_id, server_name):
     assert "beamline" in data["models"]
 
 
-@vcr.use_cassette(f"{cassette_location}/test_smoke_sirepo.yml")
+@vcr.use_cassette(f"{cassette_location}/sirepo_test.yml")
 def test_auth_vcr():
     test_auth(sim_id="avw4qnNw", server_name="http://10.10.10.10:8000")
 
