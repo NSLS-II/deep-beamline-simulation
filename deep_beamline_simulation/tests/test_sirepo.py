@@ -1,5 +1,6 @@
 from sirepo_bluesky.sirepo_bluesky import SirepoBluesky
 from deep_beamline_simulation.sirepo_data import sirepo_data
+import deep_beamline_simulation.tests
 import os
 import pytest
 import vcr
@@ -10,7 +11,7 @@ cassette_location = os.path.join(
 
 
 def test_auth(sim_id, server_name):
-    sb = SirepoBluesky("server_name")
+    sb = SirepoBluesky(server_name)
     data, schema = sb.auth("srw", sim_id)
     assert "beamline" in data["models"]
 
