@@ -3,7 +3,7 @@ from deep_beamline_simulation.sirepo_data import sirepo_data
 
 
 def test_auth():
-    sb = SirepoBluesky("http://127.0.0.1:8000/")
+    sb = SirepoBluesky("http://10.10.10.10:8000")
     data, schema = sb.auth('srw', "avw4qnNw")
     assert 'beamline' in data['models']
 
