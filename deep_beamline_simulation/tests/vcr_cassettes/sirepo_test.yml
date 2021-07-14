@@ -1,0 +1,602 @@
+interactions:
+- request:
+    body: '{"simulationType": "srw", "simulationId": "avw4qnNw", "authNonce": "1626212104-BSevSU8hadQain6uz3qn4OELtF1q8fc1",
+      "authHash": "v1:NXCz_keBP9qTe6CW7S1OV23a8TPS4SxWsvtce_EEArg="}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '176'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.25.1
+    method: POST
+    uri: http://10.10.10.10:8000/bluesky-auth
+  response:
+    body:
+      string: '{"data":{"models":{"arbitraryMagField":{"interpolationOrder":1,"longitudinalPosition":0,"magneticFile":"ivu21_srx_g6_2c.dat"},"beamline":[{"horizontalOffset":0,"horizontalSize":1,"id":4,"position":25,"shape":"r","title":"Aperture","type":"aperture","verticalOffset":0,"verticalSize":1},{"id":5,"position":27,"title":"Watchpoint","type":"watch"}],"beamline3DReport":{"condenseBeamline":"1","includeSource":"1","projection":"parallel","showLabels":"1","showPosition":"1"},"brillianceReport":{"brightnessComponent":"k-tuning","detuning":0,"energyDelta":10,"energyPointCount":100,"finalHarmonic":5,"harmonic":"5","initialHarmonic":1,"minDeflection":0.2,"notes":"","plotScale":"linear","reportType":"0"},"coherenceXAnimation":{"aspectRatio":"1","colorMap":"grayscale","intensityPlotsWidth":"0","plotScale":"linear"},"coherenceYAnimation":{"aspectRatio":"1","colorMap":"grayscale","intensityPlotsWidth":"0","plotScale":"linear"},"electronBeam":{"beamDefinition":"t","beamSelector":"NSLS-II
+        Low Beta Final","current":0.5,"energy":3,"energyDeviation":0,"horizontalAlpha":0,"horizontalBeta":1.84,"horizontalDispersion":0,"horizontalDispersionDerivative":0,"horizontalEmittance":0.55,"isReadOnly":true,"name":"NSLS-II
+        Low Beta Final","rmsDivergX":17.28910187,"rmsDivergY":2.6148818,"rmsSizeX":31.81194744,"rmsSizeY":3.05941171,"rmsSpread":0.00089,"verticalAlpha":0,"verticalBeta":1.17,"verticalDispersion":0,"verticalDispersionDerivative":0,"verticalEmittance":0.008,"xxprX":0,"xxprY":0},"electronBeamPosition":{"drift":-1.54,"driftCalculationMethod":"auto","horizontalAngle":0,"horizontalPosition":0,"verticalAngle":0,"verticalPosition":0},"exportRsOpt":{"elements":[],"numCores":4,"numSamples":100,"numWorkers":1,"scanType":"random"},"fluxAnimation":{"azimuthalPrecision":1,"distanceFromSource":20,"finalEnergy":20000,"finalHarmonic":15,"fluxType":1,"horizontalApertureSize":"1","horizontalPosition":0,"initialEnergy":10000,"initialHarmonic":1,"longitudinalPrecision":1,"magneticField":2,"method":1,"notes":"","numberOfMacroElectrons":1000,"photonEnergyPointCount":1000,"plotScale":"linear","polarization":6,"precision":0.01,"verticalApertureSize":"1","verticalPosition":0},"fluxReport":{"azimuthalPrecision":1,"distanceFromSource":20,"finalEnergy":20000,"finalHarmonic":15,"fluxType":1,"horizontalApertureSize":"1","horizontalPosition":0,"initialEnergy":"100","initialHarmonic":1,"longitudinalPrecision":1,"magneticField":1,"method":-1,"notes":"","numberOfMacroElectrons":1,"photonEnergyPointCount":10000,"plotScale":"linear","polarization":6,"precision":0.01,"verticalApertureSize":"1","verticalPosition":0},"gaussianBeam":{"energyPerPulse":"0.001","photonEnergy":"9000","polarization":1,"rmsDivergenceX":0,"rmsDivergenceY":0,"rmsPulseDuration":0.1,"rmsSizeX":"9.78723","rmsSizeY":"9.78723","sizeDefinition":"1","waistAngleX":0,"waistAngleY":0,"waistX":0,"waistY":0,"waistZ":0},"initialIntensityReport":{"_super":"_INTENSITY_REPORT","aspectRatio":"1","characteristic":0,"colorMap":"grayscale","copyCharacteristic":"0","fieldUnits":1,"horizontalOffset":0,"horizontalSize":0.4,"intensityPlotsWidth":"0","maxIntensityLimit":135380478726242300,"minIntensityLimit":1.1344090975219374e-15,"notes":"","plotScale":"linear","polarization":6,"precision":0.01,"rotateAngle":0,"rotateReshape":"1","sampleFactor":0,"useIntensityLimits":"0","usePlotRange":"0","verticalOffset":0,"verticalSize":0.6},"intensityReport":{"distanceFromSource":20,"fieldUnits":"1","finalEnergy":"20000","horizontalPosition":"0","initialEnergy":"100","magneticField":"1","method":"1","notes":"","photonEnergyPointCount":10000,"plotScale":"linear","polarization":6,"precision":0.01,"verticalPosition":0},"mirrorReport":{"intensityPlotsWidth":"0","notes":"","plotScale":"linear"},"multiElectronAnimation":{"_super":"_INTENSITY_REPORT","aspectRatio":"1","calcCoherence":"0","colorMap":"grayscale","horizontalOffset":0,"horizontalPosition":0,"horizontalRange":"0.4","horizontalSize":1,"integrationMethod":"0","intensityPlotsWidth":"0","jobRunMode":"parallel","maxIntensityLimit":1e+30,"minIntensityLimit":0,"notes":"","numberOfMacroElectrons":1000,"photonEnergyBandWidth":0,"plotScale":"linear","rotateAngle":0,"rotateReshape":"1","sbatchCores":128,"sbatchHours":0.4,"sbatchProject":"","sbatchQueue":"debug","stokesParameter":"0","useIntensityLimits":"0","usePlotRange":"0","verticalOffset":0,"verticalPosition":0,"verticalRange":"0.6","verticalSize":1,"watchpointId":5},"multipole":{"distribution":"n","field":0.4,"length":3,"order":1},"postPropagation":[0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0],"powerDensityReport":{"_super":"_INTENSITY_REPORT","aspectRatio":"1","colorMap":"grayscale","distanceFromSource":20,"horizontalOffset":0,"horizontalPointCount":100,"horizontalPosition":"0","horizontalRange":"15","horizontalSize":1,"intensityPlotsWidth":"0","maxIntensityLimit":1e+30,"method":1,"minIntensityLimit":0,"notes":"","plotScale":"linear","precision":"1","rotateAngle":0,"rotateReshape":"1","useIntensityLimits":"0","usePlotRange":"0","verticalOffset":0,"verticalPointCount":100,"verticalPosition":0,"verticalRange":"15","verticalSize":1},"propagation":{"4":[[0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,1,1,1,0,0,0,0,0,0,0,0]],"5":[[0,0,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0],[0,0,1,1,0,1,1,1,1,0,0,0,0,0,0,0,0]]},"simulation":{"distanceFromSource":25,"documentationUrl":"","folder":"/","horizontalPointCount":100,"horizontalPosition":0,"horizontalRange":"0.4","isExample":"","name":"example","notes":"","outOfSessionSimulationId":"","photonEnergy":"9000","sampleFactor":1,"samplingMethod":1,"simulationId":"avw4qnNw","simulationSerial":1625773121923982,"sourceType":"g","verticalPointCount":100,"verticalPosition":0,"verticalRange":"0.6"},"sourceIntensityReport":{"_super":"_INTENSITY_REPORT","aspectRatio":"1","characteristic":0,"colorMap":"grayscale","distanceFromSource":20,"fieldUnits":1,"finalPosition":0,"horizontalOffset":0,"horizontalPointCount":100,"horizontalPosition":0,"horizontalRange":"0.4","horizontalSize":0.4,"initialPosition":0,"intensityPlotsWidth":"0","maxIntensityLimit":199264457942106100,"method":"1","minIntensityLimit":1.1731989394935498e-30,"notes":"","photonEnergy":"9000","plotScale":"linear","polarization":6,"precision":0.01,"rotateAngle":0,"rotateReshape":"1","sampleFactor":1,"samplingMethod":2,"useIntensityLimits":"0","usePlotRange":"0","verticalOffset":0,"verticalPointCount":100,"verticalPosition":0,"verticalRange":"0.6","verticalSize":0.6},"tabulatedUndulator":{"gap":6.72,"id":"
+        1","indexFileName":"","magneticFile":"magnetic_measurements.zip","name":"Undulator","phase":0,"undulatorSelector":"Undulator","undulatorType":"u_t"},"trajectoryReport":{"finalTimeMoment":0,"initialTimeMoment":0,"magneticField":"2","notes":"","numberOfPoints":10000,"plotAxisX":"Z","plotAxisY":"X","plotAxisY2":"None","timeMomentEstimation":"auto"},"undulator":{"effectiveDeflectingParameter":1.65776086,"horizontalAmplitude":"0","horizontalDeflectingParameter":0,"horizontalInitialPhase":0,"horizontalSymmetry":1,"length":3,"longitudinalPosition":0,"period":"20","verticalAmplitude":"0.88770981","verticalDeflectingParameter":1.65776086,"verticalInitialPhase":0,"verticalSymmetry":-1},"watchpointReport5":{"_super":"_INTENSITY_REPORT","aspectRatio":"1","characteristic":0,"colorMap":"grayscale","copyCharacteristic":"0","fieldUnits":1,"horizontalOffset":0,"horizontalSize":0.401433642568047,"intensityPlotsWidth":"0","maxIntensityLimit":118054297186336770,"minIntensityLimit":0,"notes":"","plotScale":"linear","polarization":6,"precision":0.01,"rotateAngle":0,"rotateReshape":"1","sampleFactor":0,"useIntensityLimits":"0","usePlotRange":"0","verticalOffset":0,"verticalSize":0.6022905129016719}},"report":"initialIntensityReport","simulationType":"srw","version":"20210630.223337"},"schema":{"appModes":{"calculator":{"localRoute":"source","includeMode":true},"wavefront":{"localRoute":"beamline","includeMode":true},"light-sources":{"localRoute":"beamline","includeMode":true},"default":{"localRoute":"source","includeMode":false}},"constants":{"helpVideoURL":"https://vimeo.com/410318423/632634aa5d","rsoptElements":{"aperture":{"positionFields":["horizontalOffset","verticalOffset","position"]},"ellipsoidMirror":{"positionFields":["horizontalOffset","verticalOffset","position"],"vectorFields":["normalVectorX","normalVectorY","normalVectorZ"]},"mirror":{"positionFields":["","","position"]},"sphericalMirror":{"vectorFields":["normalVectorX","normalVectorY","normalVectorZ"],"positionFields":["horizontalOffset","verticalOffset","position"]},"toroidalMirror":{"vectorFields":["normalVectorX","normalVectorY","normalVectorZ"],"positionFields":["horizontalOffset","verticalOffset","position"]}},"canDownloadInputFile":true,"clientCookie":"sirepo_cookie_js","hasJupyterExport":false,"hasMadxExport":false,"maxSimCopies":100,"oneDayMillis":86400000,"paymentPlans":{"basic":"Sirepo
+        Basic","enterprise":"Sirepo Enterprise","premium":"Sirepo Premium"},"plansUrl":"/en/plans.html","simulationSourceExtension":"py"},"enum":{"AnalyticalTreatment":[["0","0
+        - Standard"],["1","1 - Quadratic Term"],["2","2 - Quadratic Term - Special"],["3","3
+        - From Waist"],["4","4 - To Waist"]],"ApertureShape":[["r","Rectangular"],["c","Circular"]],"ApertureShapeToroidalMirror":[["r","Rectangular"],["e","Elliptical"]],"ApplicationMode":[["default","Expert"],["calculator","SR
+        Calculator"],["light-sources","Light Source Facilities"],["wavefront","Wavefront
+        Propagation"]],"AutocomputeVectors":[["horizontal","Horizontal"],["vertical","Vertical"],["none","None"]],"BeamDefinition":[["t","Twiss"],["m","Moments"]],"BrightnessComponent":[["k-tuning","K
+        Tuning"],["spectral-detuning","Spectral Detuning"]],"BrillianceReportType":[["0","Flux
+        (Ph/s/.1%)"],["1","Angular Flux (Ph/s/.1%/mr\u00b2)"],["2","Brilliance (Ph/s/.1%/mr\u00b2/mm\u00b2)"],["3","Horizontal
+        RMS Angular Divergence"],["4","Vertical RMS Angular Divergence"],["5","Horizontal
+        RMS Source Size"],["6","Vertical RMS Source Size"]],"Characteristic":[["0","Single-Electron
+        Intensity"],["1","Multi-Electron Intensity (disregarding energy spread)"],["4","Single-Electron
+        Radiation Phase"],["5","Re(E): Real part of Single-Electron Electric Field"],["6","Im(E):
+        Imaginary part of Single-Electron Electric Field"]],"CharacteristicSimple":[["0","Intensity"],["4","Radiation
+        Phase"],["5","Re(E): Real part of Electric Field"],["6","Im(E): Imaginary
+        part of Electric Field"]],"ComputeParametersFrom":[["1","Cff"],["2","Grazing
+        Angle"],["3","Manually"]],"CRLMaterial":[["User-defined","User-defined"],["Al","Al"],["Au","Au"],["B","B"],["Be","Be"],["C","C"],["Cu","Cu"],["Li","Li"],["Mo","Mo"],["Si","Si"],["SiO2","SiO2"],["W","W"]],"CRLMethod":[["server","Server
+        http://henke.lbl.gov"],["file","Saved data file"]],"CRLShape":[["1","Parabolic"],["2","Circular"]],"CrystalMaterial":[["Unknown","User-defined"],["Si
+        (SRW)","Silicon (SRW)"],["Silicon (X0h)","Silicon (X0h server)"],["Germanium
+        (X0h)","Germanium (X0h server)"],["Diamond (X0h)","Diamond (X0h server)"]],"DiffractionPlaneAngle":[["-1.57079632","-\ud835\uded1/2
+        (horizontal, right)"],["0","0 (vertical, up)"],["1.57079632","\ud835\uded1/2
+        (horizontal, left)"],["3.14159265","\ud835\uded1 (vertical, down)"]],"DriftCalculationMethod":[["auto","Automatic"],["manual","Manual"]],"EstimateTimeMomentParameters":[["auto","Automatic"],["manual","Manual"]],"FieldUnits":[["0","Arbitrary
+        Units"],["1","ph/s/.1%bw/mm\u00b2"],["2","J/eV/mm\u00b2"]],"Flux":[["1","Flux"],["2","Flux
+        per Unit Surface"]],"FluxMethod":[["1","Auto-Undulator"],["2","Auto-Wiggler"],["-1","Use
+        Approximate Method"]],"FocalPlane":[["1","Horizontal"],["2","Vertical"],["3","Both"]],"GaussianBeamPolarization":[["1","Linear
+        Horizontal"],["2","Linear Vertical"],["3","Linear 45 degrees"],["4","Linear
+        135 degrees"],["5","Circular Right"],["6","Circular Left"]],"GaussianBeamSizeDefinition":[["1","RMS
+        Waist"],["2","RMS Divergence"]],"GeometryType":[["1","Bragg Reflection"],["2","Bragg
+        Transmission"]],"GridShape":[["0","Circular Grids"],["1","Rectangular Grids"],["2","2D
+        Phase Grating"]],"HarmonicList":[["1","1"],["3","3"],["5","5"],["7","7"],["9","9"],["11","11"],["13","13"],["15","15"]],"IntensityMethod":[["0","Manual"],["1","Auto-Undulator"],["2","Auto-Wiggler"]],"PlotScale":[["linear","Linear"],["log10","Base-10
+        Logarithm"],["log","Natural Logarithm"],["log2","Base-2 Logarithm"]],"IntensityPlotsWidth":[["100","100"],["200","200"],["400","400"],["800","800"],["1000","1000"],["0","Original
+        Size"]],"MagneticField":[["1","Approximate"],["2","Accurate (tabulated)"]],"MillerIndicesRange":[["0","0"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["-1","-1"],["-2","-2"],["-3","-3"],["-4","-4"],["-5","-5"],["-6","-6"],["-7","-7"],["-8","-8"],["-9","-9"],["-10","-10"]],"MirrorApertureShape":[["r","Rectangular"],["e","Elliptical"]],"MirrorOrientation":[["x","Horizontal"],["y","Vertical"]],"MultiElectronIntegrationMethod":[["0","No
+        approximation (use the standard 5D integration method)"],["1","Integrate numerically
+        only over e-beam energy spread and use convolution to treat transverse emittance"]],"MultipoleOrientation":[["n","Horizontal"],["s","Vertical"]],"OutputImageFormat":[["tif","TIF"],["tiff","TIFF"],["png","PNG"],["bmp","BMP"],["gif","GIF"],["jpg","JPG"],["jpeg","JPEG"]],"Polarization":[["0","Linear
+        Horizontal"],["1","Linear Vertical"],["2","Linear 45 degrees"],["3","Linear
+        135 degrees"],["4","Circular Right"],["5","Circular Left"],["6","Total"]],"PowerDensityMethod":[["1","Near
+        Field"],["2","Far Field"]],"Projection3D":[["parallel","Parallel"],["perspective","Perspective"]],"RandomGenerationMethod":[["1","Standard
+        Pseudo-Random Number Generator"],["2","Halton Sequences"],["3","LPtau sequences
+        (to be implemented)"]],"SamplingMethod":[["1","Automatic"],["2","Manual"]],"SampleObjectType":[["1","Rectangle"],["2","Ellipse"],["3","Triangle"],["4","Polygon"],["5","Random
+        Shapes"]],"SampleRandomAlgorithm":[["1","Uniform Seeding"],["2","Random Walk"]],"SampleRotationDistribution":[["1","Uniform"],["2","Normal
+        (Gaussian)"],["3","Flory\u2013Schulz"]],"SampleSizeDistribution":[["1","Uniform"],["2","Normal
+        (Gaussian)"],["3","Flory\u2013Schulz"]],"SampleSource":[["file","Image File"],["randomDisk","Random
+        2D Objects"]],"ScanType":[["grid","Grid"],["random","Random"]],"SimulationState":[["initial","Initial
+        State"],["running","Running"],["completed","Completed"],["canceled","Canceled"]],"SourceType":[["u","Electron
+        Beam with Idealized Undulator"],["t","Electron Beam with Tabulated Undulator"],["m","Electron
+        Beam with Dipole"],["a","Electron Beam with Arbitrary Magnetic Field"],["g","Coherent
+        Gaussian Beam"]],"StokesParameter":[["0","Coordinate"],["1","Angular"]],"Symmetry":[["1","Symmetrical"],["-1","Anti-symmetrical"]],"TrajectoryPlotAxis":[["ct","c
+        \u00d7 t"],["X","Horizontal Position"],["Y","Vertical Position"],["Z","Longitudinal
+        Position"],["Bx","Horizontal Magnetic Field"],["By","Vertical Magnetic Field"],["Bz","Longitudinal
+        Magnetic Field"],["BetaX","Horizontal Beta"],["BetaY","Vertical Beta"],["BetaZ","Longitudinal
+        Beta"]],"TrajectoryPlotAxis2":[["ct","c \u00d7 t"],["X","Horizontal Position"],["Y","Vertical
+        Position"],["Z","Longitudinal Position"],["Bx","Horizontal Magnetic Field"],["By","Vertical
+        Magnetic Field"],["Bz","Longitudinal Magnetic Field"],["BetaX","Horizontal
+        Beta"],["BetaY","Vertical Beta"],["BetaZ","Longitudinal Beta"],["None","None"]],"TransmissionImage":[["0","Zero"],["1","Same
+        as on Image Boundary"]],"UndulatorType":[["u_i","Idealized"],["u_t","Tabulated"]],"WavefrontShiftTreatment":[["0","0
+        - No Shift"],["1","1 - Horizontal Position"],["2","2 - Vertical Position"],["3","3
+        - Horizontal and Vertical Position"]],"AspectRatio":[["2","1 x 2"],["1.777777","9
+        x 16"],["1.333333","3 x 4"],["1","1 x 1"],["0.75","4 x 3"],["0.5625","16 x
+        9"],["0.5","2 x 1"]],"Boolean":[["0","No"],["1","Yes"]],"ColorMap":[["grayscale","grayscale"],["viridis","viridis"],["afmhot","afmhot"],["coolwarm","coolwarm"],["jet","jet"],["blues","blues"],["contrast","high
+        contrast"]],"JobRunMode":[["sequential","sequential"],["parallel","parallel"],["sbatch","sbatch"]],"FramesPerSecond":[["1","1"],["2","2"],["5","5"],["10","10"],["15","15"],["20","20"]],"NERSCQueue":[["debug","debug"],["premium","premium"],["realtime","realtime"],["regular","regular"]],"PlotRangeType":[["none","None"],["fit","Fit
+        Data"],["fixed","Fixed"]]},"dynamicFiles":{"externalLibs":{"js":["dom-to-image.min.js","vtk.js","angular-cookies.min.js","angular-route.min.js","angular-sanitize.min.js","bootstrap-3.3.7.min.js","bootstrap-toggle.min.js","ngDraggable.js","colorbar.js","canvg-and-dependencies.js","FileSaver.js","Blob.js","canvas-toBlob.js","d3-3.5.9.min.js","fontdetect-0.3.js","ie10-viewport-bug-workaround.js","katex.min.js"]},"sirepoLibs":{"js":["srw.js","sirepo-beamline.js","sirepo-common.js","sirepo-components.js","sirepo-plotting.js","sirepo-plotting-vtk.js","sirepo-geometry.js"],"css":["srw.css"]},"libURLs":["/auth-state"]},"frameIdFields":{"coherenceXAnimation":["intensityPlotsWidth","rotateAngle","rotateReshape"],"coherenceYAnimation":["intensityPlotsWidth","rotateAngle","rotateReshape"],"fluxAnimation":[],"multiElectronAnimation":["intensityPlotsWidth","rotateAngle","rotateReshape"]},"localRoutes":{"source":{"config":{"controller":"SourceController
+        as source","templateUrl":"/static/html/srw-source.html"},"route":"/source/:simulationId"},"beamline":{"route":"/beamline/:simulationId","config":{"controller":"BeamlineController
+        as beamline","templateUrl":"/static/html/srw-beamline.html","reloadOnSearch":true}},"admJobs":{"route":"/adm-jobs","config":{"templateUrl":"/static/html/adm-jobs.html"}},"completeRegistration":{"route":"/complete-registration","config":{"controller":"LoginConfirmController
+        as loginConfirm","templateUrl":"/static/html/complete-registration.html"}},"error":{"route":"/error","config":{"templateUrl":"/static/html/server-error.html"}},"forbidden":{"route":"/forbidden","config":{"templateUrl":"/static/html/forbidden.html"}},"findByName":{"route":"/findByName/:applicationMode/:simulationName","config":{"controller":"FindByNameController
+        as findByName","templateUrl":"/static/html/find-by-name.html"}},"login":{"route":"/login","config":{"controller":"LoginController
+        as login","templateUrl":"/static/html/login.html"}},"loginFail":{"route":"/login-fail/:method/:reason","config":{"controller":"LoginFailController
+        as loginFail","templateUrl":"/static/html/login-fail.html"}},"loginWith":{"route":"/login-with/:method","config":{"controller":"LoginWithController
+        as loginWith","templateUrl":"/static/html/login-with.html"}},"loginWithEmailConfirm":{"route":"/login-with-email-confirm/:token/:needCompleteRegistration","config":{"controller":"LoginConfirmController
+        as loginConfirm","templateUrl":"/static/html/login-with-email-confirm.html"}},"missingCookies":{"route":"/missing-cookies","config":{"templateUrl":"/static/html/missing-cookies.html"}},"notFound":{"route":"/not-found","config":{"templateUrl":"/static/html/not-found.html"}},"notFoundCopy":{"route":"/copy-session/:simulationIds/:section","config":{"controller":"NotFoundCopyController
+        as notFoundCopy","templateUrl":"/static/html/copy-session.html"}},"ownJobs":{"route":"/own-jobs","config":{"templateUrl":"/static/html/own-jobs.html"}},"sbatchLogin":{"route":"/sbatch-login/:isModal/:reason/:simulationType/:simulationId/:report/:host","config":{"controller":"SbatchLoginController
+        as sbatchLogin","templateUrl":"/static/html/sbatch-login.html"}},"serverUpgraded":{"route":"/server-upgraded","config":{"controller":"ServerUpgradedController
+        as serverUpgraded","templateUrl":"/static/html/server-upgraded.html"}},"simulations":{"route":"/simulations","config":{"controller":"SimulationsController
+        as simulations","templateUrl":"/static/html/simulations.html"}},"simulationsFolder":{"route":"/simulations/:folderPath?","config":{"controller":"SimulationsController
+        as simulations","templateUrl":"/static/html/simulations.html"}}},"model":{"_INTENSITY_REPORT":{"colorMap":["Color
+        Map","ColorMap","grayscale"],"aspectRatio":["Aspect Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum
+        Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"rotateAngle":["Rotation
+        Angle [deg]","Float",0,"Positive values rotate the image clockwise, negative
+        - counterclockwise"],"rotateReshape":["Fit Whole Image after Rotation?","Boolean","1","If
+        set to Yes, the output image is adapted so that the input image is contained
+        completely in the output one"],"useIntensityLimits":["Use Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower
+        Limit","Float",0],"maxIntensityLimit":["Upper Limit","Float",1e+30],"usePlotRange":["Adjust
+        Range","Boolean","0"],"horizontalSize":["Horizontal Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical
+        Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal Center Position
+        [mm]","Float",0],"verticalOffset":["Vertical Center Position [mm]","Float",0],"notes":["Notes","Text",""]},"aperture":{"title":["Element
+        Name","String","Aperture"],"position":["Position along Optical Path [m]","Float"],"shape":["Shape","ApertureShape","r"],"horizontalSize":["Horizontal
+        Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal
+        Center Position [mm]","Float",0],"verticalOffset":["Vertical Center Position
+        [mm]","Float",0]},"beamline3DReport":{"projection":["3D Projection","Projection3D","parallel"],"showLabels":["Show
+        Labels","Boolean","1"],"showPosition":["Show Position in Label","Boolean","1"],"condenseBeamline":["Condense
+        Beamline","Boolean","1","Rescale the transverse distances to fit a smaller
+        area"],"includeSource":["Include Beam Source","Boolean","1"]},"brillianceReport":{"minDeflection":["Minimum
+        Deflecting Parameter (K)","Float",0.2],"initialHarmonic":["Initial Harmonic","Integer",1],"finalHarmonic":["Final
+        Harmonic","Integer",5],"detuning":["Detuning from Resonant Frequency (dE/En)","Float",0],"energyPointCount":["Number
+        of Energy Points","Integer",100],"reportType":["Report Type","BrillianceReportType","0"],"brightnessComponent":["Scan
+        Type","BrightnessComponent","k-tuning"],"energyDelta":["Energy Delta [eV]","Float",10,"",1,1000],"harmonic":["Harmonic","HarmonicList","5"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"notes":["Notes","Text",""]},"coherenceXAnimation":{"intensityPlotsWidth":["Maximum
+        Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"colorMap":["Color
+        Map","ColorMap","grayscale"],"aspectRatio":["Aspect Ratio","AspectRatio","1"]},"coherenceYAnimation":{"intensityPlotsWidth":["Maximum
+        Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"colorMap":["Color
+        Map","ColorMap","grayscale"],"aspectRatio":["Aspect Ratio","AspectRatio","1"]},"rsOptElement":{"id":["_","Integer",-1],"enabled":["Enabled","Boolean","0"],"offsetRanges":["Offset
+        Ranges [m]","FloatStringArray","0.0, 0.0, 0.0","","Horizontal, Vertical, Longitudinal"],"position":["Position
+        along Optical Path [m]","Float"],"rotationRanges":["Rotation Ranges [rad]","FloatStringArray","0.0,
+        0.0, 0.0","","\ud835\udfb1x, \ud835\udfb1y, \ud835\udfb1z"],"title":["_","String",""]},"exportRsOpt":{"elements":["Beamline
+        Elements","RSOptElements",[]],"numCores":["Number of Cores","Integer",4],"numSamples":["Number
+        of Samples","Integer",100],"numWorkers":["Number of Workers","Integer",1],"scanType":["Scan
+        Type","ScanType","random","Grid samples each parameter uniformly for a total
+        of <number of samples>^<number of params> samples. Random takes a random sample
+        for each param for a total of <number of samples>"]},"crl":{"title":["Element
+        Name","String","CRL"],"position":["Position along Optical Path [m]","Float"],"focalPlane":["Focal
+        Plane","FocalPlane","2"],"material":["Material of the CRL","CRLMaterial","Be"],"method":["Method
+        of Getting Delta/Attenuation Length","CRLMethod","server"],"refractiveIndex":["Refractive
+        Index Decrement","Float",4.20756805e-06,"The photon energy is: {{ appState.models.simulation.photonEnergy
+        }} eV"],"attenuationLength":["Attenuation Length [m]","Float",0.00731294,"The
+        photon energy is: {{ appState.models.simulation.photonEnergy }} eV"],"focalDistance":["CRL
+        Focal Distance [m]","Float",0,"The value is for information purposes only
+        and is valid for simple optical layout! For complicated beamlines (e.g., with
+        SSA) the value may have some errors since it is calculated from the position
+        of the source."],"absoluteFocusPosition":["CRL Focus Position from Source
+        [m]","Float",0,"The value is for information purposes only and is valid for
+        simple optical layout! For complicated beamlines (e.g., with SSA) the value
+        may have some errors since it is calculated from the position of the source."],"shape":["Shape","CRLShape","1"],"horizontalApertureSize":["Horizontal
+        Aperture Size [mm]","Float",1,"",1e-99],"verticalApertureSize":["Vertical
+        Aperture Size [mm]","Float",1,"",1e-99],"radius":["Radius on Tip of Parabola
+        [m]","Float",0.0015],"tipRadius":["Radius on Tip of Parabola [\u00b5m]","Float",1500.0],"numberOfLenses":["Number
+        of Lenses","Integer",3],"wallThickness":["Wall Thickness at Tip of Parabola
+        [m]","Float",8e-05],"tipWallThickness":["Wall Thickness at Tip of Parabola
+        [\u00b5m]","Float",80],"horizontalOffset":["Horizontal Center Position [mm]","Float",0],"verticalOffset":["Vertical
+        Center Position [mm]","Float",0]},"crystal":{"title":["Element Name","String","Crystal"],"position":["Position
+        along Optical Path [m]","Float"],"material":["Material","CrystalMaterial","Si
+        (SRW)"],"h":["h","MillerIndicesRange","1"],"k":["k","MillerIndicesRange","1"],"l":["l","MillerIndicesRange","1"],"energy":["Photon
+        energy [eV] to orient crystal for","Float",9000],"useCase":["Use case","GeometryType","1"],"diffractionAngle":["Diffraction
+        plane (roll) angle [rad]","DiffractionPlaneAngle","0"],"grazingAngle":["Grazing
+        Angle [mrad]","Float",0.0],"asymmetryAngle":["Asymmetry angle [rad]","Float",0.0],"crystalThickness":["Crystal
+        thickness [m]","Float",0.01],"dSpacing":["Crystal reflecting planes d-spacing
+        [A]","Float",0],"psi0r":["0-th Fourier component","Float",0],"psi0i":["0-th
+        Fourier component","Float",0],"psiHr":["H-th Fourier component","Float",0],"psiHi":["H-th
+        Fourier component","Float",0],"psiHBr":["-H-th Fourier component","Float",0],"psiHBi":["-H-th
+        Fourier component","Float",0],"nvx":["Horizontal coordinate","Float",0],"nvy":["Vertical
+        coordinate","Float",0],"nvz":["Longitudinal coordinate","Float",0],"tvx":["Horizontal
+        coordinate","Float",0],"tvy":["Vertical coordinate","Float",0],"outoptvx":["Horizontal","Float",0],"outoptvy":["Vertical","Float",0],"outoptvz":["Longitudinal","Float",0],"outframevx":["Horizontal","Float",0],"outframevy":["Vertical","Float",0],"heightProfileFile":["Height
+        Profile Data File","MirrorFile",""],"orientation":["Orientation of Reflection
+        Plane","MirrorOrientation","x"],"heightAmplification":["Height Amplification
+        Coefficient","Float",1]},"electronBeam":{"beamSelector":["Existing Beam","BeamList"],"name":["Beam
+        Name","String"],"energy":["Energy [GeV]","Float"],"current":["Current [A]","Float"],"energyDeviation":["Average
+        Energy Deviation [GeV]","Float"],"rmsSpread":["RMS Energy Spread","Float"],"beamDefinition":["Beam
+        Definition by","BeamDefinition"],"horizontalEmittance":["Horizontal Emittance
+        [nm]","Float"],"horizontalBeta":["Horizontal Beta [m]","Float"],"horizontalAlpha":["Horizontal
+        Alpha [rad]","Float"],"horizontalDispersion":["Horizontal Dispersion [m]","Float"],"horizontalDispersionDerivative":["Horizontal
+        Dispersion Derivative [rad]","Float"],"verticalEmittance":["Vertical Emittance
+        [nm]","Float"],"verticalBeta":["Vertical Beta [m]","Float"],"verticalAlpha":["Vertical
+        Alpha [rad]","Float"],"verticalDispersion":["Vertical Dispersion [m]","Float"],"verticalDispersionDerivative":["Vertical
+        Dispersion Derivative [rad]","Float"],"rmsSizeX":["RMS Size [\u00b5m]","Float"],"rmsDivergX":["RMS
+        Divergence [\u00b5rad]","Float"],"xxprX":["$\\langle(x-\\langle x \\rangle)(x''-\\langle
+        x'' \\rangle)\\rangle$ [nm]","Float"],"rmsSizeY":["RMS Size [\u00b5m]","Float"],"rmsDivergY":["RMS
+        Divergence [\u00b5rad]","Float"],"xxprY":["$\\langle(x-\\langle x \\rangle)(x''-\\langle
+        x'' \\rangle)\\rangle$ [nm]","Float"]},"electronBeamPosition":{"horizontalPosition":["Average
+        Horizontal Position [mm]","Float",0],"verticalPosition":["Average Vertical
+        Position [mm]","Float",0],"horizontalAngle":["Average Horizontal Angle [mrad]","Float",0],"verticalAngle":["Average
+        Vertical Angle [mrad]","Float",0],"driftCalculationMethod":["Drift Calculation
+        Method","DriftCalculationMethod"],"drift":["Drift [m]","Float"]},"ellipsoidMirror":{"title":["Element
+        Name","String","Elliptical Cylinder Mirror"],"position":["Position along Optical
+        Path [m]","Float"],"firstFocusLength":["Distance from Source to Mirror Center
+        (p) [m]","Float",20],"focalLength":["Distance from Mirror Center to Second
+        Focus (q) [m]","Float",1.7],"tangentialSize":["Tangential Size [m]","Float",0.5],"sagittalSize":["Sagittal
+        Size [m]","Float",0.01],"grazingAngle":["Grazing Angle [mrad]","Float",3.6],"autocomputeVectors":["Auto-compute
+        Vectors","AutocomputeVectors","horizontal"],"normalVectorX":["Horizontal","Float",0.9999935200069984],"normalVectorY":["Vertical","Float",0],"normalVectorZ":["Longitudinal","Float",-0.0035999922240050387],"tangentialVectorX":["Horizontal","Float",-0.0035999922240050387],"tangentialVectorY":["Vertical","Float",0],"heightProfileFile":["Height
+        Profile Data File","MirrorFile",""],"orientation":["Orientation of Reflection
+        Plane","MirrorOrientation","x"],"heightAmplification":["Height Amplification
+        Coefficient","Float",1],"horizontalOffset":["Horizontal Center Position [mm]","Float",0],"verticalOffset":["Vertical
+        Center Position [mm]","Float",0]},"fiber":{"title":["Element Name","String","Fiber"],"position":["Position
+        along Optical Path [m]","Float"],"focalPlane":["Focal Plane","FocalPlane","1","Horizontal
+        (fiber is parallel to vertical axis), Vertical (fiber is parallel to horizontal
+        axis)"],"method":["Method of Getting Delta/Attenuation Length","CRLMethod","server"],"externalMaterial":["External
+        Material","CRLMaterial","User-defined"],"externalRefractiveIndex":["Refractive
+        Index Decrement","Float",4.20756805e-06,"The photon energy is: {{ appState.models.simulation.photonEnergy
+        }} eV"],"externalAttenuationLength":["Attenuation Length [m]","Float",0.00731294,"The
+        photon energy is: {{ appState.models.simulation.photonEnergy }} eV"],"externalDiameter":["External
+        Diameter [m]","Float",0.0001],"coreMaterial":["Core Material","CRLMaterial","User-defined"],"coreRefractiveIndex":["Refractive
+        Index Decrement","Float",4.20756805e-06],"coreAttenuationLength":["Attenuation
+        Length [m]","Float",0.00731294],"coreDiameter":["Core Diameter [m]","Float",1e-05],"horizontalCenterPosition":["Horizontal
+        Center Position [m]","Float",0],"verticalCenterPosition":["Vertical Center
+        Position [m]","Float",0]},"fluxAnimation":{"distanceFromSource":["Distance
+        From Source [m]","Float",20],"initialEnergy":["Initial Photon Energy [eV]","Float",10000],"finalEnergy":["Final
+        Photon Energy [eV]","Float",20000],"photonEnergyPointCount":["Number of Points
+        vs Photon Energy","Integer",10000],"numberOfMacroElectrons":["Number of Macro-Electrons","Integer",1000,"Number
+        of macro-electrons for calculation of spectrum in case of arbitrary input
+        magnetic field"],"horizontalPosition":["Horizontal Center Position [mm]","Float",0],"horizontalApertureSize":["Horizontal
+        Aperture Size [mm]","Float",1,"",1e-99],"verticalPosition":["Vertical Center
+        Position [mm]","Float",0],"verticalApertureSize":["Vertical Aperture Size
+        [mm]","Float",1,"",1e-99],"initialHarmonic":["Initial UR Spectral Harmonic","Integer",1],"finalHarmonic":["Final
+        UR Spectral Harmonic","Integer",15],"longitudinalPrecision":["Longitudinal
+        Integration Precision","Float",1],"azimuthalPrecision":["Azimuthal Integration
+        Precision","Float",1],"magneticField":["Magnetic Field Treatment","MagneticField",1],"method":["Flux
+        Computation Method","FluxMethod","1"],"precision":["Relative Precision","Float",0.01],"fluxType":["Entity
+        to Calculate","Flux","1"],"polarization":["Polarization Component to Extract","Polarization","6"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"notes":["Notes","Text",""]},"fluxReport":{"distanceFromSource":["Distance
+        From Source [m]","Float",20],"initialEnergy":["Initial Photon Energy [eV]","Float",10000],"finalEnergy":["Final
+        Photon Energy [eV]","Float",20000],"photonEnergyPointCount":["Number of Points
+        vs Photon Energy","Integer",10000],"numberOfMacroElectrons":["Number of Macro-Electrons","Integer",1,"Number
+        of macro-electrons for calculation of spectrum in case of arbitrary input
+        magnetic field"],"horizontalPosition":["Horizontal Center Position [mm]","Float",0],"horizontalApertureSize":["Horizontal
+        Aperture Size [mm]","Float",1,"",1e-99],"verticalPosition":["Vertical Center
+        Position [mm]","Float",0],"verticalApertureSize":["Vertical Aperture Size
+        [mm]","Float",1,"",1e-99],"initialHarmonic":["Initial UR Spectral Harmonic","Integer",1],"finalHarmonic":["Final
+        UR Spectral Harmonic","Integer",15],"longitudinalPrecision":["Longitudinal
+        Integration Precision","Float",1],"azimuthalPrecision":["Azimuthal Integration
+        Precision","Float",1],"magneticField":["Magnetic Field Treatment","MagneticField",1],"method":["Flux
+        Computation Method","FluxMethod","-1"],"precision":["Relative Precision","Float",0.01],"fluxType":["Entity
+        to Calculate","Flux","1"],"polarization":["Polarization Component to Extract","Polarization","6"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"notes":["Notes","Text",""]},"gaussianBeam":{"waistX":["Horizontal
+        Waist Offset [\u00b5m]","Float"],"waistY":["Vertical Waist Offset [\u00b5m]","Float"],"waistZ":["Longitudinal
+        Waist Position [\u00b5m]","Float"],"waistAngleX":["Horizontal Beam Angle [mrad]","Float"],"waistAngleY":["Vertical
+        Beam Angle [mrad]","Float"],"photonEnergy":["Average Photon Energy [eV]","Float"],"energyPerPulse":["Energy
+        per Pulse [J]","Float"],"polarization":["Polarization","GaussianBeamPolarization"],"sizeDefinition":["Definition
+        of Beam Size","GaussianBeamSizeDefinition","1"],"rmsSizeX":["Horizontal RMS
+        Waist [\u00b5m]","Float"],"rmsSizeY":["Vertical RMS Waist [\u00b5m]","Float"],"rmsDivergenceX":["Horizontal
+        RMS Divergence [\u00b5rad]","Float",0],"rmsDivergenceY":["Vertical RMS Divergence
+        [\u00b5rad]","Float",0],"rmsPulseDuration":["RMS Pulse Duration [ps]","Float"]},"grating":{"title":["Element
+        Name","String","Grating"],"position":["Position along Optical Path [m]","Float"],"tangentialSize":["Tangential
+        Size [m]","Float",0.2],"sagittalSize":["Sagittal Size [m]","Float",0.02],"grazingAngle":["Grazing
+        Angle [mrad]","Float",20.510339824],"nvx":["Horizontal","Float",0],"nvy":["Vertical","Float",-0.99978967],"nvz":["Longitudinal","Float",-0.0205089],"tvx":["Horizontal","Float",0],"tvy":["Vertical","Float",-0.0205089],"outoptvx":["Horizontal","Float",0],"outoptvy":["Vertical","Float",-0.131326539724],"outoptvz":["Longitudinal","Float",0.99133916495],"outframevx":["Horizontal","Float",1.0],"outframevy":["Vertical","Float",0],"energyAvg":["Photon
+        energy [eV] to orient grating for","Float",1000],"cff":["Cff Parameter (cos(beta)/cos(alpha))","Float",1.75],"rollAngle":["Roll
+        Angle [rad]","Float",0],"diffractionOrder":["Diffraction Order","Float",1],"grooveDensity0":["a\u2080
+        [lines/mm]","Float",350.0],"grooveDensity1":["a\u2081 [lines/mm\u00b2]","Float",0],"grooveDensity2":["a\u2082
+        [lines/mm\u00b3]","Float",0],"grooveDensity3":["a\u2083 [lines/mm\u2074]","Float",0],"grooveDensity4":["a\u2084
+        [lines/mm\u2075]","Float",0],"horizontalOffset":["Horizontal Center Position
+        [mm]","Float",0],"verticalOffset":["Vertical Center Position [mm]","Float",0],"heightProfileFile":["Height
+        Profile Data File","MirrorFile",""],"computeParametersFrom":["Compute Parameters
+        from","ComputeParametersFrom","2"],"orientation":["Orientation of Reflection
+        Plane","MirrorOrientation","x"],"heightAmplification":["Height Amplification
+        Coefficient","Float",0.001]},"initialIntensityReport":{"_super":["_","model","_INTENSITY_REPORT"],"polarization":["Polarization
+        Component to Extract","Polarization"],"characteristic":["Characteristic to
+        be Extracted","Characteristic"],"copyCharacteristic":["Use Characteristic
+        Across Reports","Boolean","0"],"fieldUnits":["Intensity Units","FieldUnits","1"],"colorMap":["Color
+        Map","ColorMap","grayscale"],"aspectRatio":["Aspect Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum
+        Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"rotateAngle":["Rotation
+        Angle [deg]","Float",0,"Positive values rotate the image clockwise, negative
+        - counterclockwise"],"rotateReshape":["Fit Whole Image after Rotation?","Boolean","1","If
+        set to Yes, the output image is adapted so that the input image is contained
+        completely in the output one"],"useIntensityLimits":["Use Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower
+        Limit","Float",0],"maxIntensityLimit":["Upper Limit","Float",1e+30],"usePlotRange":["Adjust
+        Range","Boolean","0"],"horizontalSize":["Horizontal Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical
+        Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal Center Position
+        [mm]","Float",0],"verticalOffset":["Vertical Center Position [mm]","Float",0],"notes":["Notes","Text",""]},"intensityReport":{"distanceFromSource":["Distance
+        From Source [m]","Float"],"initialEnergy":["Initial Photon Energy [eV]","Float"],"finalEnergy":["Final
+        Photon Energy [eV]","Float"],"photonEnergyPointCount":["Number of Points vs
+        Photon Energy","Integer",10000],"horizontalPosition":["Horizontal Position
+        [mm]","Float"],"verticalPosition":["Vertical Position [mm]","Float"],"method":["Single-Electron
+        Spectrum Computation Method","IntensityMethod"],"precision":["Relative Precision","Float",0.01],"polarization":["Polarization
+        Component to Extract","Polarization"],"fieldUnits":["Intensity Units","FieldUnits","1"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"notes":["Notes","Text",""]},"lens":{"title":["Element
+        Name","String","Lens"],"position":["Position along Optical Path [m]","Float"],"horizontalFocalLength":["Horizontal
+        Focal Length [m]","Float",3],"verticalFocalLength":["Vertical Focal Length
+        [m]","Float",1e+23],"horizontalOffset":["Horizontal Center Position [mm]","Float",0],"verticalOffset":["Vertical
+        Center Position [mm]","Float",0]},"mask":{"title":["Element Name","String","Mask"],"position":["Position
+        along Optical Path [m]","Float"],"material":["Material of the mask","CRLMaterial","User-defined"],"method":["Method
+        of Getting Delta/Attenuation Length","CRLMethod","server"],"refractiveIndex":["Refractive
+        Index Decrement","Float",1.0,"The photon energy is: {{ appState.models.simulation.photonEnergy
+        }} eV"],"attenuationLength":["Attenuation Length [m]","Float",1.0,"The photon
+        energy is: {{ appState.models.simulation.photonEnergy }} eV"],"maskThickness":["Thickness
+        of Mask [m]","Float",1.0],"gridShape":["Grid Shape","GridShape","0"],"gridTiltAngle":["Tilt
+        Angle of Grid [rad]","Float",0.4363323129985824],"horizontalSamplingInterval":["Horizontal
+        Sampling Interval [\u00b5m]","Float",0.732],"verticalSamplingInterval":["Vertical
+        Sampling Interval [\u00b5m]","Float",0.732],"horizontalGridPitch":["Horizontal
+        Grid Pitch [\u00b5m]","Float",20],"verticalGridPitch":["Vertical Grid Pitch
+        [\u00b5m]","Float",20],"horizontalPixelsNumber":["Horizontal Number of Pixels","Integer",1024],"verticalPixelsNumber":["Vertical
+        Number of Pixels","Integer",1024],"horizontalGridsNumber":["Horizontal Number
+        of Grids","Integer",21],"verticalGridsNumber":["Vertical Number of Grids","Integer",21],"horizontalGridDimension":["Horizontal
+        Grid Dimension [\u00b5m]","Float",5,"Width and height for rectangular or elliptical
+        grids"],"verticalGridDimension":["Vertical Grid Dimension [\u00b5m]","Float",5],"horizontalMaskCoordinate":["Horizontal
+        Center Position","Float",0],"verticalMaskCoordinate":["Vertical Center Position","Float",0]},"mirror":{"title":["Element
+        Name","String","Planar Mirror"],"position":["Position along Optical Path [m]","Float"],"heightProfileFile":["Height
+        Profile Data File","MirrorFile","mirror_1d.dat"],"orientation":["Orientation
+        of Reflection Plane","MirrorOrientation","x"],"grazingAngle":["Grazing Angle
+        [mrad]","Float",3.1415926],"heightAmplification":["Height Amplification Coefficient","Float",1],"horizontalTransverseSize":["Horizontal
+        Transverse Size [mm]","Float",1],"verticalTransverseSize":["Vertical Transverse
+        Size [mm]","Float",1]},"mirrorReport":{"intensityPlotsWidth":["Maximum Plot
+        Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"notes":["Notes","Text",""]},"multiElectronAnimation":{"_super":["_","model","_INTENSITY_REPORT"],"jobRunMode":["Execution
+        Mode","JobRunMode","parallel"],"sbatchCores":["Cores","Integer",128],"sbatchHours":["Hours","Float",0.4],"sbatchQueue":["Queue","NERSCQueue","debug"],"sbatchProject":["Project","OptionalString",""],"stokesParameter":["Representation
+        of Stokes Parameters","StokesParameter","0"],"numberOfMacroElectrons":["Number
+        of Macro-Electrons","Integer",1000,"Number of macro-electrons (coherent wavefronts)
+        for calculation of multi-electron wavefront propagation"],"integrationMethod":["Multi-electron
+        Integration Approximation Method","MultiElectronIntegrationMethod","0"],"photonEnergyBandWidth":["Photon
+        Energy Band Width [eV]","Float",0],"horizontalPosition":["Horizontal Center
+        Position for Degree of Coherence Cuts [mm]","Float",0],"verticalPosition":["Vertical
+        Center Position for Degree of Coherence Cuts [mm]","Float",0],"watchpointId":["Evaluate
+        at Watchpoint","WatchPoint",0],"calcCoherence":["Calculate Degree of Coherence
+        in Addition to Intensity","Boolean","0"],"colorMap":["Color Map","ColorMap","grayscale"],"aspectRatio":["Aspect
+        Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"rotateAngle":["Rotation Angle [deg]","Float",0,"Positive
+        values rotate the image clockwise, negative - counterclockwise"],"rotateReshape":["Fit
+        Whole Image after Rotation?","Boolean","1","If set to Yes, the output image
+        is adapted so that the input image is contained completely in the output one"],"useIntensityLimits":["Use
+        Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower Limit","Float",0],"maxIntensityLimit":["Upper
+        Limit","Float",1e+30],"usePlotRange":["Adjust Range","Boolean","0"],"horizontalSize":["Horizontal
+        Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal
+        Center Position [mm]","Float",0],"verticalOffset":["Vertical Center Position
+        [mm]","Float",0],"notes":["Notes","Text",""]},"multipole":{"field":["Magnetic
+        Field [T]","Float"],"distribution":["Orientation","MultipoleOrientation"],"length":["Effective
+        Length [m]","Float"]},"obstacle":{"title":["Element Name","String","Obstacle"],"position":["Position
+        along Optical Path [m]","Float"],"shape":["Shape","ApertureShape","r"],"horizontalSize":["Horizontal
+        Size [mm]","Float",0.5,"",1e-99],"verticalSize":["Vertical Size [mm]","Float",0.5,"",1e-99],"horizontalOffset":["Horizontal
+        Center Position [mm]","Float",0],"verticalOffset":["Vertical Center Position
+        [mm]","Float",0]},"powerDensityReport":{"_super":["_","model","_INTENSITY_REPORT"],"distanceFromSource":["Distance
+        From Source [m]","Float"],"horizontalPosition":["Horizontal Center Position
+        [mm]","Float"],"horizontalRange":["Range of Horizontal Position [mm]","Float"],"verticalPosition":["Vertical
+        Center Position [mm]","Float"],"verticalRange":["Range of Vertical Position
+        [mm]","Float"],"precision":["Relative Precision","Float"],"method":["Power
+        Density Computation Method","PowerDensityMethod"],"horizontalPointCount":["Number
+        of Points vs Horizontal Position","Integer",100],"verticalPointCount":["Number
+        of Points vs Vertical Position","Integer",100],"colorMap":["Color Map","ColorMap","grayscale"],"aspectRatio":["Aspect
+        Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"rotateAngle":["Rotation Angle [deg]","Float",0,"Positive
+        values rotate the image clockwise, negative - counterclockwise"],"rotateReshape":["Fit
+        Whole Image after Rotation?","Boolean","1","If set to Yes, the output image
+        is adapted so that the input image is contained completely in the output one"],"useIntensityLimits":["Use
+        Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower Limit","Float",0],"maxIntensityLimit":["Upper
+        Limit","Float",1e+30],"usePlotRange":["Adjust Range","Boolean","0"],"horizontalSize":["Horizontal
+        Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal
+        Center Position [mm]","Float",0],"verticalOffset":["Vertical Center Position
+        [mm]","Float",0],"notes":["Notes","Text",""]},"propagationParameters":{"0":["Auto-resize
+        before propagation","Boolean","0"],"1":["Auto-resize after propagation","Boolean","0"],"2":["Relative
+        precision for propagation with auto-resizing","Float",1,"1. is nominal"],"3":["Propagator","AnalyticalTreatment","0","<div
+        style=''text-align: left''><strong>Standard</strong> - Fresnel (it uses two
+        FFTs) <br/> <strong>Quadratic Term</strong> - with semi-analytical treatment
+        of the quadratic (leading) phase terms (it uses two FFTs) <br/> <strong>From
+        Waist</strong> - good for propagation from &quot;waist&quot over a large distance
+        (it uses one FFT) <br/> <strong>To Waist</strong> - good for propagation to
+        a &quot;waist&quot; (e.g. some 2D focus of an optical system) over some distance
+        (it uses one FFT)</div>"],"4":["Do any resizing on fourier side, using FFT","Boolean","0"],"5":["Horizontal
+        range modification factor at resizing","Float",1,"1. means no modification"],"6":["Horizontal
+        resolution modification factor at resizing","Float",1],"7":["Vertical range
+        modification factor at resizing","Float",1],"8":["Vertical resolution modification
+        factor at resizing","Float",1],"9":["Type of Wavefront Shift\nbefore Resizing","WavefrontShiftTreatment","0","<div
+        style=''text-align: left''>1. means Horizontal Position <br/> 2. means Vertical
+        Position <br/> 3. means Horizontal and Vertical Position </div>"],"10":["New
+        Horizontal Wavefront\nCenter Position after Shift","Float",1],"11":["New Vertical
+        Wavefront\nCenter Position after Shift","Float",1],"12":["Orientation of the
+        Output Optical Axis vector in the Incident Beam Frame:\nHorizontal Coordinate","Float",0],"13":["Orientation
+        of the Output Optical Axis vector in the Incident Beam Frame:\nVertical Coordinate","Float",0],"14":["Orientation
+        of the Output Optical Axis vector in the Incident Beam Frame:\nLongitudinal
+        Coordinate","Float",0],"15":["Orientation of the Horizontal Base vector of
+        the Output Frame in the Incident Beam Frame:\nHorizontal Coordinate","Float",0],"16":["Orientation
+        of the Horizontal Base vector of the Output Frame in the Incident Beam Frame:\nVertical
+        Coordinate","Float",0],"17":["Set Nominal Values","Button","1"]},"sample":{"title":["Element
+        Name","String","Sample"],"position":["Position along Optical Path [m]","Float"],"sampleSource":["Method","SampleSource","file"],"imageFile":["Image
+        or NumPy File","ImageFile","sample.tif",""],"resolution":["Resolution [nm/pixel]","Float",2.480469],"thickness":["Thickness
+        [\u00b5m]","Float",10],"material":["Material of the mask","CRLMaterial","Au"],"method":["Method
+        of Getting Delta/Attenuation Length","CRLMethod","server"],"refractiveIndex":["Refractive
+        Index Decrement","Float",3.23075074e-05,"The photon energy is: {{ appState.models.simulation.photonEnergy
+        }} eV"],"attenuationLength":["Attenuation Length [m]","Float",4.06544e-06,"The
+        photon energy is: {{ appState.models.simulation.photonEnergy }} eV"],"horizontalCenterCoordinate":["Horizontal
+        Center Position [nm]","Float",0],"verticalCenterCoordinate":["Vertical Center
+        Position [nm]","Float",0],"cropArea":["Crop Area?","Boolean","1","Crop selected
+        rectangle area"],"areaXStart":["Horizontal Start Coordinate [pixels]","Integer",0],"areaXEnd":["Horizontal
+        End Coordinate [pixels]","Integer",1280],"areaYStart":["Vertical Start Coordinate
+        [pixels]","Integer",0],"areaYEnd":["Vertical End Coordinate [pixels]","Integer",834],"rotateAngle":["Rotate
+        Angle [deg]","Float",0,"Positive values rotate the image counterclockwise,
+        negative - clockwise"],"rotateReshape":["Fit Whole Image after Rotation?","Boolean","0","If
+        set to Yes, the output image is adapted so that the input image is contained
+        completely in the output one"],"cutoffBackgroundNoise":["Cutoff Background
+        Noise Ratio","Float",0.5,"The ratio for cutoff the background noise (between
+        0 and 1)",0,1],"backgroundColor":["Background Color","Integer",0,"The background
+        color code to use instead of the background noise (0=black, 255=white)",0,255],"tileImage":["Tile
+        Sample?","Boolean","0","Tile the cut area of the image with the provided number
+        of rows and columns"],"tileRows":["Number of Rows","Integer",1],"tileColumns":["Number
+        of Columns","Integer",1],"transmissionImage":["Transmission Outside Image","TransmissionImage","1"],"shiftX":["Horizontal
+        Shift [pixels]","Integer",0],"shiftY":["Vertical Shift [pixels]","Integer",0],"invert":["Invert
+        Image Colors","Boolean","0"],"outputImageFormat":["Output Image Format","OutputImageFormat","tif"],"rx":["Horizontal
+        Transmission Range [m]","Float",1e-05],"nx":["Horizontal Transmission Points
+        ","Integer",1001,"",1],"ry":["Vertical Transmission Range [m]","Float",1e-05],"ny":["Vertical
+        Transmission Points ","Integer",1001,"",1],"dens":["Density [particles per
+        mm\u00b2]","Float",20000000.0,"",1],"obj_type":["Object Shape","SampleObjectType","1"],"r_min_bw_obj":["Minimum
+        Shape Distance [m]","Float",1e-09],"edge_frac":["Edge Fraction","Float",0.02,"How
+        close to the edge can an object be placed on the object plane"],"obj_size_min":["Minimum
+        Object Size [m]","Float",1e-07],"ang_min":["Minimum Object Rotation [deg]","Float",0],"obj_size_max":["Maximum
+        Object Size [m]","Float",1.2e-07],"ang_max":["Maximum Object Rotation [deg]","Float",45],"size_dist":["Size
+        Distribution","SampleSizeDistribution","1"],"ang_dist":["Rotation Distribution","SampleRotationDistribution","1"],"rand_alg":["Randomization
+        Algorithm","SampleRandomAlgorithm","1","Uniform Seeding: Algorithm will create
+        a uniform set of objects based on: density, minimum and maximum object size,
+        and the minimum distance between objects. It then applies random seeded noise
+        to the point locations. <br> 2D Random Walk: Each object will be placed using
+        a random 2D random walk."],"rand_obj_size":["Random Height to Width Ratio","Boolean","0"],"obj_size_ratio":["Height
+        to Width Ratio","Float",0.5],"rand_poly_side":["Random Polygon Side Count","Boolean","0"],"poly_sides":["Polygon
+        Side Count","Integer",6,"",3,12],"rand_shapes":["Random Shapes","SampleRandomShapeArray",[1,2,3,4]]},"simulation":{"distanceFromSource":["Distance
+        From Source [m]","Float",20],"horizontalPointCount":["Number of Points vs
+        Horizontal Position","Integer",100],"horizontalPosition":["Horizontal Center
+        Position [mm]","Float"],"horizontalRange":["Range of Horizontal Position [mm]","Float"],"photonEnergy":["Photon
+        Energy [eV]","Float"],"sampleFactor":["Sampling Factor","Float"],"samplingMethod":["Sampling
+        Method","SamplingMethod"],"sourceType":["Source Type","SourceType"],"verticalPointCount":["Number
+        of Points vs Vertical Position","Integer",100],"verticalPosition":["Vertical
+        Center Position [mm]","Float"],"verticalRange":["Range of Vertical Position
+        [mm]","Float"],"name":["Name","SimulationName"],"folder":["Folder","UserFolder","/"],"documentationUrl":["Documentation
+        URL","OptionalString",""],"notes":["Notes","Text",""]},"simulationStatus":{},"sourceIntensityReport":{"_super":["_","model","_INTENSITY_REPORT"],"characteristic":["Characteristic
+        to be Extracted","Characteristic"],"distanceFromSource":["Distance From Source
+        [m]","Float"],"fieldUnits":["Intensity Units","FieldUnits","1"],"horizontalPointCount":["Number
+        of Points vs Horizontal Position","Integer"],"horizontalPosition":["Horizontal
+        Center Position [mm]","Float"],"horizontalRange":["Range of Horizontal Position
+        [mm]","Float"],"method":["Single-Electron Spectrum Computation Method","IntensityMethod"],"initialPosition":["Initial
+        Longitudinal Position for SR Calculation (effective if smaller than final
+        position)","Float",0.0],"finalPosition":["Final Longitudinal Position for
+        SR Calculation (effective if larger than initial position)","Float",0.0],"photonEnergy":["Photon
+        Energy [eV]","Float"],"polarization":["Polarization Component to Extract","Polarization"],"precision":["Relative
+        Precision","Float",0.01],"sampleFactor":["Sampling Factor","Float"],"samplingMethod":["Sampling
+        Method","SamplingMethod"],"verticalPointCount":["Number of Points vs Vertical
+        Position","Integer"],"verticalPosition":["Vertical Center Position [mm]","Float"],"verticalRange":["Range
+        of Vertical Position [mm]","Float"],"colorMap":["Color Map","ColorMap","grayscale"],"aspectRatio":["Aspect
+        Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot
+        Scale","PlotScale","linear"],"rotateAngle":["Rotation Angle [deg]","Float",0,"Positive
+        values rotate the image clockwise, negative - counterclockwise"],"rotateReshape":["Fit
+        Whole Image after Rotation?","Boolean","1","If set to Yes, the output image
+        is adapted so that the input image is contained completely in the output one"],"useIntensityLimits":["Use
+        Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower Limit","Float",0],"maxIntensityLimit":["Upper
+        Limit","Float",1e+30],"usePlotRange":["Adjust Range","Boolean","0"],"horizontalSize":["Horizontal
+        Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal
+        Center Position [mm]","Float",0],"verticalOffset":["Vertical Center Position
+        [mm]","Float",0],"notes":["Notes","Text",""]},"sphericalMirror":{"title":["Element
+        Name","String","Circular Cylinder Mirror"],"position":["Position along Optical
+        Path [m]","Float"],"radius":["Radius of Surface Curvature [m]","Float",1049],"tangentialSize":["Tangential
+        Size [m]","Float",0.3],"sagittalSize":["Sagittal Size [m]","Float",0.11],"grazingAngle":["Grazing
+        Angle [mrad]","Float",3.1415926],"autocomputeVectors":["Auto-compute Vectors","AutocomputeVectors","horizontal"],"normalVectorX":["Horizontal","Float",0.9999025244842406],"normalVectorY":["Vertical","Float",0],"normalVectorZ":["Longitudinal","Float",-0.013962146326506367],"tangentialVectorX":["Horizontal","Float",0.013962146326506367],"tangentialVectorY":["Vertical","Float",0],"heightProfileFile":["Height
+        Profile Data File","MirrorFile",""],"orientation":["Orientation of Reflection
+        Plane","MirrorOrientation","x"],"heightAmplification":["Height Amplification
+        Coefficient","Float",1],"horizontalOffset":["Horizontal Center Position [mm]","Float",0],"verticalOffset":["Vertical
+        Center Position [mm]","Float",0]},"tabulatedUndulator":{"undulatorSelector":["Existing
+        Undulator","UndulatorList"],"name":["Undulator Name","String"],"undulatorType":["Type
+        of Undulator","UndulatorType","u_t"],"gap":["Magnetic Gap [mm]","Float",6.72],"phase":["Magnet
+        Arrays Shift [mm]","Float",0],"magneticFile":["Magnetic Data File","MagneticZipFile","magnetic_measurements.zip"]},"toroidalMirror":{"title":["Element
+        Name","String","Toroid Mirror"],"position":["Position along Optical Path [m]","Float"],"tangentialRadius":["Tangential
+        Radius [m]","Float",7592.12],"sagittalRadius":["Sagittal Radius [m]","Float",0.186],"tangentialSize":["Tangential
+        Size [m]","Float",0.96],"sagittalSize":["Sagittal Size [m]","Float",0.08],"horizontalPosition":["Horizontal
+        Center Position [m]","Float",0],"verticalPosition":["Vertical Center Position
+        [m]","Float",0],"apertureShape":["Shape of Aperture","ApertureShapeToroidalMirror","r"],"grazingAngle":["Grazing
+        Angle [mrad]","Float",7],"autocomputeVectors":["Auto-compute Vectors","AutocomputeVectors","horizontal"],"normalVectorX":["Horizontal","Float",0.9999755001000415],"normalVectorY":["Vertical","Float",0],"normalVectorZ":["Longitudinal","Float",-0.006999942833473391],"tangentialVectorX":["Horizontal","Float",0.006999942833473391],"tangentialVectorY":["Vertical","Float",0],"heightProfileFile":["Height
+        Profile Data File","MirrorFile",""],"orientation":["Orientation of Reflection
+        Plane","MirrorOrientation","x"],"heightAmplification":["Height Amplification
+        Coefficient","Float",1]},"trajectoryReport":{"timeMomentEstimation":["Estimate
+        Time Moment Parameters","EstimateTimeMomentParameters","auto"],"initialTimeMoment":["Initial
+        Time Moment (c*t) for Electron Trajectory Calculation [m]","Float",0.0],"finalTimeMoment":["Final
+        Time Moment (c*t) for Electron Trajectory Calculation [m]","Float",0.0],"numberOfPoints":["Number
+        of Points for Trajectory Calculation","Integer",10000],"plotAxisX":["Horizontal
+        Value to Plot","TrajectoryPlotAxis","Z"],"plotAxisY":["Vertical Value to Plot","TrajectoryPlotAxis","X"],"plotAxisY2":["Vertical
+        Value to Plot","TrajectoryPlotAxis2","None"],"notes":["Notes","Text",""]},"undulator":{"undulatorParameter":["Deflecting
+        Parameter (K)","Float",0],"period":["Period [mm]","Float",20,"",1e-99],"length":["Length
+        [m]","Float",3,"",1e-99],"longitudinalPosition":["Longitudinal Central Position
+        [m]","Float"],"horizontalAmplitude":["Horizontal Magnetic Field [T]","Float"],"horizontalSymmetry":["Horizontal
+        Symmetry","Symmetry"],"horizontalInitialPhase":["Initial Horizontal Phase
+        [rad]","Float"],"verticalAmplitude":["Vertical Magnetic Field [T]","Float"],"verticalSymmetry":["Vertical
+        Symmetry","Symmetry"],"verticalInitialPhase":["Initial Vertical Phase [rad]","Float"],"effectiveDeflectingParameter":["Effective
+        Deflecting Parameter","Float"],"horizontalDeflectingParameter":["Horizontal
+        Deflecting Parameter (K)","Float"],"verticalDeflectingParameter":["Vertical
+        Deflecting Parameter (K)","Float"]},"arbitraryMagField":{"interpolationOrder":["Interpolation
+        Order","Float",1],"longitudinalPosition":["Longitudinal Central Position [m]","Float",0],"magneticFile":["Magnetic
+        Data File","ArbitraryFieldFile","ivu21_srx_g6_2c.dat"]},"watch":{"title":["Element
+        Name","SafePath","Watchpoint"],"position":["Position along Optical Path [m]","Float"]},"watchpointReport":{"_super":["_","model","_INTENSITY_REPORT"],"polarization":["Polarization
+        Component to Extract","Polarization"],"characteristic":["Characteristic to
+        be Extracted","Characteristic"],"fieldUnits":["Intensity Units","FieldUnits","1"],"colorMap":["Color
+        Map","ColorMap","grayscale"],"aspectRatio":["Aspect Ratio","AspectRatio","1"],"intensityPlotsWidth":["Maximum
+        Plot Dimension [pixels]","IntensityPlotsWidth","0"],"plotScale":["Plot Scale","PlotScale","linear"],"rotateAngle":["Rotation
+        Angle [deg]","Float",0,"Positive values rotate the image clockwise, negative
+        - counterclockwise"],"rotateReshape":["Fit Whole Image after Rotation?","Boolean","1","If
+        set to Yes, the output image is adapted so that the input image is contained
+        completely in the output one"],"useIntensityLimits":["Use Intensity Limits","Boolean","0"],"minIntensityLimit":["Lower
+        Limit","Float",0],"maxIntensityLimit":["Upper Limit","Float",1e+30],"usePlotRange":["Adjust
+        Range","Boolean","0"],"horizontalSize":["Horizontal Size [mm]","Float",1,"",1e-99],"verticalSize":["Vertical
+        Size [mm]","Float",1,"",1e-99],"horizontalOffset":["Horizontal Center Position
+        [mm]","Float",0],"verticalOffset":["Vertical Center Position [mm]","Float",0],"notes":["Notes","Text",""]},"zonePlate":{"title":["Element
+        Name","String","Zone Plate"],"position":["Position along Optical Path [m]","Float"],"numberOfZones":["Number
+        of Zones","Integer",100],"outerRadius":["Outer Zone Radius [mm]","Float",0.1],"thickness":["Thickness
+        [\u00b5m]","Float",10],"method":["Method of Getting Delta/Attenuation Length","CRLMethod","server"],"mainMaterial":["Main
+        Material","CRLMaterial","User-defined"],"mainRefractiveIndex":["Main Refractive
+        Index Decrement","Float",1e-06,"The photon energy is: {{ appState.models.simulation.photonEnergy
+        }} eV"],"mainAttenuationLength":["Main Attenuation Length [m]","Float",0.1,"The
+        photon energy is: {{ appState.models.simulation.photonEnergy }} eV"],"complementaryMaterial":["Complementary
+        Material","CRLMaterial","User-defined"],"complementaryRefractiveIndex":["Complementary
+        Refractive Index Decrement","Float",0],"complementaryAttenuationLength":["Complementary
+        Attenuation Length [m]","Float",1e-06],"horizontalOffset":["Horizontal Center
+        Position [mm]","Float",0],"verticalOffset":["Vertical Center Position [mm]","Float",0]},"simFolder":{"name":["Folder
+        Name","SafePath"],"parent":["Parent Folder","UserFolder"]}},"strings":{"completionState":"","genericSimulationError":"Error
+        encountered during {typeOfSimulation}","importText":null,"simulationDataType":"simulation","simulationDataTypePlural":"simulations","simulationState":"{typeOfSimulation}
+        {state}","typeOfSimulation":"simulation","simulationSource":"Python Source"},"view":{"_INTENSITY_REPORT":{"basic":[],"advanced":[["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"arbitraryMagField":{"title":"Arbitrary
+        Magnetic Field","basic":[],"advanced":["longitudinalPosition","magneticFile","interpolationOrder"]},"aperture":{"title":"Aperture","basic":[],"advanced":["title","position","shape",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]]]},"beamline3DReport":{"title":"Beamline","advanced":["projection","showLabels","showPosition","condenseBeamline","includeSource"]},"brillianceReport":{"title":"Brightness","basic":[],"advanced":["brightnessComponent","minDeflection","initialHarmonic","finalHarmonic","harmonic","detuning","energyDelta","energyPointCount","reportType","plotScale","notes"]},"coherenceXAnimation":{"title":"Degree
+        of Coherence vs. X","basic":[],"advanced":[["Scale",["intensityPlotsWidth","plotScale"]],["Other",["colorMap","aspectRatio"]]]},"coherenceYAnimation":{"title":"Degree
+        of Coherence vs. Y","basic":[],"advanced":[["Scale",["intensityPlotsWidth","plotScale"]],["Other",["colorMap","aspectRatio"]]]},"crl":{"title":"CRL","basic":[],"advanced":[["Name
+        & Position",["title","position",[["Horizontal",["horizontalOffset"]],["Vertical",["verticalOffset"]]]]],["Geometry",["focalPlane","shape","tipRadius","numberOfLenses","tipWallThickness","focalDistance",[["Horizontal",["horizontalApertureSize"]],["Vertical",["verticalApertureSize"]]]]],["Material",["material","method","refractiveIndex","attenuationLength","focalDistance"]]]},"crystal":{"title":"Crystal","basic":[],"advanced":[["Name
+        & Position",["title","position"]],["Geometry",["asymmetryAngle","crystalThickness"]],["Orientation",["energy","useCase","diffractionAngle",[["Outward
+        normal vector",["nvx","nvy","nvz"]],["Central tangential vector",["tvx","tvy"]]]]],["Material",[[["Material
+        of the crystal",["material"]],["Miller''s indices",["h","k","l"]]],[["Polarizability''s
+        Real part",["psi0r","psiHr","psiHBr"]],["Polarizability''s Imaginary part",["psi0i","psiHi","psiHBi"]]],"dSpacing"]],["Height
+        Profile",["heightProfileFile","orientation","heightAmplification"]]]},"electronBeam":{"title":"Electron
+        Beam","basic":["beamSelector"],"advanced":[["Main",["beamSelector","name","energy","current","rmsSpread","beamDefinition",[["Horizontal
+        Twiss Parameters",["horizontalEmittance","horizontalBeta","horizontalAlpha","horizontalDispersion","horizontalDispersionDerivative"]],["Vertical
+        Twiss Parameters",["verticalEmittance","verticalBeta","verticalAlpha","verticalDispersion","verticalDispersionDerivative"]]],[["Horizontal
+        Moments",["rmsSizeX","rmsDivergX","xxprX"]],["Vertical Moments",["rmsSizeY","rmsDivergY","xxprY"]]]]],["Position",[[["Horizontal",["electronBeamPosition.horizontalPosition","electronBeamPosition.horizontalAngle"]],["Vertical",["electronBeamPosition.verticalPosition","electronBeamPosition.verticalAngle"]]],"electronBeamPosition.driftCalculationMethod","electronBeamPosition.drift"]]]},"ellipsoidMirror":{"title":"Elliptical
+        Cylinder Mirror","basic":[],"advanced":[["Name & Position",["title","position",[["Horizontal",["horizontalOffset"]],["Vertical",["verticalOffset"]]]]],["Geometry",["firstFocusLength","focalLength","tangentialSize","sagittalSize"]],["Orientation",["grazingAngle","autocomputeVectors",[["Coordinates
+        of Central Normal Vector",["normalVectorX","normalVectorY","normalVectorZ"]],["Coordinates
+        of Central Tangential Vector",["tangentialVectorX","tangentialVectorY"]]]]],["Height
+        Profile",["heightProfileFile","orientation","heightAmplification"]]]},"fiber":{"title":"Fiber","basic":[],"advanced":[["Geometry",["title","position","focalPlane",[["Horizontal",["horizontalCenterPosition"]],["Vertical",["verticalCenterPosition"]]]]],["Material",["method",[["External",["externalMaterial","externalRefractiveIndex","externalAttenuationLength","externalDiameter"]],["Core",["coreMaterial","coreRefractiveIndex","coreAttenuationLength","coreDiameter"]]]]]]},"fluxAnimation":{"title":"Spectral
+        Flux","basic":[],"advanced":[["Main",["distanceFromSource","initialEnergy","finalEnergy","photonEnergyPointCount",[["Horizontal",["horizontalApertureSize","horizontalPosition"]],["Vertical",["verticalApertureSize","verticalPosition"]]],"fluxType","polarization","plotScale","notes"]],["Accuracy",["magneticField","method","precision","numberOfMacroElectrons","initialHarmonic","finalHarmonic","longitudinalPrecision","azimuthalPrecision"]]]},"fluxReport":{"title":"Spectral
+        Flux","basic":[],"advanced":[["Main",["distanceFromSource","initialEnergy","finalEnergy","photonEnergyPointCount",[["Horizontal",["horizontalApertureSize","horizontalPosition"]],["Vertical",["verticalApertureSize","verticalPosition"]]],"fluxType","polarization","plotScale","notes"]],["Accuracy",["initialHarmonic","finalHarmonic","longitudinalPrecision","azimuthalPrecision"]]]},"gaussianBeam":{"title":"Coherent
+        Gaussian Beam","basic":[],"advanced":["photonEnergy","energyPerPulse","polarization","rmsPulseDuration","waistZ","sizeDefinition",[["Horizontal",["rmsSizeX","rmsDivergenceX","waistX","waistAngleX"]],["Vertical",["rmsSizeY","rmsDivergenceY","waistY","waistAngleY"]]]]},"grating":{"title":"Grating","basic":[],"advanced":[["Name
+        & Position",["title","position",[["Horizontal",["horizontalOffset"]],["Vertical",["verticalOffset"]]]]],["Geometry",["tangentialSize","sagittalSize","*Groove
+        Density Parameters:\n$a_0 + a_1 y + a_2 y^2 + a_3 y^3 + a_4 y^4$","grooveDensity0","grooveDensity1","grooveDensity2","grooveDensity3","grooveDensity4"]],["Orientation",["energyAvg","diffractionOrder","computeParametersFrom","cff","grazingAngle","rollAngle",[["Outward
+        normal vector",["nvx","nvy","nvz"]],["Central tangential vector",["tvx","tvy"]]]]],["Height
+        Profile",["heightProfileFile","orientation","heightAmplification"]]]},"initialIntensityReport":{"_super":["_","view","_INTENSITY_REPORT"],"title":"Initial
+        Intensity","basic":[],"advanced":[["Main",["simulation.photonEnergy","polarization","characteristic","copyCharacteristic","fieldUnits","notes"]],["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"intensityReport":{"title":"Single-Electron
+        Spectrum","basic":[],"advanced":[["Main",["distanceFromSource","initialEnergy","finalEnergy","photonEnergyPointCount","polarization","fieldUnits",[["Horizontal",["horizontalPosition"]],["Vertical",["verticalPosition"]]],"plotScale","notes"]],["Accuracy",["method","precision"]]]},"lens":{"title":"Lens","basic":[],"advanced":["title","position",[["Horizontal",["horizontalFocalLength","horizontalOffset"]],["Vertical",["verticalFocalLength","verticalOffset"]]]]},"mask":{"title":"Mask","basic":[],"advanced":[["Geometry",["title","position","maskThickness","gridShape","gridTiltAngle",[["Horizontal",["horizontalSamplingInterval","horizontalGridPitch","horizontalPixelsNumber","horizontalGridsNumber","horizontalGridDimension","horizontalMaskCoordinate"]],["Vertical",["verticalSamplingInterval","verticalGridPitch","verticalPixelsNumber","verticalGridsNumber","verticalGridDimension","verticalMaskCoordinate"]]]]],["Material",["material","method","refractiveIndex","attenuationLength"]]]},"mirror":{"title":"Planar
+        Mirror","basic":[],"advanced":["title","position","heightProfileFile","orientation","grazingAngle","heightAmplification","horizontalTransverseSize","verticalTransverseSize"]},"mirrorReport":{"title":"Mirror","basic":[],"advanced":["notes"]},"rsOptElement":{"title":"rsopt
+        Element","basic":["offsetRanges","rotationRanges"],"advanced":[]},"exportRsOpt":{"title":"Generate
+        Machine Learning Data Script","basic":[],"advanced":["elements","scanType","numSamples"]},"multipole":{"title":"Dipole","basic":[],"advanced":["field","length","distribution"]},"multiElectronAnimation":{"_super":["_","view","_INTENSITY_REPORT"],"title":"Partially
+        Coherent Intensity","basic":[],"advanced":[["Main",["watchpointId","simulation.photonEnergy","stokesParameter","numberOfMacroElectrons","integrationMethod","photonEnergyBandWidth","calcCoherence",[["Horizontal",["horizontalPosition"]],["Vertical",["verticalPosition"]]],"notes"]],["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"obstacle":{"title":"Obstacle","basic":[],"advanced":["title","position","shape",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]]]},"powerDensityReport":{"_super":["_","view","_INTENSITY_REPORT"],"title":"Power
+        Density","basic":[],"advanced":[["Main",["distanceFromSource",[["Horizontal",["horizontalPosition","horizontalRange","horizontalPointCount"]],["Vertical",["verticalPosition","verticalRange","verticalPointCount"]]],"notes"]],["Accuracy",["method","precision"]],["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"sample":{"title":"Sample","basic":[],"advanced":[["Method",["title","position","sampleSource"]],["Image
+        Manipulation",["imageFile","rotateAngle","rotateReshape","cutoffBackgroundNoise","backgroundColor","invert","tileImage","tileRows","tileColumns","cropArea",[["Horizontal",["areaXStart","areaXEnd","shiftX"]],["Vertical",["areaYStart","areaYEnd","shiftY"]]]]],["Random
+        2D Objects",["rand_alg","obj_type","rand_obj_size","obj_size_ratio","rand_poly_side","poly_sides","rand_shapes","r_min_bw_obj","edge_frac",[["Minimum",["obj_size_min","ang_min"]],["Maximum",["obj_size_max","ang_max"]]],"size_dist","ang_dist"]],["Physical
+        Properties",["resolution","thickness","transmissionImage","dens",[["Horizontal",["rx","nx","horizontalCenterCoordinate"]],["Vertical",["ry","ny","verticalCenterCoordinate"]]]]],["Material",["material","method","refractiveIndex","attenuationLength"]],["Image
+        Preview",["outputImageFormat"]]]},"simulation":{"title":"Source","advanced":["name","sourceType","folder","notes"]},"simulationGrid":{"model":"simulation","title":"Initial
+        Wavefront Simulation Grid","advanced":["photonEnergy","distanceFromSource","samplingMethod","sampleFactor",[["Horizontal",["horizontalPosition","horizontalRange","horizontalPointCount"]],["Vertical",["verticalPosition","verticalRange","verticalPointCount"]]]]},"simulationStatus":{"title":"Simulation
+        Status","advanced":[]},"sourceIntensityReport":{"_super":["_","view","_INTENSITY_REPORT"],"title":"Intensity","basic":[],"advanced":[["Main",["distanceFromSource","photonEnergy","polarization","characteristic","fieldUnits","samplingMethod","sampleFactor",[["Horizontal",["horizontalPosition","horizontalRange","horizontalPointCount"]],["Vertical",["verticalPosition","verticalRange","verticalPointCount"]]],"notes"]],["Accuracy",["method","precision","initialPosition","finalPosition"]],["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"sphericalMirror":{"title":"Circular
+        Cylinder Mirror","basic":[],"advanced":[["Name & Position",["title","position",[["Horizontal",["horizontalOffset"]],["Vertical",["verticalOffset"]]]]],["Geometry",["radius","tangentialSize","sagittalSize"]],["Orientation",["grazingAngle","autocomputeVectors",[["Coordinates
+        of Central Normal Vector",["normalVectorX","normalVectorY","normalVectorZ"]],["Coordinates
+        of Central Tangential Vector",["tangentialVectorX","tangentialVectorY"]]]]],["Height
+        Profile",["heightProfileFile","orientation","heightAmplification"]]]},"tabulatedUndulator":{"title":"Undulator
+        (Idealized or Tabulated)","helpVideoURL":"https://vimeo.com/410318423/632634aa5d","basic":["undulatorSelector"],"advanced":["undulatorSelector","name","undulatorType","gap","phase","undulator.period","undulator.length","undulator.longitudinalPosition","magneticFile","undulator.effectiveDeflectingParameter",[["Horizontal",["undulator.horizontalAmplitude","undulator.horizontalDeflectingParameter","undulator.horizontalInitialPhase","undulator.horizontalSymmetry"]],["Vertical",["undulator.verticalAmplitude","undulator.verticalDeflectingParameter","undulator.verticalInitialPhase","undulator.verticalSymmetry"]]]]},"toroidalMirror":{"title":"Toroid
+        Mirror","basic":[],"advanced":[["Name & Position",["title","position",[["Horizontal",["horizontalPosition"]],["Vertical",["verticalPosition"]]]]],["Geometry",[[["Tangential",["tangentialRadius","tangentialSize"]],["Sagittal",["sagittalRadius","sagittalSize"]]],"apertureShape"]],["Orientation",["grazingAngle","autocomputeVectors",[["Coordinates
+        of Central Normal Vector",["normalVectorX","normalVectorY","normalVectorZ"]],["Coordinates
+        of Central Tangential Vector",["tangentialVectorX","tangentialVectorY"]]]]],["Height
+        Profile",["heightProfileFile","orientation","heightAmplification"]]]},"trajectoryReport":{"title":"Electron
+        Trajectory","basic":[],"advanced":["timeMomentEstimation","initialTimeMoment","finalTimeMoment","numberOfPoints",[["Horizontal",["plotAxisX"]],["Vertical",["plotAxisY","plotAxisY2"]]],"notes"]},"undulator":{"title":"Idealized
+        Undulator","helpVideoURL":"https://vimeo.com/410318423/632634aa5d","basic":[],"advanced":["period","length","longitudinalPosition","effectiveDeflectingParameter",[["Horizontal",["horizontalAmplitude","horizontalDeflectingParameter","horizontalInitialPhase","horizontalSymmetry"]],["Vertical",["verticalAmplitude","verticalDeflectingParameter","verticalInitialPhase","verticalSymmetry"]]]]},"watch":{"title":"Watchpoint","basic":[],"advanced":["title","position"]},"watchpointReport":{"_super":["_","view","_INTENSITY_REPORT"],"title":"Watchpoint","basic":[],"advanced":[["Main",["simulation.photonEnergy","polarization","characteristic","fieldUnits","notes"]],["View",["intensityPlotsWidth","plotScale","useIntensityLimits","minIntensityLimit","maxIntensityLimit","usePlotRange",[["Horizontal",["horizontalSize","horizontalOffset"]],["Vertical",["verticalSize","verticalOffset"]]],"rotateAngle","rotateReshape"]],["Other",["colorMap","aspectRatio"]]]},"zonePlate":{"title":"Zone
+        Plate","basic":[],"advanced":[["Geometry",["title","position","numberOfZones","outerRadius","thickness",[["Horizontal",["horizontalOffset"]],["Vertical",["verticalOffset"]]]]],["Material",["method",[["Main",["mainMaterial","mainRefractiveIndex","mainAttenuationLength"]],["Complementary",["complementaryMaterial","complementaryRefractiveIndex","complementaryAttenuationLength"]]]]]]},"simDoc":{"model":"simulation","title":"Simulation
+        Documentation","advanced":["documentationUrl"]},"simFolder":{"title":"New
+        Folder","advanced":["name","parent"]}},"appInfo":{"myapp":{"longName":"MyApp","shortName":"MyApp"},"controls":{"longName":"Controls","shortName":"Controls"},"elegant":{"longName":"elegant","shortName":"elegant"},"flash":{"longName":"FLASH","shortName":"FLASH"},"hellweg":{"longName":"Hellweg","shortName":"Hellweg"},"irad":{"longName":"IRAD","shortName":"IRAD"},"jspec":{"longName":"JSPEC","shortName":"JSPEC"},"jupyterhublogin":{"longName":"JupyterHub
+        Login","shortName":"JupyterHub"},"madx":{"longName":"MAD-X","shortName":"MAD-X"},"ml":{"longName":"Activait","shortName":"Activait"},"opal":{"longName":"OPAL","shortName":"OPAL"},"radia":{"longName":"Radia","shortName":"Radia"},"rcscon":{"longName":"RCSCON","shortName":"RCSCON"},"rs4pi":{"longName":"RS4PI","shortName":"RS4PI"},"shadow":{"longName":"SHADOW","shortName":"SHADOW"},"silas":{"longName":"SILAS","shortName":"SILAS"},"srw":{"longName":"Synchrotron
+        Radiation Workshop","shortName":"SRW"},"synergia":{"longName":"Synergia","shortName":"Synergia"},"warppba":{"longName":"Warp
+        PBA","shortName":"Warp PBA"},"warpvnd":{"longName":"Warp VND","shortName":"Warp
+        VND"},"webcon":{"longName":"Webcon","shortName":"Webcon"},"zgoubi":{"longName":"ZGOUBI","shortName":"ZGOUBI"}},"productInfo":{"shortName":"Sirepo","longName":"Sirepo"},"rootRedirectUri":{"fete":"/warpvnd","plans":"/en/plans.html","warp":"/warppba"},"route":{"adjustTime":"/adjust-time/?<days>","admJobs":"/adm-jobs","authBlueskyLogin":"/auth-bluesky-login","authCompleteRegistration":"/auth-complete-registration","authEmailAuthorized":"/auth-email-authorized/<simulation_type>/<token>","authEmailLogin":"/auth-email-login","authGithubAuthorized":"/auth-github-authorized","authGithubLogin":"/auth-github-login/<simulation_type>","authGuestLogin":"/auth-guest-login/<simulation_type>","authLogout":"/auth-logout/?<simulation_type>","authState":"/auth-state","blueskyAuth":"/bluesky-auth","comsol":"/comsol","comsolRegister":"/comsol-register","copyNonSessionSimulation":"/copy-non-session-simulation","copySimulation":"/copy-simulation","deleteFile":"/delete-file","deleteSimulation":"/delete-simulation","downloadDataFile":"/download-data-file/<simulation_type>/<simulation_id>/<model>/<frame>/?<suffix>","downloadFile":"/download-file/<simulation_type>/<simulation_id>/<filename>","errorLogging":"/error-logging","exportArchive":"/export-archive/<simulation_type>/<simulation_id>/<filename>","exportJupyterNotebook":"/export-jupyter-notebook/<simulation_type>/<simulation_id>/?<model>/?<title>","exportRSOptConfig":"/export-rsopt-config/<simulation_type>/<simulation_id>/<filename>","favicon":"/favicon.ico","findByName":"/find-by-name/<simulation_type>/<application_mode>/<simulation_name>","findByNameWithAuth":"/find-by-name-auth/<simulation_type>/<application_mode>/<simulation_name>","getApplicationData":"/get-application-data/?<filename>","homePage":"/en/*<path_info>","importArchive":"/import-archive","importFile":"/import-file/<simulation_type>","jobSupervisorPing":"/job-supervisor-ping","jupyterHub":"/jupyter","listFiles":"/file-list/<simulation_type>/<simulation_id>/<file_type>","listSimulations":"/simulation-list","migrateJupyterhub":"/migrate-jupyterhub","newSimulation":"/new-simulation","oauthAuthorized":"/oauth-authorized/<oauth_type>","ownJobs":"/own-jobs","pythonSource":"/python-source/<simulation_type>/<simulation_id>/?<model>/?<title>","redirectJupyterHub":"/redirect-jupyterhub","robotsTxt":"/robots.txt","root":"/*<path_info>","runCancel":"/run-cancel","runSimulation":"/run-simulation","runStatus":"/run-status","saveSimulationData":"/save-simulation","sbatchLogin":"/sbatch-login","serverStatus":"/server-status","simulationData":"/simulation/<simulation_type>/<simulation_id>/<pretty>/?<section>","simulationFrame":"/simulation-frame/<frame_id>","simulationSchema":"/simulation-schema","srUnit":"/
+        srunit","srwLight":"/light","statelessCompute":"/stateless-compute","staticFile":"/static/*<path_info>","updateFolder":"/update-folder","uploadFile":"/upload-file/<simulation_type>/<simulation_id>/<file_type>"},"common":{"appDefaults":{"route":"simulations"},"appModes":{"default":{"localRoute":"source","includeMode":false}},"constants":{"canDownloadInputFile":true,"clientCookie":"sirepo_cookie_js","hasJupyterExport":false,"hasMadxExport":false,"maxSimCopies":100,"oneDayMillis":86400000,"paymentPlans":{"basic":"Sirepo
+        Basic","enterprise":"Sirepo Enterprise","premium":"Sirepo Premium"},"plansUrl":"/en/plans.html","simulationSourceExtension":"py"},"cookies":{"firstVisit":{"name":"1st_vis","value":"a"},"getStarted":{"name":"strt","value":"a"},"listView":{"name":"lv","value":false,"valType":"b"},"login":{"name":"login","value":"a","timeout":1},"previousRoute":{"name":"prev","value":"a"}},"dynamicFiles":{"externalLibs":{"js":["angular-cookies.min.js","angular-route.min.js","angular-sanitize.min.js","bootstrap-3.3.7.min.js","bootstrap-toggle.min.js","ngDraggable.js","colorbar.js","canvg-and-dependencies.js","FileSaver.js","Blob.js","canvas-toBlob.js","d3-3.5.9.min.js","fontdetect-0.3.js","ie10-viewport-bug-workaround.js","katex.min.js"]},"sirepoLibs":{"js":["sirepo-common.js","sirepo-components.js","sirepo-plotting.js","sirepo-plotting-vtk.js","sirepo-geometry.js"]},"libURLs":["/auth-state"]},"enum":{"AspectRatio":[["2","1
+        x 2"],["1.777777","9 x 16"],["1.333333","3 x 4"],["1","1 x 1"],["0.75","4
+        x 3"],["0.5625","16 x 9"],["0.5","2 x 1"]],"Boolean":[["0","No"],["1","Yes"]],"ColorMap":[["grayscale","grayscale"],["viridis","viridis"],["afmhot","afmhot"],["coolwarm","coolwarm"],["jet","jet"],["blues","blues"],["contrast","high
+        contrast"]],"JobRunMode":[["sequential","sequential"],["parallel","parallel"],["sbatch","sbatch"]],"FramesPerSecond":[["1","1"],["2","2"],["5","5"],["10","10"],["15","15"],["20","20"]],"NERSCQueue":[["debug","debug"],["premium","premium"],["realtime","realtime"],["regular","regular"]],"PlotRangeType":[["none","None"],["fit","Fit
+        Data"],["fixed","Fixed"]]},"localRoutes":{"admJobs":{"route":"/adm-jobs","config":{"templateUrl":"/static/html/adm-jobs.html"}},"completeRegistration":{"route":"/complete-registration","config":{"controller":"LoginConfirmController
+        as loginConfirm","templateUrl":"/static/html/complete-registration.html"}},"error":{"route":"/error","config":{"templateUrl":"/static/html/server-error.html"}},"forbidden":{"route":"/forbidden","config":{"templateUrl":"/static/html/forbidden.html"}},"findByName":{"route":"/findByName/:applicationMode/:simulationName","config":{"controller":"FindByNameController
+        as findByName","templateUrl":"/static/html/find-by-name.html"}},"login":{"route":"/login","config":{"controller":"LoginController
+        as login","templateUrl":"/static/html/login.html"}},"loginFail":{"route":"/login-fail/:method/:reason","config":{"controller":"LoginFailController
+        as loginFail","templateUrl":"/static/html/login-fail.html"}},"loginWith":{"route":"/login-with/:method","config":{"controller":"LoginWithController
+        as loginWith","templateUrl":"/static/html/login-with.html"}},"loginWithEmailConfirm":{"route":"/login-with-email-confirm/:token/:needCompleteRegistration","config":{"controller":"LoginConfirmController
+        as loginConfirm","templateUrl":"/static/html/login-with-email-confirm.html"}},"missingCookies":{"route":"/missing-cookies","config":{"templateUrl":"/static/html/missing-cookies.html"}},"notFound":{"route":"/not-found","config":{"templateUrl":"/static/html/not-found.html"}},"notFoundCopy":{"route":"/copy-session/:simulationIds/:section","config":{"controller":"NotFoundCopyController
+        as notFoundCopy","templateUrl":"/static/html/copy-session.html"}},"ownJobs":{"route":"/own-jobs","config":{"templateUrl":"/static/html/own-jobs.html"}},"sbatchLogin":{"route":"/sbatch-login/:isModal/:reason/:simulationType/:simulationId/:report/:host","config":{"controller":"SbatchLoginController
+        as sbatchLogin","templateUrl":"/static/html/sbatch-login.html"}},"serverUpgraded":{"route":"/server-upgraded","config":{"controller":"ServerUpgradedController
+        as serverUpgraded","templateUrl":"/static/html/server-upgraded.html"}},"simulations":{"route":"/simulations","config":{"controller":"SimulationsController
+        as simulations","templateUrl":"/static/html/simulations.html"}},"simulationsFolder":{"route":"/simulations/:folderPath?","config":{"controller":"SimulationsController
+        as simulations","templateUrl":"/static/html/simulations.html"}},"source":{"route":"/source/:simulationId"}},"model":{"simFolder":{"name":["Folder
+        Name","SafePath"],"parent":["Parent Folder","UserFolder"]},"simulation":{"name":["Name","SimulationName"],"folder":["Folder","UserFolder","/"],"documentationUrl":["Documentation
+        URL","OptionalString",""],"notes":["Notes","Text",""]}},"notifications":{"getStarted":{"name":"getStarted","cookie":"getStarted","content":"","active":true},"login":{"name":"login","cookie":"login","content":"","active":false,"delay":1}},"staticFiles":{"externalLibs":{"js":["angular.min.js","jquery-2.2.4.min.js","cookieconsent.min.js"],"css":["bootstrap-3.3.7.min.css","bootstrap-colxl.css","bootstrap-toggle.min.css","katex.min.css","cookieconsent.min.css"]},"sirepoLibs":{"js":["sirepo.js","sirepo-dom.js"],"css":["sirepo.css"]}},"strings":{"completionState":":
+        {frameCount} animation frames","genericSimulationError":"Error encountered
+        during {typeOfSimulation}","importText":null,"simulationDataType":"simulation","simulationDataTypePlural":"simulations","simulationState":"{typeOfSimulation}
+        {state}","typeOfSimulation":"simulation","simulationSource":"Python Source"},"view":{"simDoc":{"model":"simulation","title":"Simulation
+        Documentation","advanced":["documentationUrl"]},"simFolder":{"title":"New
+        Folder","advanced":["name","parent"]},"simulation":{"title":"Simulation","advanced":["name","folder","notes"]}}},"customErrors":{"403":{"url":"forbidden.html","msg":"Forbidden","route":"forbidden"},"404":{"url":"not-found.html","msg":"File
+        Not Found","route":"notFound"},"422":{"url":"srw-magnet-file-error.html","msg":"Invalid
+        Magnet File","route":"error"},"500":{"url":"server-error.html","msg":"Server
+        Error","route":"error"},"502":{"url":"server-error.html","msg":"Proxy Error","route":"error"}},"version":"20210630.223337","feature_config":{"app_url":"/en/xray-beamlines.html","beamline3d":true,"hide_guest_warning":true,"mask_in_toolbar":true,"show_open_shadow":true,"show_rsopt_ml":true},"simulationType":"srw","dynamicModules":{"js":["/static/js/ext/dom-to-image.min.js","/static/js/ext/vtk.js","/static/js/ext/angular-cookies.min.js","/static/js/ext/angular-route.min.js","/static/js/ext/angular-sanitize.min.js","/static/js/ext/bootstrap-3.3.7.min.js","/static/js/ext/bootstrap-toggle.min.js","/static/js/ext/ngDraggable.js","/static/js/ext/colorbar.js","/static/js/ext/canvg-and-dependencies.js","/static/js/ext/FileSaver.js","/static/js/ext/Blob.js","/static/js/ext/canvas-toBlob.js","/static/js/ext/d3-3.5.9.min.js","/static/js/ext/fontdetect-0.3.js","/static/js/ext/ie10-viewport-bug-workaround.js","/static/js/ext/katex.min.js","/static/js/srw.js","/static/js/sirepo-beamline.js","/static/js/sirepo-common.js","/static/js/sirepo-components.js","/static/js/sirepo-plotting.js","/static/js/sirepo-plotting-vtk.js","/static/js/sirepo-geometry.js"],"css":["/static/css/srw.css"]},"appDefaults":{"route":"simulations"},"cookies":{"firstVisit":{"name":"1st_vis","value":"a"},"getStarted":{"name":"strt","value":"a"},"listView":{"name":"lv","value":false,"valType":"b"},"login":{"name":"login","value":"a","timeout":1},"previousRoute":{"name":"prev","value":"a"}},"notifications":{"getStarted":{"name":"getStarted","cookie":"getStarted","content":"","active":true},"login":{"name":"login","cookie":"login","content":"","active":false,"delay":1}}},"state":"ok"}'
+    headers:
+      Content-Length:
+      - '88257'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 13 Jul 2021 21:35:04 GMT
+      Server:
+      - Werkzeug/2.0.1 Python/3.7.2
+      Set-Cookie:
+      - sirepo_dev=Z0FBQUFBQmc3Z2NJRkJnRm9EdFlGYjBpaGE4REFMTEphb296TUZsdlZoNE9zRzVhWWpQcE5QaGUyS0VfVkJTVWZPcFRGVlZZdTc2cmttOGFidHZPanUwVWpOQ3hXX3BoZEFVWDVnamV4N3dTMDM2dXJKTVRxcUFmZGJtVlNLLURYaGhKNzFWd0ZINlg=;
+        Expires=Fri, 11 Jul 2031 21:35:04 GMT; Max-Age=315360000; HttpOnly; Path=/
+    status:
+      code: 200
+      message: OK
+version: 1
