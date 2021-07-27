@@ -179,6 +179,8 @@ pyparsing==2.4.7
     #   packaging
 pyqt5>=5.9,<5.12
     # via sirepo-bluesky
+pyqt5-sip==4.19.11
+    # via pyqt5
 pyrsistent==0.18.0
     # via jsonschema
 python-dateutil==2.8.2
