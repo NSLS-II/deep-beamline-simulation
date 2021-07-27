@@ -134,6 +134,7 @@ numconv==2.1.1
     #   sirepo-bluesky
 numpy==1.20.3
     # via
+    #   -r requirements.in
     #   bluesky
     #   bluesky-live
     #   dask
