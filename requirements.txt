@@ -219,8 +219,6 @@ six==1.16.0
     #   super-state-machine
 slicerator==1.0.0
     # via pims
-srwpy==0.0.4
-    # via sirepo-bluesky
 suitcase-mongo==0.3.0
     # via databroker
 suitcase-msgpack==0.2.4
