@@ -19,7 +19,7 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v2
         with:
-          activate-environment: "conda-pack"
+          activate-environment: "deep-beamline-simulation"
           auto-update-conda: true
           miniconda-version: "latest"
           python version: ${{ matrix.python-version }}
