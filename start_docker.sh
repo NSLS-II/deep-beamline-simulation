@@ -25,5 +25,5 @@ docker run $1 --init --rm --name sirepo \
        -e SIREPO_SRDB_ROOT=/sirepo \
        -e SIREPO_COOKIE_IS_SECURE=false \
        -p 8000:8000 \
-       -v $HOME/tmp/sirepo-docker-run:/sirepo \
+       -v $PWD/sirepo_bluesky/tests/SIREPO_SRDB_ROOT:/SIREPO_SRDB_ROOT:ro,z \
        radiasoft/sirepo:beta bash -l -c "sirepo service http"
