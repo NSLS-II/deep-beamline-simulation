@@ -1,0 +1,186 @@
+#!/bin/bash
+#
+# Invoke docker run on /home/vagrant/.radia-run/start
+#
+set -euo pipefail
+radia_run_channel='prod'
+radia_run_cmd='/home/vagrant/.radia-run/start'
+radia_run_container=$(id -u -n)-$(basename 'radiasoft/sirepo')
+radia_run_daemon='1'
+radia_run_db_dir='/sirepo'
+radia_run_guest_dir='/vagrant'
+radia_run_guest_uid='1000'
+radia_run_guest_user='vagrant'
+radia_run_image='radiasoft/sirepo'
+radia_run_interactive=''
+radia_run_port='8000'
+radia_run_uri='/'
+
+radia_run_msg () 
+{ 
+    echo "$@" 1>&2
+}
+radia_run_err () 
+{ 
+    trap - EXIT;
+    if [[ -n $1 ]]; then
+        install_msg "$*
+If you don't know what to do, please contact support@radiasoft.net.";
+    fi;
+    if [[ -z $install_verbose ]]; then
+        install_clean &> /dev/null;
+    fi;
+    exit 1
+}
+radia_run_assert_not_root () 
+{ 
+    if (( $(id -u) == 0 || $(id -g) == 0 )); then
+        install_err 'cannot be run as root or group 0';
+    fi
+}
+radia_run_check () 
+{ 
+    local x=$(docker inspect --format='{{.State.Running}}' "$radia_run_container" 2>/dev/null || true);
+    if [[ $x == true ]]; then
+        radia_run_msg 'Server is running; stopping';
+        local res;
+        if ! res=$(docker rm -f "$radia_run_container" 2>&1); then
+            radia_run_msg "$res";
+            radia_run_msg 'Failed to stop, trying to start anyway.';
+        fi;
+    else
+        if [[ $x == false ]]; then
+            docker rm "$radia_run_container" &> /dev/null || true;
+        fi;
+    fi
+}
+radia_run_exec () 
+{ 
+    local cmd=("$@");
+    radia_run_prompt;
+    if [[ -n $radia_run_cmd ]]; then
+        cmd+=(/bin/bash -c "cd; source ~/.bashrc; $radia_run_cmd");
+    fi;
+    if [[ -n $radia_run_daemon ]]; then
+        "${cmd[@]}" &> radia-run.log &
+    else
+        "${cmd[@]}";
+    fi
+}
+radia_run_linux_fixup () 
+{ 
+    local run=.radia-run-linux;
+    ( cat <<EOF1
+#!/bin/bash
+#
+# Work around Docker not mapping user for volumes.
+# Only necessary on Linux when uid is different.
+# See download/installers/container-run.
+#
+set -euo pipefail
+rd='$radia_run_guest_dir'
+ru='$radia_run_guest_uid'
+rn='$radia_run_guest_user'
+EOF1
+
+    cat <<'EOF2'
+# map uid & gid to run dir's uid & gid
+u=$(stat -c %u "$rd")
+g=$(stat -c %g "$rd")
+n=$rn
+rh="/home/$rn"
+# user or group different than default run_user's home
+n=radia-run
+if ! getent group "$g" >& /dev/null; then
+    # ensure group entry exists
+    groupadd -g "$g" "$n"
+fi
+if [[ $u == $ru ]]; then
+    # only group is different, just add group to run_user
+    usermod -g "$g" -d "$rh" "$rn"
+    n=$rn
+elif getent passwd "$u" >& /dev/null; then
+    # user exists but is not run_user; modify user in place
+    n=$(id -n -u "$u")
+    if [[ ! " $(id -G vagrant) " =~ " $g " ]]; then
+        # Might be a system account so set shell
+        usermod -a -G "$g" -s /bin/bash -d "$rh" "$n"
+    fi
+else
+    # no user so create
+    useradd --no-create-home -d "$rh" -u "$u" -g "$g" "$n"
+fi
+# This is similar to gosu but without a dependency on it, but
+# we also set the gid to the gid of the directory which might
+# not be the primary gid.
+exec python - "$@" <<END
+import os, sys
+# POSIT: always a command and always absolute; see containers/bin/build-docker.sh
+cmd = sys.argv[1:]
+# don't need other groups so this is sufficient
+os.setgroups([])
+os.setgid($g)
+os.setuid($u)
+os.environ['HOME'] = '$rh'
+os.execv(cmd[0], cmd)
+END
+EOF2
+ ) > "$run";
+    chmod 755 "$run";
+    echo "--user=root --entrypoint=$radia_run_guest_dir/$run"
+}
+radia_run_main () 
+{ 
+    radia_run_assert_not_root;
+    radia_run_check;
+    local image=$radia_run_image:$radia_run_channel;
+    radia_run_msg "Updating Docker image: $image ...";
+    local res;
+    if ! res=$(docker pull "$image" 2>&1); then
+        radia_run_msg "$res";
+        radia_run_msg 'Update failed: Assuming network failure, continuing.';
+    fi;
+    local cmd=(docker run --init --name "$radia_run_container" -v "$PWD:$radia_run_guest_dir");
+    if [[ -n $radia_run_db_dir ]]; then
+        cmd+=(-v "$PWD:$radia_run_db_dir");
+    fi;
+    if [[ -n $radia_run_daemon ]]; then
+        cmd+=(-d);
+    else
+        if [[ ! -n $radia_run_cmd ]]; then
+            radia_run_cmd=bash;
+            cmd+=(-i);
+            if [[ -t 1 ]]; then
+                cmd+=(-t);
+            fi;
+        fi;
+    fi;
+    if [[ -n $radia_run_port ]]; then
+        cmd+=(-p "$radia_run_port:$radia_run_port" -e "RADIA_RUN_PORT=$radia_run_port");
+    fi;
+    if [[ $(uname) == ^[Ll]inux$ && $(stat -c '%u %g' "$PWD") != "$radia_run_guest_uid $radia_run_guest_uid" ]]; then
+        cmd+=($(radia_run_linux_fixup) "$image");
+    else
+        cmd+=(-u "$radia_run_guest_user" "$image");
+    fi;
+    radia_run_exec "${cmd[@]}"
+}
+radia_run_msg () 
+{ 
+    echo "$@" 1>&2
+}
+radia_run_prompt () 
+{ 
+    local stop="To stop the application container, run:
+
+docker rm -f '$radia_run_container'";
+    if [[ -n $radia_run_uri ]]; then
+        radia_run_msg "Point your browser to:
+
+http://127.0.0.1:$radia_run_port$radia_run_uri
+
+$stop";
+    fi
+}
+
+radia_run_main "$@"
