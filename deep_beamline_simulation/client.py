@@ -114,7 +114,7 @@ class Client:
 
     def login(self):
         """Instead of auth, login as a guest user each time"""
-        r = self.post("/simulation-list", {})
+        r = self.post("simulation-list", {})
         assert r["srException"]["routeName"] == "missingCookies"
         self.post("/auth-guest-login/" + self.sim_type, {})
 
