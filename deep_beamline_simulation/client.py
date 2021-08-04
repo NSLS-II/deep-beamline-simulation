@@ -12,7 +12,7 @@ class Client:
     def __init__(self, sim_type="srw"):
         # create a session
         self.session = requests.Session()
-        self.host = "http://127.0.0.1:8000"
+        self.host = "http://127.0.0.1:8000/"
         self.sim_name = None
         # sim type is typically 'srw'
         self.sim_type = sim_type
