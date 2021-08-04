@@ -1,0 +1,26 @@
+{
+    "models": {
+        "dog": {
+            "breed": "Great Dane",
+            "disposition": "friendly",
+            "favoriteTreat": "",
+            "gender": "male",
+            "height": 81.28,
+            "weight": 70.25
+        },
+        "heightWeightReport": {},
+        "simFolder": {},
+        "simulation": {
+            "documentationUrl": "",
+            "folder": "/",
+            "isExample": true,
+            "name": "Scooby Doo",
+            "notes": "",
+            "outOfSessionSimulationId": "",
+            "simulationId": "Zt6rlmHR",
+            "simulationSerial": 1628087383136211
+        }
+    },
+    "simulationType": "myapp",
+    "version": "20210803.161439"
+}

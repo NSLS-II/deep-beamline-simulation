@@ -12,7 +12,7 @@ class Client:
     def __init__(self, sim_type="srw"):
         # create a session
         self.session = requests.Session()
-        self.host = "http://10.10.10.10:8000"
+        self.host = "http://127.0.0.1:8000"
         self.sim_name = None
         # sim type is typically 'srw'
         self.sim_type = sim_type
@@ -47,7 +47,7 @@ class Client:
     def get_simulation_id(self):
         """Returns simulation id based on simulation name"""
         to_search = {"simulation.name": self.sim_name}
-        response = self.post("/simulation-list", {"search": to_search})
+        response = self.post("simulation-list", {"search": to_search})
         if len(response) > 1:
             raise ValueError(
                 f"expecting only one simulation with name={self.sim_name} found {response}"
@@ -62,7 +62,7 @@ class Client:
         """Returns simulation description based on name"""
         to_search = {"simulation.name": self.sim_name}
         post_dict = dict(simulationType="srw", search=to_search)
-        description = self.post("/simulation-list", post_dict)
+        description = self.post("simulation-list", post_dict)
         return description
 
     def get_titles(self, data):
@@ -116,7 +116,7 @@ class Client:
         """Instead of auth, login as a guest user each time"""
         r = self.post("simulation-list", {})
         assert r["srException"]["routeName"] == "missingCookies"
-        self.post("/auth-guest-login/" + self.sim_type, {})
+        self.post("auth-guest-login/" + self.sim_type, {})
 
     @staticmethod
     def _assert_success(response, url):
@@ -151,7 +151,7 @@ class Client:
     def import_simulation(self, path):
         """imports zip file of simulation infomation"""
         return self.post(
-            f"/import-file/{self.sim_type}",
+            f"import-file/{self.sim_type}",
             {},
             file={"file": open("./example-sim.zip", "rb"), "folder": (None, "/foo")},
         )
@@ -164,7 +164,7 @@ class Client:
             "simulationType": self.sim_type,
             "sourceType": "u",
         }
-        return self.post("/new-simulation", data)
+        return self.post("new-simulation", data)
 
     def run_simulation(self, data, max_calls=1000):
         """Returns simulation data after running it"""

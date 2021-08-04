@@ -1,0 +1,434 @@
+{
+    "models": {
+        "box": {
+            "_super": "geomObject",
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "division": "1, 1, 1",
+            "groupId": "",
+            "id": "e5b99898-c9cb-47d9-b565-9edd34634cf7",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "transforms": [],
+            "type": "box"
+        },
+        "circlePath": {
+            "_super": "fieldPath",
+            "ctrX": 0.0,
+            "ctrY": 0.0,
+            "ctrZ": 0.0,
+            "name": "",
+            "numPoints": 10,
+            "phi": 0.0,
+            "radius": 10.0,
+            "theta": 0.0,
+            "type": "circle"
+        },
+        "cloneTransform": {
+            "_super": "transform",
+            "alternateFields": "1",
+            "angle": "0.0",
+            "axis": "0.0, 0.0, 1.0",
+            "center": "0.0, 0.0, 0.0",
+            "distance": "10.0, 0.0, 0.0",
+            "id": "454d6f97-40f4-480a-a43d-7daead5df025",
+            "name": "Clone",
+            "numCopies": 1,
+            "object": "",
+            "transforms": []
+        },
+        "fieldDisplay": {
+            "colorMap": "jet",
+            "scaling": "uniform"
+        },
+        "fieldLineoutReport": {
+            "fieldPath": {},
+            "fieldPaths": [],
+            "fieldType": "B",
+            "inProgressText": "Calculating"
+        },
+        "fieldMapPath": {
+            "_super": "fieldPath",
+            "ctrX": 0.0,
+            "ctrY": 0.0,
+            "ctrZ": 0.0,
+            "lenX": 1.0,
+            "lenY": 1.0,
+            "lenZ": 1.0,
+            "name": "",
+            "numPoints": 10,
+            "type": "fieldMap"
+        },
+        "fieldPath": {
+            "name": ""
+        },
+        "fieldPaths": {
+            "path": "line",
+            "paths": [
+                {
+                    "_super": "fieldPath",
+                    "begin": "-60,0,10",
+                    "end": "60,0,10",
+                    "id": 0,
+                    "name": "X Axis Offset",
+                    "numPoints": 21,
+                    "type": "line"
+                }
+            ]
+        },
+        "filePath": {
+            "_super": "fieldPath",
+            "fileModel": "",
+            "fileName": "",
+            "name": "",
+            "type": "file"
+        },
+        "gamma": {
+            "_super": "stemmed",
+            "armHeight": 1.0,
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "division": "1, 1, 1",
+            "groupId": "",
+            "id": "9db01063-3fab-4cef-aff1-6eaa1c177dde",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "stemWidth": 1.0,
+            "transforms": [],
+            "type": "gamma"
+        },
+        "geomGroup": {
+            "_super": "radiaObject",
+            "color": "#cccccc",
+            "groupId": "",
+            "id": "09570aa2-e1c0-41b7-81d3-16c9ccbb9b21",
+            "layoutShape": "rect",
+            "members": [],
+            "name": "",
+            "transforms": []
+        },
+        "geomObject": {
+            "_super": "radiaObject",
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "division": "1, 1, 1",
+            "groupId": "",
+            "id": "5352a41a-ed24-4180-a48f-081bd412ea84",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "transforms": [],
+            "type": "box"
+        },
+        "geomUndulatorGroup": {
+            "_super": "geomGroup",
+            "color": "#cccccc",
+            "gap": 1.0,
+            "groupId": "",
+            "id": "24b15eef-4da6-47f5-a94a-87031233387a",
+            "layoutShape": "rect",
+            "members": [],
+            "name": "",
+            "numPeriods": 1,
+            "transforms": []
+        },
+        "geometryReport": {
+            "beamAxis": "x",
+            "doGenerate": "1",
+            "id": "1eefbe54-db87-4758-a842-3e8c44eb47e9",
+            "isSolvable": "1",
+            "name": "Dipole",
+            "objects": [
+                {
+                    "bevels": [],
+                    "color": "#ff0000",
+                    "id": "1c3a32be-c19b-42f8-a303-28fecaa5c1f0",
+                    "material": "",
+                    "name": "Dipole.Geom.0.polygons",
+                    "type": ""
+                },
+                {
+                    "bevels": [],
+                    "color": "#0000ff",
+                    "id": "f904f1d1-93d5-4a84-bafb-cebf9efa0b35",
+                    "material": "",
+                    "name": "Dipole.Geom.1.polygons",
+                    "type": ""
+                }
+            ]
+        },
+        "hybridUndulator": {
+            "_super": "undulator",
+            "autoTerminate": "1",
+            "color": "#cccccc",
+            "enableKickMaps": "1",
+            "gap": 20.0,
+            "gapAxis": "y",
+            "gapOffset": 1.0,
+            "groupId": "",
+            "id": "dd076d28-a729-407c-b650-e979be752192",
+            "layoutShape": "rect",
+            "magnetBaseObjectId": "130993b6-356f-4a73-b208-d0297c2236ee",
+            "magnetColor": "#00ffff",
+            "magnetCrossSection": "65.0, 45.0",
+            "magnetDivision": "1, 1, 3",
+            "magnetLength": 18.0,
+            "magnetMagnetization": "0.0, 0.0, -1.0",
+            "magnetMaterial": "NdFeB",
+            "magnetMaterialFile": "",
+            "magnetObjType": "box",
+            "magnetRemanentMag": 1.2,
+            "name": "",
+            "numPeriods": 2,
+            "periodLength": 46.0,
+            "poleBaseObjectId": "2f77dc92-f29e-49d1-956b-0412d3904562",
+            "poleColor": "#ff00ff",
+            "poleCrossSection": "45.0, 25.0",
+            "poleDivision": "2, 5, 2",
+            "poleLength": 5.0,
+            "poleMagnetization": "0.0, 0.0, 0.0",
+            "poleMaterial": "custom",
+            "poleMaterialFile": "VaPermendur.csv",
+            "poleObjType": "box",
+            "poleRemanentMag": 0.0,
+            "transforms": [],
+            "transverseAxis": "x"
+        },
+        "invertField": {
+            "name": "Invert Field"
+        },
+        "kickMapReport": {
+            "beamAxis": "z",
+            "begin": "0, 0, 0",
+            "colorMap": "viridis",
+            "component": "h",
+            "direction": "0, 0, 1",
+            "gapAxis": "z",
+            "inProgressText": "Calculating",
+            "isSelfContained": "1",
+            "numPeriods": 1,
+            "numTransPoints1": 10,
+            "numTransPoints2": 10,
+            "periodLength": 1.0,
+            "transverseDirection": "0, 1, 0",
+            "transverseRange1": 1.0,
+            "transverseRange2": 1.0
+        },
+        "layoutObject": {
+            "color": "#cccccc",
+            "groupId": "",
+            "id": "50b9399d-b253-4350-acdd-06293691ef25",
+            "layoutShape": "rect"
+        },
+        "linePath": {
+            "_super": "fieldPath",
+            "begin": "-10.0, 0, 0",
+            "end": "10.0, 0, 0",
+            "name": "",
+            "numPoints": 10,
+            "type": "line"
+        },
+        "magnetDisplay": {
+            "alpha": 1.0,
+            "bgColor": "#ffffff",
+            "fieldPoints": [],
+            "fieldType": "M",
+            "notes": "",
+            "viewType": "objects"
+        },
+        "manualPath": {
+            "_super": "fieldPath",
+            "name": "",
+            "ptX": 0.0,
+            "ptY": 0.0,
+            "ptZ": 0.0,
+            "type": "manual"
+        },
+        "material": {
+            "density": 1.0,
+            "name": ""
+        },
+        "objectBevel": {
+            "amountGap": 1.0,
+            "amountTrans": 1.0,
+            "edge": "0"
+        },
+        "objectShape": {
+            "viewAxis": "z"
+        },
+        "racetrack": {
+            "_super": "geomObject",
+            "axis": "z",
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "currentDensity": 1.0,
+            "division": "1, 1, 1",
+            "fieldCalc": "man",
+            "groupId": "",
+            "id": "1c5d11c9-c323-4e28-9a3f-c9b40f8b4b17",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "numSegments": 1,
+            "rInner": 6.0,
+            "rOuter": 10.0,
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "transforms": [],
+            "type": "racetrack"
+        },
+        "radiaObject": {
+            "_super": "layoutObject",
+            "color": "#cccccc",
+            "groupId": "",
+            "id": "9cf754ff-c7ed-4e72-b99c-795e0eaa5a50",
+            "layoutShape": "rect",
+            "name": "",
+            "transforms": []
+        },
+        "reset": {},
+        "rotate": {
+            "angle": "0.0",
+            "axis": "0.0, 0.0, 1.0",
+            "center": "0.0, 0.0, 0.0",
+            "name": "Rotate"
+        },
+        "rotateClone": {
+            "angle": "0.0",
+            "axis": "0.0, 0.0, 1.0",
+            "center": "0.0, 0.0, 0.0",
+            "id": "c8910f41-dd6c-4c95-b1a8-4adc8ed94dc0",
+            "name": "Rotate"
+        },
+        "simFolder": {},
+        "simulation": {
+            "beamAxis": "x",
+            "documentationUrl": "",
+            "enableKickMaps": "0",
+            "exampleName": "Dipole",
+            "folder": "/Examples",
+            "heightAxis": "y",
+            "isExample": true,
+            "magnetType": "freehand",
+            "name": "Dipole",
+            "notes": "",
+            "outOfSessionSimulationId": "",
+            "simulationId": "M96pz3wJ",
+            "simulationSerial": 1628012110208214,
+            "widthAxis": "x"
+        },
+        "solverAnimation": {
+            "jobRunMode": "parallel",
+            "lastSolved": "-1",
+            "maxIterations": 1500,
+            "method": "0",
+            "precision": 0.0001,
+            "result": "",
+            "sbatchCores": 1,
+            "sbatchHours": 0.4,
+            "sbatchProject": "",
+            "sbatchQueue": "debug"
+        },
+        "spatialTransform": {},
+        "stemmed": {
+            "_super": "geomObject",
+            "armHeight": 1.0,
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "division": "1, 1, 1",
+            "groupId": "",
+            "id": "8426f794-916d-414c-9b9d-c682f0830202",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "stemWidth": 1.0,
+            "transforms": [],
+            "type": "box"
+        },
+        "symmetryTransform": {
+            "_super": "transform",
+            "id": "d0597d43-b398-49ed-9dea-7d4dee8f2bbb",
+            "name": "Symmetry",
+            "object": "",
+            "symmetryPlane": "1.0, 0.0, 0.0",
+            "symmetryPoint": "0.0, 0.0, 0.0",
+            "symmetryType": "parallel"
+        },
+        "tee": {
+            "_super": "stemmed",
+            "armHeight": 1.0,
+            "bevels": [],
+            "center": "0.0, 0.0, 0.0",
+            "color": "#cccccc",
+            "division": "1, 1, 1",
+            "groupId": "",
+            "id": "7e3acbcd-9333-4e7c-afea-9cb6a6cc6c0d",
+            "layoutShape": "rect",
+            "magnetization": "0.0, 0.0, 0.0",
+            "material": "NdFeB",
+            "materialFile": "",
+            "name": "",
+            "remanentMag": 0.0,
+            "size": "10.0, 10.0, 10.0",
+            "stemWidth": 1.0,
+            "transforms": [],
+            "type": "tee"
+        },
+        "transform": {
+            "id": "9169659b-ee71-413c-98a0-ecc9b1cd0d08",
+            "name": "Transform",
+            "object": ""
+        },
+        "translate": {
+            "distance": "10.0, 0.0, 0.0",
+            "name": "Translate"
+        },
+        "translateClone": {
+            "distance": "10.0, 0.0, 0.0",
+            "id": "44d8ccd7-a643-4527-b4e3-f2849a049e35",
+            "name": "Translate"
+        },
+        "undulator": {
+            "_super": "radiaObject",
+            "color": "#cccccc",
+            "enableKickMaps": "1",
+            "gap": 20.0,
+            "gapAxis": "y",
+            "groupId": "",
+            "id": "4593a479-ae3b-4a93-8533-cc96cbd8334c",
+            "layoutShape": "rect",
+            "name": "",
+            "numPeriods": 2,
+            "periodLength": 46.0,
+            "transforms": [],
+            "transverseAxis": "x"
+        }
+    },
+    "simulationType": "radia",
+    "version": "20210803.161439"
+}
