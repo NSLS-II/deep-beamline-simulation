@@ -57,4 +57,5 @@ jobs:
         shell: bash -l {0}
         run: |
           set -vxeuo pipefail
+          conda env list
           pytest -s -v deep_beamline_simulation/tests
