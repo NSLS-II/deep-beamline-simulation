@@ -15,13 +15,13 @@ print(model)
 
 training_data = {}
 # training_data["210301_horpos.csv"] = [21.0, 0.3, 0.1]
-training_data["210051_horpos.csv"] = [21.0, 0.05, 1]
+training_data["test_data/210051_horpos.csv"] = [21.0, 0.05, 1]
 
 trainx = list(training_data.values())
 trainy = model.parse_data(training_data)
 
 testing_data = {}
-testing_data["2100202_horpos.csv"] = [21.0, 0.02, 0.2]
+testing_data["test_data/2100202_horpos.csv"] = [21.0, 0.02, 0.2]
 testx = list(testing_data.values())
 testy = model.parse_data(testing_data)
 
