@@ -6,7 +6,7 @@ on:
 
 jobs:
   generate_conda_packd_envs:
-    name: Generate conda-pack'd envs with Python ${{ matrix.python-version }}
+    name: Test DBS with Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix: 
@@ -22,7 +22,7 @@ jobs:
           activate-environment: "deep-beamline-simulation"
           auto-update-conda: true
           miniconda-version: "latest"
-          python version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-version }}
 
       - name: start Sirepo-Bluesky docker container
         run: bash start_docker.sh -d
