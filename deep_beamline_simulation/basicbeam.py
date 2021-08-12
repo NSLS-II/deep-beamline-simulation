@@ -9,7 +9,7 @@ from torch.utils.tensorboard import SummaryWriter
 from deep_beamline_simulation.neuralnet import Neural_Net
 
 writer = SummaryWriter()
-model = Neural_Net(3,70)
+model = Neural_Net(3, 70)
 print("Model Structure")
 print(model)
 
@@ -40,13 +40,19 @@ loss_func = torch.nn.MSELoss()
 
 loss_plot = []
 accuracy_plot = []
+
 file_path1 = "/vagrant/loss.txt"
-file1 = open(file_path1, "w")
 file_path2 = "/vagrant/accuracy.txt"
+with open(file_path1, "r+") as f:
+    f.truncate(0)
+with open(file_path2, "r+") as f:
+    f.truncate(0)
+
+file1 = open(file_path1, "w")
 file2 = open(file_path2, "w")
 
 t_start = time.time()
-for e in range(5000):
+for e in range(4500):
     prediction = model(train_inputs)
     loss = loss_func(prediction, train_outputs)
     optimizer.zero_grad()

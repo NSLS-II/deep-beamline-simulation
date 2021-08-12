@@ -9,17 +9,27 @@ from torch.utils.tensorboard import SummaryWriter
 from deep_beamline_simulation.neuralnet import Neural_Net
 
 srx_writer = SummaryWriter()
-srx_model = Neural_Net(15,560)
+srx_model = Neural_Net(15, 560)
 print("Model Structure")
 print(srx_model)
 
 training_data = {}
 training_data["Intensity-At-Sample-63-3m-Horizontal-Position.csv"] = [
-    33.1798, 2, 1,
-    34.2608, 0, 0,
-    35.6678, 2.4, 1.5,
-    50.6572, 0.005, 3,
-    62.488, 3, 0.875
+    33.1798,
+    2,
+    1,
+    34.2608,
+    0,
+    0,
+    35.6678,
+    2.4,
+    1.5,
+    50.6572,
+    0.005,
+    3,
+    62.488,
+    3,
+    0.875,
 ]
 
 trainx = list(training_data.values())
@@ -36,9 +46,15 @@ loss_func = torch.nn.MSELoss()
 
 loss_plot = []
 accuracy_plot = []
+
 file_path1 = "/vagrant/loss.txt"
-file1 = open(file_path1, "w")
 file_path2 = "/vagrant/accuracy.txt"
+with open(file_path1, "r+") as f:
+    f.truncate(0)
+with open(file_path2, "r+") as f:
+    f.truncate(0)
+
+file1 = open(file_path1, "w")
 file2 = open(file_path2, "w")
 
 t_start = time.time()
