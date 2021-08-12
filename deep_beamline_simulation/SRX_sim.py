@@ -14,7 +14,7 @@ print("Model Structure")
 print(srx_model)
 
 training_data = {}
-training_data["Intensity-At-Sample-63-3m-Horizontal-Position.csv"] = [
+training_data["test_data/Intensity-At-Sample-63-3m-Horizontal-Position.csv"] = [
     33.1798,
     2,
     1,
