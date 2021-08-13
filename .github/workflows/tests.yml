@@ -23,8 +23,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: start Sirepo-Bluesky docker container
-        shell: pwd
-        run: bash start_docker.sh -d
+        run: bash deep-beamline-simulation/start_docker.sh -d
 
       - name: is Sirepo-Bluesky docker container running?
         run: docker ps -a
