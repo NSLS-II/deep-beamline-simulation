@@ -277,11 +277,11 @@ pyparsing==2.4.7
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
     #   packaging
-pyqt5==5.11.3
+pyqt5
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-pyqt5-sip==4.19.19
+pyqt5-sip
     # via
     #   deep-beamline-simulation (setup.py)
     #   pyqt5
