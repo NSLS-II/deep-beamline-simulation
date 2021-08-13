@@ -4,79 +4,79 @@
 #
 #    pip-compile
 #
-appdirs==1.4.4
+appdirs
     # via
     #   deep-beamline-simulation (setup.py)
     #   intake
-asciitree==0.3.3
+asciitree
     # via
     #   deep-beamline-simulation (setup.py)
     #   zarr
-attrs==21.2.0
+attrs
     # via
     #   deep-beamline-simulation (setup.py)
     #   jsonschema
-backcall==0.2.0
+backcall
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-bluesky==1.7.0
+bluesky
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-bluesky-live==0.0.8
+bluesky-live
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-boltons==21.0.0
+boltons
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-cachetools==4.2.2
+cachetools
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-certifi==2021.5.30
+certifi
     # via
     #   deep-beamline-simulation (setup.py)
     #   requests
-charset-normalizer==2.0.3
+charset-normalizer
     # via
     #   deep-beamline-simulation (setup.py)
     #   requests
-cloudpickle==1.6.0
+cloudpickle
     # via
     #   dask
     #   deep-beamline-simulation (setup.py)
-cycler==0.10.0
+cycler
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
-dask[array,bag]==2021.7.1
+dask[array,bag]
     # via
     #   bluesky-live
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   intake
-databroker==1.2.3
+databroker
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-decorator==5.0.9
+decorator
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-doct==1.0.5
+doct
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-entrypoints==0.3
+entrypoints
     # via
     #   bluesky-live
     #   deep-beamline-simulation (setup.py)
     #   intake
-event-model==1.17.2
+event-model
     # via
     #   bluesky
     #   bluesky-live
@@ -84,113 +84,113 @@ event-model==1.17.2
     #   deep-beamline-simulation (setup.py)
     #   suitcase-mongo
     #   suitcase-msgpack
-fasteners==0.16.3
+fasteners
     # via
     #   deep-beamline-simulation (setup.py)
     #   zarr
-fsspec==2021.7.0
+fsspec
     # via
     #   dask
     #   deep-beamline-simulation (setup.py)
     #   intake
-heapdict==1.0.1
+heapdict
     # via
     #   deep-beamline-simulation (setup.py)
     #   zict
-historydict==1.2.3
+historydict
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
-humanize==3.10.0
+humanize
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   doct
-idna==3.2
+idna
     # via
     #   deep-beamline-simulation (setup.py)
     #   requests
-intake==0.6.2
+intake
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-ipython==7.25.0
+ipython
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-ipython-genutils==0.2.0
+ipython-genutils
     # via
     #   deep-beamline-simulation (setup.py)
     #   traitlets
-jedi==0.18.0
+jedi
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-jinja2==3.0.1
+jinja2
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   intake
-jsonschema==3.2.0
+jsonschema
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   event-model
-kiwisolver==1.3.1
+kiwisolver
     # via
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
-locket==0.2.1
+locket
     # via
     #   deep-beamline-simulation (setup.py)
     #   partd
-markupsafe==2.0.1
+markupsafe
     # via
     #   deep-beamline-simulation (setup.py)
     #   jinja2
-matplotlib==3.4.2
+matplotlib
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
     #   srwpy
-matplotlib-inline==0.1.2
+matplotlib-inline
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-mongoquery==1.3.6
+mongoquery
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-mpmath==1.2.1
+mpmath
     # via
     #   deep-beamline-simulation (setup.py)
     #   sympy
-msgpack==1.0.2
+msgpack
     # via
     #   bluesky
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   msgpack-numpy
     #   suitcase-msgpack
-msgpack-numpy==0.4.7.1
+msgpack-numpy
     # via
     #   bluesky
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   suitcase-msgpack
-networkx==2.6.2
+networkx
     # via
     #   deep-beamline-simulation (setup.py)
     #   ophyd
-numcodecs==0.8.0
+numcodecs
     # via
     #   deep-beamline-simulation (setup.py)
     #   zarr
-numconv==2.1.1
+numconv
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-numpy==1.21.1
+numpy
     # via
     #   bluesky
     #   bluesky-live
@@ -211,68 +211,68 @@ numpy==1.21.1
     #   unyt
     #   xarray
     #   zarr
-ophyd==1.6.1
+ophyd
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-packaging==21.0
+packaging
     # via
     #   dask
     #   deep-beamline-simulation (setup.py)
-pandas==1.3.1
+pandas
     # via
     #   bluesky-live
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   xarray
-parso==0.8.2
+parso
     # via
     #   deep-beamline-simulation (setup.py)
     #   jedi
-partd==1.2.0
+partd
     # via
     #   dask
     #   deep-beamline-simulation (setup.py)
-pexpect==4.8.0
+pexpect
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-pickleshare==0.7.5
+pickleshare
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-pillow==8.3.1
+pillow
     # via
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
     #   srwpy
-pims==0.5
+pims
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-prettytable==2.1.0
+prettytable
     # via
     #   deep-beamline-simulation (setup.py)
     #   doct
-prompt-toolkit==3.0.19
+prompt-toolkit
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-ptyprocess==0.7.0
+ptyprocess
     # via
     #   deep-beamline-simulation (setup.py)
     #   pexpect
-pygments==2.9.0
+pygments
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
-pymongo==3.12.0
+pymongo
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
     #   suitcase-mongo
-pyparsing==2.4.7
+pyparsing
     # via
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
@@ -285,39 +285,39 @@ pyqt5-sip
     # via
     #   deep-beamline-simulation (setup.py)
     #   pyqt5
-pyrsistent==0.18.0
+pyrsistent
     # via
     #   deep-beamline-simulation (setup.py)
     #   jsonschema
-python-dateutil==2.8.2
+python-dateutil
     # via
     #   deep-beamline-simulation (setup.py)
     #   matplotlib
     #   pandas
-pytz==2021.1
+pytz
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   pandas
     #   tzlocal
-pyyaml==5.4.1
+pyyaml
     # via
     #   dask
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   intake
-requests==2.26.0
+requests
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-scipy==1.7.0
+scipy
     # via
     #   deep-beamline-simulation (setup.py)
     #   srwpy
-sirepo-bluesky==0.2.0
+sirepo-bluesky
     # via deep-beamline-simulation (setup.py)
-six==1.16.0
+six
     # via
     #   cycler
     #   databroker
@@ -330,79 +330,79 @@ six==1.16.0
     #   python-dateutil
     #   slicerator
     #   super-state-machine
-slicerator==1.0.0
+slicerator
     # via
     #   deep-beamline-simulation (setup.py)
     #   pims
-srwpy==0.0.4
+srwpy
     # via sirepo-bluesky
-suitcase-mongo==0.3.0
+suitcase-mongo
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-suitcase-msgpack==0.2.4
+suitcase-msgpack
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-suitcase-utils==0.5.4
+suitcase-utils
     # via
     #   deep-beamline-simulation (setup.py)
     #   suitcase-msgpack
-super-state-machine==2.0.2
+super-state-machine
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
-sympy==1.8
+sympy
     # via
     #   deep-beamline-simulation (setup.py)
     #   unyt
-tifffile==2021.7.2
+tifffile
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-toolz==0.11.1
+toolz
     # via
     #   bluesky
     #   dask
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   partd
-tqdm==4.61.2
+tqdm
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
-traitlets==5.0.5
+traitlets
     # via
     #   deep-beamline-simulation (setup.py)
     #   ipython
     #   matplotlib-inline
-tzlocal==2.1
+tzlocal
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-unyt==2.8.0
+unyt
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-urllib3==1.26.6
+urllib3
     # via
     #   deep-beamline-simulation (setup.py)
     #   requests
-wcwidth==0.2.5
+wcwidth
     # via
     #   deep-beamline-simulation (setup.py)
     #   prettytable
     #   prompt-toolkit
-xarray==0.19.0
+xarray
     # via
     #   bluesky-live
     #   databroker
     #   deep-beamline-simulation (setup.py)
-zarr==2.8.3
+zarr
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
-zict==2.0.0
+zict
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
