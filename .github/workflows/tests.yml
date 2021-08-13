@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  generate_conda_packd_envs:
+  DBS_tests:
     name: Test DBS with Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
@@ -33,11 +33,13 @@ jobs:
       - name: pip-install dependencies
         shell: bash -l {0}
         run: |
+          conda activate deep-beamline-simulation
           set -vxeuo pipefail
           python3 -m pip install -r requirements.txt
     
       - name: pip-install dev-dependencies
         run: |
+          conda activate deep-beamline-simulation
           set -vxeuo pipefail
           python3 -m pip install -r requirements-dev.txt
 
@@ -57,5 +59,6 @@ jobs:
         shell: bash -l {0}
         run: |
           set -vxeuo pipefail
+          conda activate deep-beamline-simulation
           conda env list
           pytest -s -v deep_beamline_simulation/tests
