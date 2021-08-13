@@ -30,9 +30,9 @@ jobs:
 
       - name: Create conda environment
         run: |
-        set -vxeuo pipefail
-        source $CONDA/etc/profile.d/conda.sh
-        conda create -n dbs python=${{ matrix.python-version }}
+          set -vxeuo pipefail
+          source $CONDA/etc/profile.d/conda.sh
+          conda create -n dbs python=${{ matrix.python-version }}
 
       - name: pip-install dependencies
         shell: bash -l {0}
