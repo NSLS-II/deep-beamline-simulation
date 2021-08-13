@@ -23,9 +23,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: start Sirepo-Bluesky docker container
-        run: |
-        pwd
-        bash start_docker.sh -d
+        shell: pwd
+        run: bash start_docker.sh -d
 
       - name: is Sirepo-Bluesky docker container running?
         run: docker ps -a
