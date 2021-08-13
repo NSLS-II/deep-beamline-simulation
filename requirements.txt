@@ -24,7 +24,7 @@ bluesky==1.7.0
     # via
     #   deep-beamline-simulation (setup.py)
     #   sirepo-bluesky
-bluesky-live==0.08
+bluesky-live==0.0.8
     # via
     #   databroker
     #   deep-beamline-simulation (setup.py)
@@ -97,7 +97,7 @@ heapdict==1.0.1
     # via
     #   deep-beamline-simulation (setup.py)
     #   zict
-historydict==1.23
+historydict
     # via
     #   bluesky
     #   deep-beamline-simulation (setup.py)
