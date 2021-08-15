@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
     # this way the vagrant account can run docker without sudo
     usermod -aG docker vagrant
 
-    # download miniconda to the vagrant account's home directory
+    # download miniconda
     wget -P /home/vagrant https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
     chown vagrant:vagrant /home/vagrant/Miniconda3-latest-Linux-x86_64.sh
 
