@@ -1,3 +1,4 @@
+import sirepo_bluesky
 from sirepo_bluesky.sirepo_bluesky import SirepoBluesky
 from deep_beamline_simulation.sirepo_data import sirepo_data
 import deep_beamline_simulation.tests
