@@ -4,9 +4,9 @@ month=$(date +"%m")
 day=$(date +"%d")
 year=$(date +"%Y")
 
-today="./../tmp/data/${year}/${month}/${day}"
+today="${HOME}/tmp/data/${year}/${month}/${day}"
 
-if [ -d "./../tmp/data/${year}/${month}/${day}" ]
+if [ -d "${today}" ]
 then
     echo "Directory ${today} exists."
 else
