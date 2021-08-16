@@ -82,3 +82,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#DB directory
+db/
+
+#Runs directory
+runs/
