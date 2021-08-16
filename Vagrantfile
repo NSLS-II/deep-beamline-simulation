@@ -32,15 +32,30 @@ Vagrant.configure("2") do |config|
     # this way the vagrant account can run docker without sudo
     usermod -aG docker vagrant
 
-    # download miniconda to the vagrant account's home directory
-    wget -P /home/vagrant https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    chown vagrant:vagrant /home/vagrant/Miniconda3-latest-Linux-x86_64.sh
+    # install miniconda3
+    wget -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /home/vagrant/miniconda3
+    rm /tmp/Miniconda3-latest-Linux-x86_64.sh
+    /home/vagrant/miniconda3/bin/conda init --system
+    /home/vagrant/miniconda3/bin/conda update conda -y
+
+    # create a conda environment for development
+    /home/vagrant/miniconda3/bin/conda create -y -n dbs python=3.8
+    # install deep-beamline-simulation
+    /home/vagrant/miniconda3/envs/dbs/bin/pip install -e /vagrant
+    /home/vagrant/miniconda3/envs/dbs/bin/pip install -r /vagrant/requirements-dev.txt
+    # must change ownership for /home/vagrant/miniconda3 after creating virtual environments and installing packages
+    chown -R vagrant:vagrant /home/vagrant/miniconda3
 
     # install mongodb
     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
     apt update
     apt install -y mongodb-org
+
+    # note: change the mongodb bindIP in /etc/mongod.conf to 0.0.0.0 to allow connections from the host
+    cp /vagrant/files/mongod.conf /etc/
+
     systemctl start mongod
     systemctl enable mongod
 
