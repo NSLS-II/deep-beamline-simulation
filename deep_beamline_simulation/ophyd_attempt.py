@@ -52,19 +52,28 @@ pprint.pprint(response_sim_list.json())
 # get sim id from uploaded_sim
 sim_id = uploaded_sim["models"]["simulation"]["simulationId"]
 print("Simulation ID of uploaded sim: " + str(sim_id))
-# copy the data from the uploaded_sim
-data = uploaded_sim
+
 # set the sim_id to prevent 'simulationId not found' error
-data["simulationId"] = sim_id
+uploaded_sim["simulationId"] = sim_id
+uploaded_sim['report'] = 'intensityReport'
 
 # run simulation here
 response_run_simulation = session.post(
-    "http://localhost:8000/run-simulation", json=data
+    "http://localhost:8000/run-simulation", json=uploaded_sim
 )
 
+for i in range(1000):
+    state = (response_run_simulation.json())['state']
+    if state == 'completed' or state == 'error':
+        break
+    else:
+        response_run_simulation = session.post(
+            "http://localhost:8000/run-status", json=(response_run_simulation.json())['nextRequest']
+        )
+
 print(response_run_simulation.url)
-print(response_run_simulation)
-pprint.pprint(response_run_simulation.headers)
+print(response_run_simulation.json())
+#pprint.pprint(response_run_simulation.headers)
 
 # #if __name__ == "__main__":
 # #    main()
