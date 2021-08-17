@@ -21,7 +21,7 @@ response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login
 print()
 print(response_auth_guest_login.url)
 pprint.pprint(response_auth_guest_login.json())
-
+cook = response_auth_guest_login.cookies
 # file dictionary for importing
 files = {"file": open("../example-2.zip", "rb"), "folder": (None, "/foo")}
 
@@ -41,7 +41,7 @@ pprint.pprint(uploaded_sim)
 
 # verify imported sim is in sim list
 response_sim_list = session.post(
-    "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
+    "http://localhost:8000/simulation-list", json={"simulationType": "srw"}, cookies=cook
 )
 # view sim list (NOT FOR RUNNING SIM)
 print()
@@ -56,15 +56,25 @@ print("Simulation ID of uploaded sim: " + str(sim_id))
 data = uploaded_sim
 # set the sim_id to prevent 'simulationId not found' error
 data["simulationId"] = sim_id
+data['report'] = 'intensityReport'
 
 # run simulation here
-response_run_simulation = session.post(
-    "http://localhost:8000/run-simulation", json=data
+response_run_simulation = requests.post(
+    "http://localhost:8000/run-simulation", json=data, cookies=cook
 )
 
+for i in range(1000):
+    state = (response_run_simulation.json())['state']
+    if state == 'completed' or state == 'error':
+        break
+    else:
+        response_run_simulation = requests.post(
+            "http://localhost:8000/run-status", json=(response_run_simulation.json())['nextRequest'], cookies=cook
+        )
+
 print(response_run_simulation.url)
-print(response_run_simulation)
-pprint.pprint(response_run_simulation.headers)
+print(response_run_simulation.json())
+#pprint.pprint(response_run_simulation.headers)
 
 # #if __name__ == "__main__":
 # #    main()
