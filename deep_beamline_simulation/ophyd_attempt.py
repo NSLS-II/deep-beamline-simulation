@@ -77,3 +77,10 @@ print(response_run_simulation.json())
 
 # #if __name__ == "__main__":
 # #    main()
+
+
+# find simulation by name programatically
+given_name = 'NSLS-II SRX beamline'
+for sim in response_sim_list.json():
+    if sim['name'] == given_name:
+        print(sim)
