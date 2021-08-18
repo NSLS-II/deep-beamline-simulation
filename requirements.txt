@@ -315,7 +315,7 @@ scipy==1.7.0
     # via
     #   deep-beamline-simulation (setup.py)
     #   srwpy
-sirepo-bluesky==0.2.0
+sirepo-bluesky==0.3.0
     # via deep-beamline-simulation (setup.py)
 six==1.16.0
     # via
