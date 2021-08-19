@@ -88,3 +88,7 @@ db/
 
 #Runs directory
 runs/
+
+# ignore text files
+accuracy.txt
+loss.txt
