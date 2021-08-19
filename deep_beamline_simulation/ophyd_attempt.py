@@ -55,7 +55,7 @@ print("Simulation ID of uploaded sim: " + str(sim_id))
 
 # set the sim_id to prevent 'simulationId not found' error
 uploaded_sim["simulationId"] = sim_id
-uploaded_sim['report'] = 'intensityReport'
+uploaded_sim["report"] = "intensityReport"
 
 # run simulation here
 response_run_simulation = session.post(
@@ -63,24 +63,25 @@ response_run_simulation = session.post(
 )
 
 for i in range(1000):
-    state = (response_run_simulation.json())['state']
-    if state == 'completed' or state == 'error':
+    state = (response_run_simulation.json())["state"]
+    if state == "completed" or state == "error":
         break
     else:
         response_run_simulation = session.post(
-            "http://localhost:8000/run-status", json=(response_run_simulation.json())['nextRequest']
+            "http://localhost:8000/run-status",
+            json=(response_run_simulation.json())["nextRequest"],
         )
 
 print(response_run_simulation.url)
 print(response_run_simulation.json())
-#pprint.pprint(response_run_simulation.headers)
+# pprint.pprint(response_run_simulation.headers)
 
 # #if __name__ == "__main__":
 # #    main()
 
 
 # find simulation by name programatically
-given_name = 'NSLS-II SRX beamline'
+given_name = "NSLS-II SRX beamline"
 for sim in response_sim_list.json():
-    if sim['name'] == given_name:
+    if sim["name"] == given_name:
         print(sim)

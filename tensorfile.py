@@ -1,4 +1,3 @@
-
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 
@@ -10,8 +9,8 @@ for line in file1:
 file1.close()
 
 accuracy_list = []
-file_name2 = 'accuracy.txt'
-file2 = open(file_name2, 'r')
+file_name2 = "accuracy.txt"
+file2 = open(file_name2, "r")
 for line in file2:
     accuracy_list.append(line.strip())
 file2.close()
