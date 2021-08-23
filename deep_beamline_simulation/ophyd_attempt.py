@@ -23,7 +23,7 @@ print(response_auth_guest_login.url)
 pprint.pprint(response_auth_guest_login.json())
 
 # file dictionary for importing
-files = {"file": open("../example-2.zip", "rb"), "folder": (None, "/foo")}
+files = {"file": open("/example-2.zip", "rb"), "folder": (None, "/foo")}
 
 # post the file to be imported with the dict
 response_import_file = session.post(

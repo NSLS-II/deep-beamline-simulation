@@ -29,14 +29,14 @@ def test_login():
                'userName': None,
                'visibleMethods': []},
                'state': 'ok'}
-    assert str(expected['state']) == str(response_auth_guest_login.json()['state'])
+    assert expected['state'] == response_auth_guest_login.json()['state']
 
 
 def test_simulationUpload():
     session = requests.Session()
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
     response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
-    files = {"file": open("../../example-2.zip", "rb"), "folder": (None, "/foo")}
+    files = {"file": open("../../sim_example.zip", "rb"), "folder": (None, "/foo")}
     response_import_file = session.post("http://localhost:8000/import-file/srw",files=files)
     expected = '<Response [200]>'
     assert expected == str(response_import_file)
@@ -46,7 +46,7 @@ def test_runSimulation():
     session = requests.Session()
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
     response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
-    files = {"file": open("../../example-2.zip", "rb"), "folder": (None, "/foo")}
+    files = {"file": open("../../sim_example.zip", "rb"), "folder": (None, "/foo")}
     response_import_file = session.post("http://localhost:8000/import-file/srw",files=files)
     expected = '<Response [200]>'
     assert expected == str(response_import_file)
