@@ -47,7 +47,9 @@ jobs:
           conda list
 
       - name: Print output from sirepo
-        run: docker logs sirepo
+        run: |
+          docker ps -a
+          docker logs sirepo
 
       - name: Test with pytest
         shell: bash -l {0}
