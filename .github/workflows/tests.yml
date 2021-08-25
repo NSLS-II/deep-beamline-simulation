@@ -23,6 +23,9 @@ jobs:
       - name: Is Sirepo-Bluesky docker container running?
         run: docker ps -a
 
+      - name: Print output from sirepo
+        run: docker logs sirepo
+
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
