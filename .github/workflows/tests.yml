@@ -24,7 +24,9 @@ jobs:
         run: docker ps -a
 
       - name: Print output from sirepo
-        run: docker logs sirepo
+        run: |
+          sleep(5)
+          docker logs sirepo
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
