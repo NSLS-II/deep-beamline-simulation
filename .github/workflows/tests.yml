@@ -52,4 +52,4 @@ jobs:
           set -vxeuo pipefail
           source $CONDA/etc/profile.d/conda.sh
           conda activate dbs
-          pytest -s -v deep_beamline_simulation/tests
+          pytest -s -v
