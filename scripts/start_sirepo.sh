@@ -32,7 +32,7 @@ docker_image="radiasoft/sirepo:beta"
 docker pull ${docker_image}
 docker images
 
-in_docker_cmd="mkdir -p /sirepo/sirepo-db && sirepo service http"
+in_docker_cmd="sirepo service http"
 cmd="docker run $1 --init --rm --name sirepo \
        -e SIREPO_AUTH_METHODS=bluesky:guest \
        -e SIREPO_AUTH_BLUESKY_SECRET=bluesky \
