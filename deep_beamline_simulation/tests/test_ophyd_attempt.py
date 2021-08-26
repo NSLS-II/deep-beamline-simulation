@@ -1,5 +1,7 @@
 import pytest
 import requests
+import deep_beamline_simulation
+from pathlib import Path
 
 def test_connection():
     session = requests.Session()
@@ -36,7 +38,9 @@ def test_simulationUpload():
     session = requests.Session()
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
     response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
-    files = {"file": open("../../sim_example.zip", "rb"), "folder": (None, "/foo")}
+    sirepo_simulations_dir = Path(deep_beamline_simulation.__path__[0]).parent / "sirepo_simulations"
+    simulation_zip_file_path = sirepo_simulations_dir / "sim_example.zip"
+    files = {"file": open(str(simulation_zip_file_path), "rb"), "folder": (None, "/foo")}
     response_import_file = session.post("http://localhost:8000/import-file/srw",files=files)
     expected = '<Response [200]>'
     assert expected == str(response_import_file)
@@ -46,7 +50,9 @@ def test_runSimulation():
     session = requests.Session()
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
     response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
-    files = {"file": open("../../sim_example.zip", "rb"), "folder": (None, "/foo")}
+    sirepo_simulations_dir = Path(deep_beamline_simulation.__path__[0]).parent / "sirepo_simulations"
+    simulation_zip_file_path = sirepo_simulations_dir / "sim_example.zip"
+    files = {"file": open(str(simulation_zip_file_path), "rb"), "folder": (None, "/foo")}
     response_import_file = session.post("http://localhost:8000/import-file/srw",files=files)
     expected = '<Response [200]>'
     assert expected == str(response_import_file)
