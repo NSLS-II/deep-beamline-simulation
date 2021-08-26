@@ -16,6 +16,7 @@ month=$(date +"%m")
 day=$(date +"%d")
 year=$(date +"%Y")
 
+# databroker will use this or something like it, someday
 today="${HOME}/tmp/data/${year}/${month}/${day}"
 
 if [ -d "${today}" ]; then
@@ -24,9 +25,6 @@ else
     echo "Creating Directory ${today}"
     mkdir -p "${today}"
 fi
-
-# sirepo will use this directory
-mkdir -p ${HOME}/tmp/sirepo-docker-run
 
 docker_image="radiasoft/sirepo:beta"
 docker pull ${docker_image}
@@ -39,7 +37,6 @@ cmd="docker run $1 --init --rm --name sirepo \
        -e SIREPO_SRDB_ROOT=/tmp \
        -e SIREPO_COOKIE_IS_SECURE=false \
        -p 8000:8000 \
-       -v $HOME/tmp/sirepo-docker-run:/sirepo \
        ${docker_image} bash -l -c \"${in_docker_cmd}\""
 
 echo -e "Command to run:\n\n${cmd}\n"
