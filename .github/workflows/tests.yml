@@ -49,11 +49,6 @@ jobs:
           pip list
           conda list
 
-      - name: Print output from sirepo
-        run: |
-          echo "Sirepo Docker container id: ${SIREPO_DOCKER_CONTAINER_ID}"
-          docker logs ${SIREPO_DOCKER_CONTAINER_ID}
-
       - name: Test with pytest
         run: |
           set -vxeuo pipefail
