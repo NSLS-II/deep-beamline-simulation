@@ -60,6 +60,7 @@ Vagrant.configure("2") do |config|
     systemctl enable mongod
 
     # databroker will look for this directory
+    # it should probably be created in scripts/start_sirepo.sh
     cd /home/vagrant
     mkdir -p .local/share/intake
     chown -Rv vagrant:vagrant .local
