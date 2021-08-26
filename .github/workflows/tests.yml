@@ -20,7 +20,7 @@ jobs:
       - name: start Sirepo-Bluesky container
         run: |
           set -vxeuo pipefail
-          . scripts/start_docker.sh -d
+          . scripts/start_sirepo.sh -d
           export SIREPO_DOCKER_CONTAINER_ID
           echo "SIREPO_DOCKER_CONTAINER_ID=${SIREPO_DOCKER_CONTAINER_ID}" >> $GITHUB_ENV
 
