@@ -59,34 +59,16 @@ Vagrant.configure("2") do |config|
     systemctl start mongod
     systemctl enable mongod
 
-    # create some directories for the sirepo docker container to use
+    # databroker will look for this directory
     cd /home/vagrant
     mkdir -p .local/share/intake
     chown -Rv vagrant:vagrant .local
-    mkdir -p tmp/sirepo-docker-run
-    chown -Rv vagrant:vagrant tmp
-
-    # create this directory now or it will be created by the sirepo
-    # docker container with root ownership
-    mkdir sirepo_srdb_root
-    chown vagrant:vagrant sirepo_srdb_root
-  
-    # clone sirepo-bluesky to save a step later
-    #git clone https://github.com/NSLS-II/sirepo-bluesky.git
-    #chown -R vagrant:vagrant sirepo-bluesky/
 
   SHELL
   # ssh into the VM
   #   $ vagrant ssh
-  # install miniconda
-  #        # bash Miniconda3-latest-Linux-x86_64.sh
-  # log out of the VM and log back in to get the changes to .bashrc
-  # create and activate a conda virtual environment
-  #        # conda create -n dbs python=3.8
-  #        ...
-  #        # conda activate dbs
   # run the Sirepo docker container like this:
-  #  (dbs) # bash start_docker.sh
+  #  (dbs) # bash scripts/start_sirepo.sh
   #
-  # from the host go to http://10.10.10.10:8000
+  # from the host go to http://127.0.0.1:8000
 end

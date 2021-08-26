@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# set -vxeuo pipefail
-
 error_msg="Specify '-it' or '-d' on the command line as a first argument."
 
 if [ -z "$1" ]; then
@@ -20,8 +18,6 @@ year=$(date +"%Y")
 
 today="${HOME}/tmp/data/${year}/${month}/${day}"
 
-docker_image="radiasoft/sirepo:beta"
-
 if [ -d "${today}" ]; then
     echo "Directory ${today} exists."
 else
@@ -29,10 +25,11 @@ else
     mkdir -p "${today}"
 fi
 
-# ls -l $HOME/tmp
+# sirepo needs this directory
+mkdir -p ${HOME}/tmp/sirepo-docker-run
 
+docker_image="radiasoft/sirepo:beta"
 docker pull ${docker_image}
-
 docker images
 
 in_docker_cmd="sirepo service http"
