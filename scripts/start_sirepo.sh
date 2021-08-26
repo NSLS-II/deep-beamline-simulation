@@ -35,14 +35,14 @@ docker pull ${docker_image}
 
 docker images
 
-in_docker_cmd="mkdir -v -p /sirepo/ && cp -Rv /SIREPO_SRDB_ROOT/* /sirepo/ && sirepo service http"
+in_docker_cmd="sirepo service http"
 cmd="docker run $1 --init --rm --name sirepo \
        -e SIREPO_AUTH_METHODS=bluesky:guest \
        -e SIREPO_AUTH_BLUESKY_SECRET=bluesky \
        -e SIREPO_SRDB_ROOT=/sirepo \
        -e SIREPO_COOKIE_IS_SECURE=false \
        -p 8000:8000 \
-       -v $PWD/sirepo_bluesky/tests/SIREPO_SRDB_ROOT:/SIREPO_SRDB_ROOT:ro,z \
+       -v $HOME/tmp/sirepo-docker-run:/sirepo \
        ${docker_image} bash -l -c \"${in_docker_cmd}\""
 
 echo -e "Command to run:\n\n${cmd}\n"
@@ -51,6 +51,7 @@ if [ "$1" == "-d" ]; then
     export SIREPO_DOCKER_CONTAINER_ID
     echo "Container ID: ${SIREPO_DOCKER_CONTAINER_ID}"
     docker ps -a
+    # the log doesn't have anything at this point
     docker logs ${SIREPO_DOCKER_CONTAINER_ID}
 else
     eval ${cmd}
