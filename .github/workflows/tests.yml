@@ -23,7 +23,6 @@ jobs:
           . scripts/start_sirepo.sh -d
           export SIREPO_DOCKER_CONTAINER_ID
           echo "SIREPO_DOCKER_CONTAINER_ID=${SIREPO_DOCKER_CONTAINER_ID}" >> $GITHUB_ENV
-          docker logs sirepo --follow
 
       - name: Is Sirepo-Bluesky docker container running?
         run: docker ps -a
