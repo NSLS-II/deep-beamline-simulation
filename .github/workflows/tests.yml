@@ -18,7 +18,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: start Sirepo-Bluesky docker container
-        run: bash start_docker.sh -d
+        run: |
+          set -vxeuo pipefail
+          . scripts/start_sirepo.sh -d
+          echo $SIREPO_DOCKER_CONTAINER_ID >> $GITHUB_ENV
 
       - name: Is Sirepo-Bluesky docker container running?
         run: docker ps -a
@@ -48,8 +51,8 @@ jobs:
 
       - name: Print output from sirepo
         run: |
-          docker ps -a
-          docker logs sirepo
+          echo "Sirepo Docker container id: ${SIREPO_DOCKER_CONTAINER_ID}"
+          docker logs ${SIREPO_DOCKER_CONTAINER_ID}
 
       - name: Test with pytest
         shell: bash -l {0}
