@@ -37,7 +37,7 @@ def test_simulationUpload():
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
     response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
     files = {"file": open("../../sim_example.zip", "rb"), "folder": (None, "/foo")}
-    response_import_file = session.post("http://localhost:8000/import-file/srw",files=files)
+    response_import_file = session.post("http://localhost:8000/import-file/srw", files=files)
     expected = '<Response [200]>'
     assert expected == str(response_import_file)
 
