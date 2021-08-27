@@ -1,20 +1,16 @@
-
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 
 loss_list = []
-file_name1 = "loss.txt"
-file1 = open(file_name1, "r")
-for line in file1:
+with open("loss.txt", 'r') as file1:
+    line = file1.readline()
     loss_list.append(line.strip())
-file1.close()
 
 accuracy_list = []
-file_name2 = 'accuracy.txt'
-file2 = open(file_name2, 'r')
-for line in file2:
+
+with open("accuracy.txt", "r") as file2:
+    line = file2.readline()
     accuracy_list.append(line.strip())
-file2.close()
 
 # define writer for tensorboard implementation
 writer = SummaryWriter()
