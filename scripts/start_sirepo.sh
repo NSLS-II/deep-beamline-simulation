@@ -2,11 +2,13 @@
 
 error_msg="Specify '-it' or '-d' on the command line as a first argument."
 
-if [ -z "$1" ]; then
+arg="${1:-}"
+
+if [ -z "${arg}" ]; then
     echo "${error_msg}"
     exit 1
-elif [ "$1" != "-it" -a "$1" != "-d" ]; then
-    echo "${error_msg} Specified argument: ${1}"
+elif [ "${arg}" != "-it" -a "${arg}" != "-d" ]; then
+    echo "${error_msg} Specified argument: ${arg}"
     exit 2
 fi
 
@@ -30,11 +32,11 @@ docker_image="radiasoft/sirepo:beta"
 docker pull ${docker_image}
 docker images
 
-in_docker_cmd="sirepo service http"
+in_docker_cmd="mkdir -v -p /sirepo && sirepo service http"
 cmd="docker run $1 --init --rm --name sirepo \
        -e SIREPO_AUTH_METHODS=bluesky:guest \
        -e SIREPO_AUTH_BLUESKY_SECRET=bluesky \
-       -e SIREPO_SRDB_ROOT=/tmp \
+       -e SIREPO_SRDB_ROOT=/sirepo \
        -e SIREPO_COOKIE_IS_SECURE=false \
        -p 8000:8000 \
        ${docker_image} bash -l -c \"${in_docker_cmd}\""
