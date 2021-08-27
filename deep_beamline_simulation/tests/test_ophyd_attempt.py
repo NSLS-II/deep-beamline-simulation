@@ -1,6 +1,7 @@
 import pytest
 import requests
 
+
 def test_connection():
     session = requests.Session()
     response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
