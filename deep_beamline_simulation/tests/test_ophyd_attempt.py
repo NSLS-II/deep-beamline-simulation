@@ -9,8 +9,7 @@ def test_connection():
     response_sim_list = session.post(
         "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
     )
-    expected = "<Response [200]>"
-    assert str(response_sim_list) == expected
+    assert response_sim_list.status_code == 200
 
 
 def test_login():
