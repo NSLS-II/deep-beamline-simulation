@@ -1,29 +1,30 @@
 import pprint
 import requests
-
+import deep_beamline_simulation
+from pathlib import Path
 
 # create session with requests
 session = requests.Session()
-
 # get cookies by viewing simulation-list
 response_sim_list = session.post(
     "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
 )
-
 # output of simulation list
 print(response_sim_list.url)
 pprint.pprint(dict(response_sim_list.headers))
-
 # login as a guest
 response_auth_guest_login = session.post("http://localhost:8000/auth-guest-login/srw")
-
 # output from logging in
 print()
 print(response_auth_guest_login.url)
 pprint.pprint(response_auth_guest_login.json())
 
 # file dictionary for importing
-files = {"file": open("/example-2.zip", "rb"), "folder": (None, "/foo")}
+sirepo_simulations_dir = (
+    Path(deep_beamline_simulation.__path__[0]).parent / "sirepo_simulations"
+)
+simulation_zip_file_path = sirepo_simulations_dir / "sim_example.zip"
+files = {"file": open(str(simulation_zip_file_path), "rb"), "folder": (None, "/foo")}
 
 # post the file to be imported with the dict
 response_import_file = session.post(
@@ -35,10 +36,10 @@ response_import_file = session.post(
 print()
 print(response_import_file.url)
 print(response_import_file)
+
 # the json from the request is the data we need
 uploaded_sim = response_import_file.json()
 pprint.pprint(uploaded_sim)
-
 # verify imported sim is in sim list
 response_sim_list = session.post(
     "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
@@ -48,7 +49,6 @@ print()
 print(response_sim_list.url)
 pprint.pprint(dict(response_sim_list.headers))
 pprint.pprint(response_sim_list.json())
-
 # get sim id from uploaded_sim
 sim_id = uploaded_sim["models"]["simulation"]["simulationId"]
 print("Simulation ID of uploaded sim: " + str(sim_id))
@@ -65,6 +65,8 @@ response_run_simulation = session.post(
 for i in range(1000):
     state = (response_run_simulation.json())["state"]
     if state == "completed" or state == "error":
+        state = (response_run_simulation.json())["state"]
+    if state == "completed" or state == "error":
         break
     else:
         response_run_simulation = session.post(
@@ -74,11 +76,6 @@ for i in range(1000):
 
 print(response_run_simulation.url)
 print(response_run_simulation.json())
-# pprint.pprint(response_run_simulation.headers)
-
-# #if __name__ == "__main__":
-# #    main()
-
 
 # find simulation by name programatically
 given_name = "NSLS-II SRX beamline"
