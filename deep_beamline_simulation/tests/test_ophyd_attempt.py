@@ -6,16 +6,10 @@ from pathlib import Path
 
 def test_connection():
     session = requests.Session()
-<<<<<<< HEAD
     response_sim_list = session.post(
         "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
     )
     assert response_sim_list.status_code == 200
-=======
-    response_sim_list = session.post("http://localhost:8000/simulation-list", json={"simulationType": "srw"})
-    expected = '<Response [200]>'
-    assert str(response_sim_list) == expected
->>>>>>> 514a16b9887e2ec493e6f84394907cf4e8ac11f8
 
 
 def test_login():
@@ -199,4 +193,3 @@ def test_find_sim_by_name():
     actual_response["simulation"].pop("simulationId")
     actual_response["simulation"].pop("simulationSerial")
     assert expected_response == actual_response
-
