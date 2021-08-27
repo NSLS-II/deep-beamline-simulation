@@ -154,27 +154,28 @@ def test_find_sim_by_name():
             actual_response = sim
     # remove changing variables for expected response
     expected_response = {
-        "simulationId": "h91dTvnZ",
+        "simulationId": "Ralizjbm",
         "name": "NSLS-II SRX beamline",
         "folder": "/Light Source Facilities/NSLS-II/NSLS-II SRX beamline",
-        "last_modified": "2021-08-18 17:13",
         "isExample": True,
         "simulation": {
             "distanceFromSource": 20,
             "documentationUrl": "https://www.bnl.gov/ps/beamlines/beamline.php?r=5-ID",
+            "fieldUnits": 1,
             "folder": "/Light Source Facilities/NSLS-II/NSLS-II SRX beamline",
             "horizontalPointCount": 100,
             "horizontalPosition": 0,
             "horizontalRange": 2.5,
             "isExample": True,
+            "lastModified": 1630077470514,
             "name": "NSLS-II SRX beamline",
             "notes": "",
             "outOfSessionSimulationId": "qPYbqYWl",
             "photonEnergy": 8000,
             "sampleFactor": 0.1,
             "samplingMethod": "1",
-            "simulationId": "h91dTvnZ",
-            "simulationSerial": 1629306797967505,
+            "simulationId": "Ralizjbm",
+            "simulationSerial": 1630077470518433,
             "sourceType": "t",
             "verticalPointCount": 100,
             "verticalPosition": 0,
@@ -182,14 +183,12 @@ def test_find_sim_by_name():
         },
     }
     expected_response.pop("simulationId")
-    expected_response.pop("last_modified")
-    expected_response["simulation"].pop("outOfSessionSimulationId")
+    expected_response["simulation"].pop("lastModified")
     expected_response["simulation"].pop("simulationId")
     expected_response["simulation"].pop("simulationSerial")
     # remove changing variables for actual response
     actual_response.pop("simulationId")
-    actual_response.pop("last_modified")
-    actual_response["simulation"].pop("outOfSessionSimulationId")
+    actual_response["simulation"].pop("lastModified")
     actual_response["simulation"].pop("simulationId")
     actual_response["simulation"].pop("simulationSerial")
     assert expected_response == actual_response
