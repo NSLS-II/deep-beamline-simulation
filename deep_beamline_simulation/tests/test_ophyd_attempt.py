@@ -46,7 +46,7 @@ def test_login():
     assert expected == actual_response
 
 
-def test_simulationUpload():
+def _create_sessions():
     session = requests.Session()
     response_sim_list = session.post(
         "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
@@ -65,6 +65,11 @@ def test_simulationUpload():
     response_import_file = session.post(
         "http://localhost:8000/import-file/srw", files=files
     )
+    return session, response_import_file
+
+
+def test_simulationUpload():
+    session, response_import_file = _create_sessions()
     response_sim_list = session.post(
         "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
     )
@@ -77,24 +82,7 @@ def test_simulationUpload():
 
 
 def test_runSimulation():
-    session = requests.Session()
-    response_sim_list = session.post(
-        "http://localhost:8000/simulation-list", json={"simulationType": "srw"}
-    )
-    response_auth_guest_login = session.post(
-        "http://localhost:8000/auth-guest-login/srw"
-    )
-    sirepo_simulations_dir = (
-        Path(deep_beamline_simulation.__path__[0]).parent / "sirepo_simulations"
-    )
-    simulation_zip_file_path = sirepo_simulations_dir / "sim_example.zip"
-    files = {
-        "file": open(str(simulation_zip_file_path), "rb"),
-        "folder": (None, "/foo"),
-    }
-    response_import_file = session.post(
-        "http://localhost:8000/import-file/srw", files=files
-    )
+    session, response_import_file = _create_sessions()
     uploaded_sim = response_import_file.json()
     # get sim id from uploaded_sim
     sim_id = uploaded_sim["models"]["simulation"]["simulationId"]
@@ -109,7 +97,6 @@ def test_runSimulation():
         state = (response_run_simulation.json())["state"]
         if state == "completed" or state == "error":
             state = (response_run_simulation.json())["state"]
-        if state == "completed" or state == "error":
             break
         else:
             response_run_simulation = session.post(
@@ -118,19 +105,11 @@ def test_runSimulation():
             )
     # compare the summary to avoid comparing the large amount of intensity data
     expected_summary_data = {
-        "summaryData": {
-            "fieldIntensityRange": [210561.34375, 1.8392213897609216e16],
-            "fieldRange": [100.0, 20000.0, 10000, 0.0, 0.0, 1, 0.0, 0.0, 1],
-        },
-        "title": "On-Axis Spectrum from Filament Electron Beam",
-        "x_label": "Photon Energy [eV]",
-        "x_range": [100.0, 20000.0],
-        "x_units": "eV",
-        "y_label": "Intensity (ph/s/.1%bw/mm²)",
-        "y_units": "ph/s/.1%bw/mm^2",
-        "z_range": [210561.34375, 1.8392213897609216e16],
+        "fieldIntensityRange": [210561.34375, 1.8392213897609216e16],
+        "fieldRange": [100.0, 20000.0, 10000, 0.0, 0.0, 1, 0.0, 0.0, 1],
     }
     actual_summary_data = response_run_simulation.json()["summaryData"]
+    assert expected_summary_data == actual_summary_data
 
 
 def test_find_sim_by_name():
