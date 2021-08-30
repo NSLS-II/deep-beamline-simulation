@@ -161,13 +161,10 @@ def test_find_sim_by_name():
             "verticalRange": 1.3,
         },
     }
-    expected_response.pop("simulationId")
-    expected_response["simulation"].pop("lastModified")
-    expected_response["simulation"].pop("simulationId")
-    expected_response["simulation"].pop("simulationSerial")
-    # remove changing variables for actual response
     actual_response.pop("simulationId")
-    actual_response["simulation"].pop("lastModified")
-    actual_response["simulation"].pop("simulationId")
-    actual_response["simulation"].pop("simulationSerial")
+    expected_response.pop("simulationId")
+    values_to_remove = ["lastModified", "simulationId", "simulationSerial"]
+    for key in values_to_remove:
+        expected_response["simulation"].pop(key)
+        actual_response["simulation"].pop(key)
     assert expected_response == actual_response
