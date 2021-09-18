@@ -36,6 +36,8 @@ Vagrant.configure("2") do |config|
     # install podman
     apt update
     apt install -y podman
+    # configure default init for podman
+    sed 's;# init_path = "/usr/libexec/podman/catatonit";init_path = "/usr/bin/tini";g' -i /etc/containers/containers.conf
 
     # install miniconda3
     wget -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
