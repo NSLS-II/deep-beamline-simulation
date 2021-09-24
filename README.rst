@@ -4,8 +4,8 @@ Deep Beamline Simulation
 
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
    :target: https://github.com/psf/black
-.. image:: https://github.com/jennmald/deep-beamline-simulation/workflows/tests.yml/badge.svg
-   :target: https://github.com/jennmald/deep-beamline-simulation/actions
+.. image:: https://github.com/jennmald/deep-beamline-simulation/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/jennmald/deep-beamline-simulation/actions/workflows/tests.yml
 
 Beamline Simulation using `sirepo-bluesky`_ and Synchrotron Radiation Workshop (`SRW`_).
 
