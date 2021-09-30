@@ -1,9 +1,10 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "bento/ubuntu-20.04"
+  config.vm.box = "bento/ubuntu-20.10"
   config.vm.box_check_update = true
 
   config.vm.network "private_network", ip: "10.10.10.10"
   config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"
+  config.vm.network "forwarded_port", guest: 27017, host: 27017, host_ip: "127.0.0.1"
 
   config.vm.provider "virtualbox" do |vb|
     vb.gui = false
@@ -20,7 +21,7 @@ Vagrant.configure("2") do |config|
     apt full-upgrade
     apt install -y python3-pip
     # install X11 for matplotlib
-    apt install -y xserver-xorg-core x11-utils
+    apt install -y xserver-xorg-core x11-utils x11-apps
 
     # install docker
     apt install apt-transport-https ca-certificates curl software-properties-common
@@ -31,6 +32,12 @@ Vagrant.configure("2") do |config|
     # add the vagrant account to the docker group
     # this way the vagrant account can run docker without sudo
     usermod -aG docker vagrant
+
+    # install podman
+    apt update
+    apt install -y podman
+    # configure default init for podman
+    sed 's;# init_path = "/usr/libexec/podman/catatonit";init_path = "/usr/bin/tini";g' -i /etc/containers/containers.conf
 
     # install miniconda3
     wget -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
