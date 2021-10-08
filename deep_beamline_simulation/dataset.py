@@ -2,7 +2,9 @@ import torch
 from skimage.io import imread
 from torch.utils import data
 import deep_beamline_simulation
+from torch.utils.data import DataLoader
 from pathlib import Path
+from sklearn.model_selection import train_test_split
 
 class createDataset(data.Dataset):
     '''
@@ -28,7 +30,7 @@ class createDataset(data.Dataset):
         input_value = self.inputs[index]
         target_value = self.targets[index]
         # turns data into np arrays
-        x,y = imread(input_value), imread(target_value)
+        x,y = imread(str(input_value)), imread(str(target_value))
         if self.transform is not None:
             x,y = self.transform(x,y)
         # verify data is tensor type
@@ -41,19 +43,43 @@ class createDataset(data.Dataset):
 images_dir = (Path(deep_beamline_simulation.__path__[0]).parent / "images")
 target_dir = (Path(deep_beamline_simulation.__path__[0]).parent / "targets")
 
-in_im1 = str(images_dir / "0cdf5b5d0ce1_01.png")
-t_im1 = str(target_dir / "0cdf5b5d0ce1_01.png")
-in_im2 = str(images_dir / "0cdf5b5d0ce1_02.png")
-t_im2 = str(target_dir / "0cdf5b5d0ce1_02.png")
+def get_filenames_of_path(path, ext: str = '*'):
+    return [file for file in path.glob(ext) if file.is_file()]
+    
+inputs = get_filenames_of_path(images_dir)
+targets = get_filenames_of_path(target_dir)
 
-input_data = [in_im1, in_im2]
-target_data = [t_im1, t_im2]
+random_seed = 42
+train_size = 0.8
 
-training_dataset = createDataset(inputs=input_data,targets = target_data, transform=None)
-training_dataloader = data.DataLoader(dataset=training_dataset, batch_size = 2, shuffle = True)
+inputs_train, inputs_valid = train_test_split(
+    inputs,
+    random_state=random_seed,
+    train_size=train_size,
+    shuffle=True)
 
-x,y = next(iter(training_dataloader))
+targets_train, targets_valid = train_test_split(
+    targets,
+    random_state=random_seed,
+    train_size=train_size,
+    shuffle=True)
 
-print(f'x = shape: {x.shape}; type: {x.dtype}')
-print(f'x = min: {x.min()}; max: {x.max()}')
-print(f'y = shape: {y.shape}; class: {y.unique()}; type: {y.dtype}')
+# dataset training
+dataset_train = createDataset(inputs=inputs_train,
+                                    targets=targets_train,
+                                    transform=None)
+
+# dataset validation
+dataset_valid = createDataset(inputs=inputs_valid,
+                                    targets=targets_valid,
+                                    transform=None)
+
+# dataloader training
+dataloader_training = DataLoader(dataset=dataset_train,
+                                 batch_size=2,
+                                 shuffle=True)
+
+# dataloader validation
+dataloader_validation = DataLoader(dataset=dataset_valid,
+                                   batch_size=2,
+                                   shuffle=True)
