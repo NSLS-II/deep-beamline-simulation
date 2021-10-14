@@ -5,62 +5,51 @@ from sklearn.model_selection import train_test_split
 import torch
 from torch.utils import data
 from torch.utils.data import DataLoader
-from pathlib import Path
+import pathlib
+from functools import partial
 import deep_beamline_simulation
 
-def create_dense_target(tar: np.ndarray):
-    classes = np.unique(tar)
-    dummy = np.zeros_like(tar)
-    for idx, value in enumerate(classes):
-        mask = np.where(tar == value)
-        dummy[mask] = idx
-    return dummy
+def dense_target(target):
+    classes = np.unique(target)
+    dense = np.zeros_like(target)
+    for index, value in enumerate(classes):
+        mask = np.where(target == value)
+        dense[mask] = index
+    return dense
 
+def normalize(inputs):
+    """ Normalize input value range [0, 1] """
+    norm_inputs = (inputs - np.min(inputs)) / np.ptp(inputs)
+    return norm_inputs
 
-def normalize(inp: np.ndarray):
-    """Squash image input to the value range [0, 1] (no clipping)"""
-    inp_out = (inp - np.min(inp)) / np.ptp(inp)
-    return inp_out
+class String_Representation:
+    """ string representation of an object """
+    def __String_Representation__(self): return f'{self.__class__.__name__}: {self.__dict__}'
 
-
-class Repr:
-    """Evaluable string representation of an object"""
-
-    def __repr__(self): return f'{self.__class__.__name__}: {self.__dict__}'
-
-
-class FunctionWrapperDouble(Repr):
+class FunctionWrapperDouble(String_Representation):
     """A function wrapper that returns a partial for an input-target pair."""
-
-    def __init__(self, function: Callable, input: bool = True, target: bool = False, *args, **kwargs):
-        from functools import partial
+    def __init__(self, function, input = True, target = False, *args, **kwargs):
         self.function = partial(function, *args, **kwargs)
         self.input = input
         self.target = target
 
-    def __call__(self, inp: np.ndarray, tar: dict):
-        if self.input: inp = self.function(inp)
-        if self.target: tar = self.function(tar)
-        return inp, tar
-
+    def __call__(self, input_array, target_dict):
+        if self.input: input_array = self.function(input_array)
+        if self.target: target_dict = self.function(target_dict)
+        return input_array, target_dict
 
 class Compose:
     """Baseclass - composes several transforms together."""
-
     def __init__(self, transforms: List[Callable]):
         self.transforms = transforms
-
     def __repr__(self): return str([transform for transform in self.transforms])
-
-
 
 class ComposeDouble(Compose):
     """Composes transforms for input-target pairs."""
-
-    def __call__(self, inp: np.ndarray, target: dict):
+    def __call__(self, input_array, target_dict):
         for t in self.transforms:
-            inp, target = t(inp, target)
-        return inp, target
+            input_array, target_dict = t(input_array, target_dict)
+        return input_array, target_dict
 
 
 class createDataset(data.Dataset):
@@ -78,7 +67,6 @@ class createDataset(data.Dataset):
 
     def __len__(self):
         return len(self.inputs)
-
     '''
     Used to load, transform, and preprocess data
     index should be an integer
@@ -94,23 +82,19 @@ class createDataset(data.Dataset):
         x,y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(self.targets_dtype)
         return x,y
 
+# find root directory using Pathlib
+root = pathlib.Path.cwd() / 'Carvana'
 
-# image paths
-# file dictionary for importing
-images_dir = (Path(deep_beamline_simulation.__path__[0]).parent / "inputs")
-target_dir = (Path(deep_beamline_simulation.__path__[0]).parent / "targets")
-
+# get individual file names and return the list
 def get_filenames_of_path(path, ext: str = '*'):
-    return [str(file) for file in path.glob(ext) if file.is_file()]
+    return [file for file in path.glob(ext) if file.is_file()]
     
-inputs = get_filenames_of_path(images_dir)
-#print(inputs)
-targets = get_filenames_of_path(target_dir)
-#print(targets)
+input_files = get_filenames_of_path(root / 'inputs')
+target_files = get_filenames_of_path(root / 'targets')
 
 # training transformations and augmentations
 transforms = ComposeDouble([
-    FunctionWrapperDouble(create_dense_target, input=False, target=True),
+    FunctionWrapperDouble(dense_target, input=False, target=True),
     FunctionWrapperDouble(np.moveaxis, input=True, target=False, source=-1, destination=0),
     FunctionWrapperDouble(normalize)
 ])
@@ -119,13 +103,13 @@ random_seed = 42
 train_size = 0.8
 
 inputs_train, inputs_valid = train_test_split(
-    inputs,
+    input_files,
     random_state=random_seed,
     train_size=train_size,
     shuffle=True)
 
 targets_train, targets_valid = train_test_split(
-    targets,
+    target_files,
     random_state=random_seed,
     train_size=train_size,
     shuffle=True)
