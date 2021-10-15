@@ -1,6 +1,7 @@
 import numpy as np
 from typing import List, Callable
 from skimage.io import imread
+from skimage.transform import resize
 from sklearn.model_selection import train_test_split
 import torch
 from torch.utils import data
@@ -82,63 +83,117 @@ class createDataset(data.Dataset):
         x,y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(self.targets_dtype)
         return x,y
 
-# find root directory using Pathlib
-root = pathlib.Path.cwd() / 'Carvana'
 
-# get individual file names and return the list
-def get_filenames_of_path(path, ext: str = '*'):
-    return [file for file in path.glob(ext) if file.is_file()]
-    
-input_files = get_filenames_of_path(root / 'inputs')
-target_files = get_filenames_of_path(root / 'targets')
+x = np.random.randint(0, 256, size=(128, 128, 3), dtype=np.uint8)
+y = np.random.randint(10, 15, size=(128, 128), dtype=np.uint8)
+print(f'x = shape: {x.shape}; type: {x.dtype}')
+print(f'y = shape: {y.shape}; class: {np.unique(y)}')
+print()
 
-# training transformations and augmentations
 transforms = ComposeDouble([
+    FunctionWrapperDouble(resize,
+                          input=True,
+                          target=False,
+                          output_shape=(128, 128, 3)),
+    FunctionWrapperDouble(resize,
+                          input=False,
+                          target=True,
+                          output_shape=(128, 128),
+                          order=0,
+                          anti_aliasing=False,
+                          preserve_range=True),
     FunctionWrapperDouble(dense_target, input=False, target=True),
     FunctionWrapperDouble(np.moveaxis, input=True, target=False, source=-1, destination=0),
     FunctionWrapperDouble(normalize)
 ])
 
-random_seed = 42
-train_size = 0.8
+x_t, y_t = transforms(x, y)
 
-inputs_train, inputs_valid = train_test_split(
-    input_files,
-    random_state=random_seed,
-    train_size=train_size,
-    shuffle=True)
+print(f'x = shape: {x.shape}; type: {x.dtype}')
+print(f'x = min: {x.min()}; max: {x.max()}')
+print(f'x_t: shape: {x_t.shape}  type: {x_t.dtype}')
+print(f'x_t = min: {x_t.min()}; max: {x_t.max()}')
 
-targets_train, targets_valid = train_test_split(
-    target_files,
-    random_state=random_seed,
-    train_size=train_size,
-    shuffle=True)
-
-# dataset training
-dataset_train = createDataset(inputs=inputs_train,
-                                    targets=targets_train,
-                                    transform=transforms)
-
-# dataset validation
-dataset_valid = createDataset(inputs=inputs_valid,
-                                    targets=targets_valid,
-                                    transform=transforms)
+print(f'y = shape: {y.shape}; class: {np.unique(y)}')
+print(f'y_t = shape: {y_t.shape}; class: {np.unique(y_t)}')
+print()
 
 # dataloader training
-dataloader_training = DataLoader(dataset=dataset_train,
+dataloader_training = DataLoader(dataset=x_t,
                                  batch_size=2,
                                  shuffle=True)
 
 # dataloader validation
-dataloader_validation = DataLoader(dataset=dataset_valid,
+dataloader_validation = DataLoader(dataset=y_t,
                                    batch_size=2,
                                    shuffle=True)
 
-# verify we have the correct format
-batch = dataset_train[0]
-x, y = batch
 
-print(f'x = shape: {x.shape}; type: {x.dtype}')
-print(f'x = min: {x.min()}; max: {x.max()}')
-print(f'y = shape: {y.shape}; class: {y.unique()}; type: {y.dtype}')
+train_iter = iter(dataloader_training)
+for x in train_iter:
+    print(x)
+    print(x.size())
 
+#print(f'x = shape: {x.shape}; type: {x.dtype}')
+#print(f'x = min: {x.min()}; max: {x.max()}')
+#print(f'y = shape: {y.shape}; class: {np.unique(y)}')
+
+# # find root directory using Pathlib
+# root = pathlib.Path.cwd() / 'Carvana'
+
+# # get individual file names and return the list
+# def get_filenames_of_path(path, ext: str = '*'):
+#     return [file for file in path.glob(ext) if file.is_file()]
+    
+# input_files = get_filenames_of_path(root / 'inputs')
+# target_files = get_filenames_of_path(root / 'targets')
+
+# # training transformations and augmentations
+# transforms = ComposeDouble([
+#     FunctionWrapperDouble(dense_target, input=False, target=True),
+#     FunctionWrapperDouble(np.moveaxis, input=True, target=False, source=-1, destination=0),
+#     FunctionWrapperDouble(normalize)
+# ])
+
+# random_seed = 42
+# train_size = 0.8
+
+# inputs_train, inputs_valid = train_test_split(
+#     input_files,
+#     random_state=random_seed,
+#     train_size=train_size,
+#     shuffle=True)
+
+# targets_train, targets_valid = train_test_split(
+#     target_files,
+#     random_state=random_seed,
+#     train_size=train_size,
+#     shuffle=True)
+
+# # dataset training
+# dataset_train = createDataset(inputs=inputs_train,
+#                                     targets=targets_train,
+#                                     transform=transforms)
+
+# # dataset validation
+# dataset_valid = createDataset(inputs=inputs_valid,
+#                                     targets=targets_valid,
+#                                     transform=transforms)
+
+# # dataloader training
+# dataloader_training = DataLoader(dataset=dataset_train,
+#                                  batch_size=2,
+#                                  shuffle=True)
+
+# # dataloader validation
+# dataloader_validation = DataLoader(dataset=dataset_valid,
+#                                    batch_size=2,
+#                                    shuffle=True)
+
+# # verify we have the correct format
+# batch = dataset_train[0]
+# x, y = batch
+
+# print(f'x = shape: {x.shape}; type: {x.dtype}')
+# print(f'x = min: {x.min()}; max: {x.max()}')
+# print(f'y = shape: {y.shape}; class: {y.unique()}; type: {y.dtype}')
