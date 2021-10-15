@@ -71,5 +71,27 @@ x    = torch.randn(1, 3, 572, 572)
 ftrs = encoder(x)
 decoder = Decoder()
 x = torch.randn(1, 1024, 28, 28)
-decoder(x, ftrs[::-1][1:]).shape
+print(decoder(x, ftrs[::-1][1:]).shape)
+print('done')
 
+
+class UNet(nn.Module):
+    def __init__(self, encryption_channels=(3,64,128,256,512,1024), decryption_channels=(1024,512,256,128,64),num_class=1, retain_dim=False, out_sz=(572,572)):
+        super().__init__()
+        self.encoder = Encoder(encryption_channels)
+        self.decoder = Decoder(decryption_channels)
+        self.head = nn.Conv2d(decryption_channels[-1], num_class, 1)
+        self.retain_dim = retain_dim
+
+    def forward(self, x):
+        enc_ftrs = self.encoder(x)
+        out = self.decoder(enc_ftrs[::-1][0], enc_ftrs[::-1][1:])
+        out = self.head(out)
+        if self.retain_dim:
+            out = F.interpolate(out, out_sz)
+        return out
+
+
+unet = UNet()
+x = torch.randn(1, 3, 572, 572)
+print(unet(x).shape)
