@@ -2,19 +2,8 @@
 import torch
 import torch.nn as nn
 import torchvision
-
-
-# encoder doubles the number of channels at every step and halves spatial dimension
-# max pool reduces the height and width of the image by half
-
-
-# decoder upsamples the feature maps, doubles the spatial dimensions and halves the number of channels
-# upsample using conv transpose 2d, doubles the height and width
-
-# relu activation between each layer
-
-#Convolution operations have kernel size of 3, and no padding
-#the output feature map doesn’t have the same Height and Width as the input feature map
+from torchinfo import summary
+import matplotlib.pyplot as plt
 
 class Block(nn.Module):
     def __init__(self, input_channels, output_channels):
@@ -26,10 +15,16 @@ class Block(nn.Module):
     def forward(self,x):
         return self.relu(self.conv2(self.relu(self.conv1(x))))
 
+enc_block = Block(1, 64)
+''' input shape '''
+x = torch.randn(1, 1, 128, 128)
+''' output shape '''
+print('block shape')
+print(enc_block(x).shape)
 
 class Encoder(nn.Module):
     ''' DownSampling Part'''
-    def __init__(self, channels = (3,64,128,256,512,1024)):
+    def __init__(self, channels = (3,64,128)):
         super().__init__()
         self.enc_blocks = nn.ModuleList([Block(channels[i], channels[i+1]) for i in range(len(channels)-1)])
         self.pool = nn.MaxPool2d(2)
@@ -42,10 +37,16 @@ class Encoder(nn.Module):
             x = self.pool(x)
         return ftrs
 
+encoder = Encoder()
+# input image
+x    = torch.randn(1, 3, 128, 128)
+ftrs = encoder(x)
+print('Encoder Output')
+for ftr in ftrs: print(ftr.shape)
 
 class Decoder(nn.Module):
     ''' up convolution part '''
-    def __init__(self, channels=(1024, 512, 256, 128,64)):
+    def __init__(self, channels=(128,64)):
         super().__init__()
         self.channels = channels
         self.upconvs = nn.ModuleList([nn.ConvTranspose2d(channels[i], channels[i+1], 2, 2) for i in range(len(channels)-1)])
@@ -64,23 +65,17 @@ class Decoder(nn.Module):
         enc_ftrs = torchvision.transforms.CenterCrop([H,W])(enc_ftrs)
         return enc_ftrs
 
-
-encoder = Encoder()
-# input image
-x    = torch.randn(1, 3, 572, 572)
-ftrs = encoder(x)
 decoder = Decoder()
-x = torch.randn(1, 1024, 28, 28)
+x = torch.randn(1, 128, 28, 28)
+print('Decoder Output')
 print(decoder(x, ftrs[::-1][1:]).shape)
-print('done')
-
 
 class UNet(nn.Module):
-    def __init__(self, encryption_channels=(3,64,128,256,512,1024), decryption_channels=(1024,512,256,128,64),num_class=1, retain_dim=False, out_sz=(572,572)):
+    def __init__(self, enc_chs=(3,64,128), dec_chs=(128, 64), num_class=1, retain_dim=False, out_sz=(572,572)):
         super().__init__()
-        self.encoder = Encoder(encryption_channels)
-        self.decoder = Decoder(decryption_channels)
-        self.head = nn.Conv2d(decryption_channels[-1], num_class, 1)
+        self.encoder = Encoder(enc_chs)
+        self.decoder = Decoder(dec_chs)
+        self.head = nn.Conv2d(dec_chs[-1], num_class, 1)
         self.retain_dim = retain_dim
 
     def forward(self, x):
@@ -92,6 +87,39 @@ class UNet(nn.Module):
         return out
 
 
-unet = UNet()
-x = torch.randn(1, 3, 572, 572)
-print(unet(x).shape)
+model = UNet()
+print("Model Structure")
+print(model)
+print('Model Summary')
+summary(model)
+
+optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
+loss_func = torch.nn.MSELoss()
+
+inputs = torch.randn(1, 3, 20, 20)
+outputs = torch.randn(1, 1, 4, 4)
+
+test_in = torch.randn(1, 3, 20, 20)
+test_out = torch.randn(1, 1, 4, 4)
+
+# sanity check
+#print(model(inputs).shape)
+#print(outputs.shape)
+
+for e in range(0,10):
+	predictions = model(inputs)
+	loss = loss_func(predictions, outputs)
+	optimizer.zero_grad()
+	loss.backward()
+	optimizer.step()
+
+print('Test Loss: ' + str(loss))
+
+with torch.no_grad():
+	model.eval()
+	test_predictions = model(test_in)
+	test_loss = loss_func(test_predictions, test_out)
+	test_plot = test_predictions.data.numpy()[0]
+
+print('Test Loss: ' + str(test_loss))
+
