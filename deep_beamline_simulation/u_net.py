@@ -8,29 +8,42 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 
 
-''' Create the basic block architecture'''
+""" Create the basic block architecture"""
+
+
 class Block(nn.Module):
-    def __init__(self, input_channels = 3, output_channels = 3):
+    def __init__(self, input_channels=3, output_channels=3):
         super().__init__()
         # kernel_size = 3
-        self.conv_in = nn.Conv2d(input_channels, output_channels, 3, stride=1, padding=1)
+        self.conv_in = nn.Conv2d(
+            input_channels, output_channels, 3, stride=1, padding=1
+        )
         self.relu = nn.ReLU()
         # kernel_size = 3
-        self.conv_out = nn.Conv2d(output_channels, output_channels, 3, stride=1, padding=1)
+        self.conv_out = nn.Conv2d(
+            output_channels, output_channels, 3, stride=1, padding=1
+        )
 
-    def forward(self,x):
+    def forward(self, x):
         x = self.conv_in(x)
         x = self.relu(x)
         x = self.conv_out(x)
         return self.relu(x)
 
 
-''' similar to standard CNN '''
+""" similar to standard CNN """
+
+
 class Encoder(nn.Module):
-    def __init__(self, num_channels = (3,64,128)):
+    def __init__(self, num_channels=(3, 64, 128)):
         super().__init__()
-        # creates a block for each pair of channels 
-        self.enc_blocks = nn.ModuleList([Block(num_channels[i], num_channels[i+1]) for i in range(len(num_channels)-1)])
+        # creates a block for each pair of channels
+        self.enc_blocks = nn.ModuleList(
+            [
+                Block(num_channels[i], num_channels[i + 1])
+                for i in range(len(num_channels) - 1)
+            ]
+        )
         self.pool = nn.MaxPool2d(2)
 
     def forward(self, x):
@@ -43,32 +56,51 @@ class Encoder(nn.Module):
 
 
 class Decoder(nn.Module):
-    ''' up convolution part '''
-    def __init__(self, num_channels=(128,64)):
+    """ up convolution part """
+
+    def __init__(self, num_channels=(128, 64)):
         super().__init__()
         self.num_channels = num_channels
         # conv transpose for decreasing pairs of channels
-        self.upconvs = nn.ModuleList([nn.ConvTranspose2d(num_channels[i], num_channels[i+1], 2, 2) for i in range(len(num_channels)-1)])
-        self.dec_blocks = nn.ModuleList([Block(num_channels[i], num_channels[i+1]) for i in range(len(num_channels)-1)])
+        self.upconvs = nn.ModuleList(
+            [
+                nn.ConvTranspose2d(num_channels[i], num_channels[i + 1], 2, 2)
+                for i in range(len(num_channels) - 1)
+            ]
+        )
+        self.dec_blocks = nn.ModuleList(
+            [
+                Block(num_channels[i], num_channels[i + 1])
+                for i in range(len(num_channels) - 1)
+            ]
+        )
 
     def forward(self, x, encoder_features):
-        for i in range(len(self.num_channels)-1):
+        for i in range(len(self.num_channels) - 1):
             x = self.upconvs[i](x)
-            encoder_features = self.crop(encoder_features[i],x)
+            encoder_features = self.crop(encoder_features[i], x)
             # concat the unconvs and encoder features
             x = torch.cat([x, encoder_features], dim=1)
             x = self.dec_blocks[i](x)
-        return x 
+        return x
 
-    ''' Downsizing and creating the correct output shape '''
+    """ Downsizing and creating the correct output shape """
+
     def crop(self, encoder_features, x):
         _, _, H, W = x.shape
-        encoder_features = torchvision.transforms.CenterCrop([H,W])(encoder_features)
+        encoder_features = torchvision.transforms.CenterCrop([H, W])(encoder_features)
         return encoder_features
 
 
 class UNet(nn.Module):
-    def __init__(self, encoder_channels=(3,64,128), decoder_channels=(128, 64), num_class=1, retain_dim=False, out_sz=(572,572)):
+    def __init__(
+        self,
+        encoder_channels=(3, 64, 128),
+        decoder_channels=(128, 64),
+        num_class=1,
+        retain_dim=False,
+        out_sz=(572, 572),
+    ):
         super().__init__()
         self.encoder = Encoder(encoder_channels)
         self.decoder = Decoder(decoder_channels)
