@@ -1,7 +1,8 @@
 import os
 import pandas
-import deep_beamline_simulation
-from deep_beamline_simulation.u_net import Block, Encoder, Decoder, UNet
+#import deep_beamline_simulation
+from u_net import Block, Encoder, Decoder, UNet
+#from deep_beamline_simulation.u_net import Block, Encoder, Decoder, UNet
 from pathlib import Path
 import matplotlib.pyplot as plt
 import torch
@@ -11,12 +12,12 @@ from torch.utils.data import DataLoader
 
 
 # file dictionary for importing
+'''
 im_data = (
     Path(deep_beamline_simulation.__path__[0]).parent
     / "deep_beamline_simulation/image_data"
 )
 
-'''
 images = []
 for filename in os.listdir(im_data):
     im_data_path = im_data / filename
@@ -35,8 +36,8 @@ for i in range(0, len(images)):
 image_dataset = DataLoader(image_data, batch_size=1, shuffle=True)
 #print(image_data)
 '''
-train_file = im_data / 'Initial-Intensity-33-1798m.csv'
-output_file = im_data / 'Intensity-At-Sample-63-3m.csv'
+train_file = 'image_data/Initial-Intensity-33-1798m.csv'
+output_file = 'image_data/Intensity-At-Sample-63-3m.csv'
 train_image = torch.tensor( pandas.read_csv(train_file, skiprows=1).to_numpy() )
 output_image = torch.tensor( pandas.read_csv(output_file, skiprows=1).to_numpy() )
 
