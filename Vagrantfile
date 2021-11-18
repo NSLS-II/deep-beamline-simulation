@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-20.10"
   config.vm.box_check_update = true
 
-  config.vm.network "private_network", ip: "10.10.10.10"
+  config.vm.network "private_network", ip: "192.168.56.0"
   config.vm.network "forwarded_port", guest: 8000, host: 8000, host_ip: "127.0.0.1"
   config.vm.network "forwarded_port", guest: 27017, host: 27017, host_ip: "127.0.0.1"
 
