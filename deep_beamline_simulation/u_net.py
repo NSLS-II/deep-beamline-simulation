@@ -7,7 +7,19 @@ from torchinfo import summary
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 
-class ImageProcessing():
+
+class ImageProcessing:
+    """
+    Processes images for proper training specifications 
+    Prevents issues with size and shape of all images in a dataset
+    Normalizes values in images to prevent training issues
+
+    Parameters
+    ----------
+    image_list : list 
+        holds the list of images to transform with following methods
+    """
+
     def __init__(self, image_list):
         self.image_list = image_list
 
@@ -15,20 +27,35 @@ class ImageProcessing():
         min_height = 10e4
         min_length = 10e4
 
-        for s in dataset:
+        for s in self.image_list:
             shape = s.shape
             height = shape[0]
             length = shape[1]
             if height < min_height:
-                min_height = height 
+                min_height = height
             if length < min_length:
                 min_length = length
+        return min_height, min_length
 
     def resize(self, image, height, length):
         image = Image.fromarray(image)
-        resized_image = image.resize((length, height))
-        resized_image =  np.asarray(resized_image)
+        resized_image = image.resize((length - 1, height - 1))
+        resized_image = np.asarray(resized_image)
         return resized_image
+
+    def normalize(self):
+        transform = torchvision.transforms.Compose(
+            [
+                torchvision.transforms.ToTensor(),
+                torchvision.transforms.Normalize(
+                    mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225],
+                ),
+            ]
+        )
+        transformed_images = []
+        for im in self.image_list:
+            transformed_images.append(transform(im))
+        return transformed_images
 
 
 class Block(nn.Module):
