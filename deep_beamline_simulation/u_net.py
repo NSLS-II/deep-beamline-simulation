@@ -1,10 +1,34 @@
 import torch
 import numpy as np
 import torchvision
+from PIL import Image
 import torch.nn as nn
 from torchinfo import summary
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
+
+class ImageProcessing():
+    def __init__(self, image_list):
+        self.image_list = image_list
+
+    def smallest_image_size(self):
+        min_height = 10e4
+        min_length = 10e4
+
+        for s in dataset:
+            shape = s.shape
+            height = shape[0]
+            length = shape[1]
+            if height < min_height:
+                min_height = height 
+            if length < min_length:
+                min_length = length
+
+    def resize(self, image, height, length):
+        image = Image.fromarray(image)
+        resized_image = image.resize((length, height))
+        resized_image =  np.asarray(resized_image)
+        return resized_image
 
 
 class Block(nn.Module):
@@ -82,7 +106,6 @@ class Decoder(nn.Module):
     num_channels : list, tuple
         As the image trains the number of channels will be decreased from 
         the maximum size from the encoder
-
     Methods
     -------
     crop - Downsizes x to ensure correct output shape
