@@ -1,3 +1,4 @@
+import cv2
 import torch
 import numpy as np
 import torchvision
@@ -13,7 +14,6 @@ class ImageProcessing:
     Processes images for proper training specifications 
     Prevents issues with size and shape of all images in a dataset
     Normalizes values in images to prevent training issues
-
     Parameters
     ----------
     image_list : list 
@@ -38,24 +38,14 @@ class ImageProcessing:
         return min_height, min_length
 
     def resize(self, image, height, length):
-        image = Image.fromarray(image)
-        resized_image = image.resize((length - 1, height - 1))
-        resized_image = np.asarray(resized_image)
-        return resized_image
+        res = cv2.resize(image, dsize=(length-1, height-1), interpolation=cv2.INTER_CUBIC)
+        return res
 
-    def normalize(self):
-        transform = torchvision.transforms.Compose(
-            [
-                torchvision.transforms.ToTensor(),
-                torchvision.transforms.Normalize(
-                    mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225],
-                ),
-            ]
-        )
-        transformed_images = []
-        for im in self.image_list:
-            transformed_images.append(transform(im))
-        return transformed_images
+
+    def normalize_image(self, image):
+        im_mean = np.mean(image)
+        im_std  = np.std(image)
+        return (image - im_mean) / im_std
 
 
 class Block(nn.Module):
