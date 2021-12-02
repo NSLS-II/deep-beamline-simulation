@@ -372,6 +372,9 @@ toolz==0.11.1
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   partd
+torchinfo == 1.5.3
+    # via 
+    # deep-beamline-simulation (setup.py)
 tqdm==4.61.2
     # via
     #   bluesky
