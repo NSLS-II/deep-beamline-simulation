@@ -139,7 +139,7 @@ def test_find_sim_by_name():
         "isExample": True,
         "simulation": {
             "distanceFromSource": 20,
-            "documentationUrl": "https://www.bnl.gov/ps/beamlines/beamline.php?r=5-ID",
+            "documentationUrl": "https://www.bnl.gov/nsls2/beamlines/beamline.php?r=5-ID",
             "fieldUnits": 1,
             "folder": "/Light Source Facilities/NSLS-II/NSLS-II SRX beamline",
             "horizontalPointCount": 100,

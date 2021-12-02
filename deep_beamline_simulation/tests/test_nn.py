@@ -2,6 +2,8 @@ import os
 import torch
 import pytest
 import pandas
+from pathlib import Path
+import deep_beamline_simulation
 from deep_beamline_simulation.u_net import Block, Encoder, Decoder, UNet, ImageProcessing
 
 def test_predictions():
@@ -9,8 +11,9 @@ def test_predictions():
 	Simple test function to ensure the model returns an 
 	output image when given and input image
 	'''
-	train_file = '/vagrant/deep_beamline_simulation/image_data/Initial-Intensity-33-1798m.csv'
-	output_file = "/vagrant/deep_beamline_simulation/image_data/Intensity-At-Sample-63-3m.csv"
+	dbs_dir = (Path(deep_beamline_simulation.__path__[0]).parent / 'deep_beamline_simulation/image_data')
+	train_file = dbs_dir / 'Initial-Intensity-33-1798m.csv'
+	output_file = dbs_dir / "Intensity-At-Sample-63-3m.csv"
 
 	# read csv using pandas, skip first row for headers
 	train_numpy = pandas.read_csv(train_file, skiprows=1).to_numpy()
