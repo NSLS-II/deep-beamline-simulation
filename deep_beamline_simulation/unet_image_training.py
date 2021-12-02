@@ -59,18 +59,20 @@ print(output_image.shape)
 
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
-loss_func = torch.nn.MSELoss()
+loss_func = torch.nn.L1Loss()
 
 # loop through many epochs
-for e in range(0, 30):
+for e in range(1, 4001):
     predictions = model(train_image)
     loss = loss_func(predictions, output_image)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
-# output the loss
-print('Training Loss:' + str(loss.data.numpy()))
+    if e%1000 == 0:
+        # output the loss
+        print('Training Loss:' + str(loss.data.numpy()))
+
 
 # test the model (same image for now)
 test_predictions = None
