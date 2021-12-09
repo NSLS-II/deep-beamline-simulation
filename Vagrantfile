@@ -22,7 +22,6 @@ Vagrant.configure("2") do |config|
     apt install -y python3-pip
     # install X11 for matplotlib
     apt install -y xserver-xorg-core x11-utils x11-apps
-
     # install docker
     apt install apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -32,46 +31,42 @@ Vagrant.configure("2") do |config|
     # add the vagrant account to the docker group
     # this way the vagrant account can run docker without sudo
     usermod -aG docker vagrant
-
     # install podman
     apt update
     apt install -y podman
     # configure default init for podman
     sed 's;# init_path = "/usr/libexec/podman/catatonit";init_path = "/usr/bin/tini";g' -i /etc/containers/containers.conf
-
     # install miniconda3
     wget -P /tmp https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
     bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /home/vagrant/miniconda3
     rm /tmp/Miniconda3-latest-Linux-x86_64.sh
     /home/vagrant/miniconda3/bin/conda init --system
     /home/vagrant/miniconda3/bin/conda update conda -y
-
     # create a conda environment for development
     /home/vagrant/miniconda3/bin/conda create -y -n dbs python=3.8
+    # install pytorch and dependencies
+    /home/vagrant/miniconda3/bin/conda install -y pytorch torchvision torchaudio cpuonly -c pytorch
+    # install SRW and shadow
+    /home/vagrant/miniconda3/bin/conda install -y -c conda-forge shadow3 srwpy
     # install deep-beamline-simulation
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -e /vagrant
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -r /vagrant/requirements-dev.txt
     # must change ownership for /home/vagrant/miniconda3 after creating virtual environments and installing packages
     chown -R vagrant:vagrant /home/vagrant/miniconda3
-
     # install mongodb
     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
     apt update
     apt install -y mongodb-org
-
     # note: change the mongodb bindIP in /etc/mongod.conf to 0.0.0.0 to allow connections from the host
     cp /vagrant/files/mongod.conf /etc/
-
     systemctl start mongod
     systemctl enable mongod
-
     # databroker will look for this directory
     # it should probably be created in scripts/start_sirepo.sh
     cd /home/vagrant
     mkdir -p .local/share/intake
     chown -Rv vagrant:vagrant .local
-
   SHELL
   # ssh into the VM
   #   $ vagrant ssh
