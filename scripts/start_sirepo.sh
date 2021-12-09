@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 error_msg="Specify '-it' or '-d' on the command line as a first argument."
 
 arg="${1:-}"
