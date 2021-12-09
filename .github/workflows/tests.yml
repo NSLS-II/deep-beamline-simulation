@@ -29,7 +29,7 @@ jobs:
         uses: supercharge/mongodb-github-action@1.6.0
 
       - name: Install Podman
-        if: matrix.docker-binary == "podman"
+        if: matrix.docker-binary == 'podman'
         shell: bash -l {0}
         run: |
           # For reference: https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html.
