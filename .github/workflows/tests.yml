@@ -46,6 +46,7 @@ jobs:
           conda env list
           pip install .
           pip install -r requirements-dev.txt
+          conda install pytorch torchvision torchaudio cpuonly -c pytorch
           pip list
           conda list
 

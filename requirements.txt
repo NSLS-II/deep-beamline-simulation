@@ -211,6 +211,9 @@ numpy==1.21.1
     #   unyt
     #   xarray
     #   zarr
+opencv-python==4.5.4.60
+    # via
+    # deep-beamline-simulation (setup.py)
 ophyd==1.6.1
     # via
     #   deep-beamline-simulation (setup.py)
@@ -369,6 +372,9 @@ toolz==0.11.1
     #   databroker
     #   deep-beamline-simulation (setup.py)
     #   partd
+torchinfo == 1.5.3
+    # via 
+    # deep-beamline-simulation (setup.py)
 tqdm==4.61.2
     # via
     #   bluesky
