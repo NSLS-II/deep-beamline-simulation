@@ -17,3 +17,5 @@ sirepo-bluesky
 torchinfo
 urllib3
 torch
+torchvision
+opencv-python
