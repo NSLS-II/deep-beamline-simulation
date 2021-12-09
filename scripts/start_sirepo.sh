@@ -37,7 +37,7 @@ ${docker_binary} pull ${docker_image}
 ${docker_binary} images
 
 in_docker_cmd="mkdir -v -p /sirepo && sirepo service http"
-cmd="docker run $1 --init --rm --name sirepo \
+cmd="${docker_binary} run $1 --init --rm --name sirepo \
        -e SIREPO_AUTH_METHODS=bluesky:guest \
        -e SIREPO_AUTH_BLUESKY_SECRET=bluesky \
        -e SIREPO_SRDB_ROOT=/sirepo \
