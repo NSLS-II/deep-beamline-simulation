@@ -1,7 +1,7 @@
-os
-setuptools
-sys
-versioneer
+# os
+# setuptools
+# sys
+# versioneer
 numpydoc
 vcrpy
 ipython

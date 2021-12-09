@@ -16,3 +16,4 @@ requests
 sirepo-bluesky
 torchinfo
 urllib3
+torch
