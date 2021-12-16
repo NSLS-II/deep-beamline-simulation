@@ -48,6 +48,10 @@ Vagrant.configure("2") do |config|
 
     # create a conda environment for development
     /home/vagrant/miniconda3/bin/conda create -y -n dbs python=3.8
+    # install pytorch and dependencies
+    /home/vagrant/miniconda3/bin/conda install -y -n dbs pytorch torchvision torchaudio cpuonly -c pytorch
+    # install SRW and shadow
+    /home/vagrant/miniconda3/bin/conda install -y -n dbs -c conda-forge shadow3 srwpy
     # install deep-beamline-simulation
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -e /vagrant
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -r /vagrant/requirements-dev.txt
