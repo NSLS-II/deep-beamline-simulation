@@ -61,17 +61,23 @@ print(output_image.shape)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
 loss_func = torch.nn.L1Loss()
 
+
 # loop through many epochs
 for e in range(1, 4001):
     predictions = model(train_image)
+    crop_pred = predictions.detach()
+    crop_train = ip.loss_crop(train_image)
+    crop_out = ip.loss_crop(crop_pred)
     loss = loss_func(predictions, output_image)
+    cropped_train_loss = loss_func(crop_train, crop_out)
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
     if e%1000 == 0:
         # output the loss
-        print('Training Loss:' + str(loss.data.numpy()))
+        print('Training Loss: ' + str(loss.data.numpy()))
+        print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))
 
 
 # test the model (same image for now)
@@ -80,13 +86,20 @@ with torch.no_grad():
     model.eval()
     test_predictions = model(train_image)
     test_loss = loss_func(test_predictions, output_image)
+    test_pred_cropped = ip.loss_crop(test_predictions)
+    output_cropped = ip.loss_crop(output_image)
+    cropped_test_loss = loss_func(test_pred_cropped, output_cropped)
 
 # output test loss
 print("Test Loss: " + str(test_loss.data.numpy()))
+# cropped output test loss
+print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
+
 
 # remove extra dimenations to plot and view output
 prediction_im = test_predictions[0,0,:,:]
 actual_im = output_image[0,0,:,:]
+
 
 # plot output
 plt.subplot(121)
@@ -96,6 +109,3 @@ plt.imshow(prediction_im, extent=[0,100,0,1], aspect='auto')
 plt.colorbar()
 plt.tight_layout()
 plt.show()
-
-
-
