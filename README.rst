@@ -13,9 +13,7 @@ Beamline Simulation using `sirepo-bluesky`_ and Synchrotron Radiation Workshop (
 
 Purpose
 -------
-
-Use machine learning to simulate beamlines similar to SRW with lower computational costs.
-The goal is to determine whether or not a neural network can construct a beamline simulation given data from sirepo-bluesky.
+Use machine learning techniques to simulate beamlines given data from SRW.
 
 Installation
 ------------
@@ -23,35 +21,28 @@ Installation
 - Install `VirtualBox`_ on your computer.
 - Install `Vagrant`_ using the terminal.
 - Git clone this repository. Then use ``cd deep-beamline-simulation`` to move into the top level directory of this repository.
-- You will see a Vagrantfile containing virtual machine setup information. Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``.
-- Once the virtual machine is running, finish the Miniconda installation,
-.. code:: bash
-
-   bash Miniconda3-latest-Linux-x86_64.sh
-
-- Close and reload the VM. Create a conda environment, 
-.. code:: bash
-
-   conda create -n sirepo_bluesky python=3.8
-   conda activate sirepo_bluesky
+- You will see a Vagrantfile containing virtual machine setup information. Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``. To reload the virtual machine use ``vagrant reload`` and to update the machine for any changes use ``vagrant provision``.
 
 - It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
 
-- To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``. Use ``pip install .`` to install all requirements and setup necessary packages. 
+- To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``.
 
-- Use the command ``bash start_docker.sh`` to start the docker container. To run the docker container in the background use ``-d`` at the end of the command or for an interactive version add ``-it``. To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'.
+- There will be a conda environment created using the Vagrantfile. Verify this by using ``conda env list``. To activate it use ``conda activate dbs``.
 
-- Open the interactive website http://10.10.10.10:8000/srw.
+- Use ``pip install .`` to install all requirements and setup necessary packages. 
 
-Pytorch
--------
+- To run the docker container for Sirepo, use command ``bash scripts/start_sirepo.sh -it``. To run the container in the background use ``-d`` instead. The default ``-it`` will run the container in interactive mode. Using interactive mode will force you to open a new terminal window to view code and make changes. In the new window use ``Vagrant ssh`` to join the session created eariler and activate conda using the same command as above. 
 
-- To run files requiring pytorch, visit ``https://pytorch.org`` to find a compatible installation command. For this virtual machine it is suggested to use,
-.. code:: bash
+- To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'.
 
-   conda install pytorch torchvision torchaudio cpuonly -c pytorch
+- Open the interactive website `localhost`_.
 
-- When neural network training is complete, exit the VM and run ``python tensorfile.py``. Then use ``tensorboard --logdir=runs``. This will provide output similar to the following. Copy and paste the link into the web browser to access tensorboard.
+Interactive Tensorboard
+-----------------------
+
+- There are a few neural networks found in this repository. Pytorch is installed in the Vagrantfile and while running the pip install. There are a few extra steps to be able to use tensorboard applications.
+
+- When neural network training is complete, exit the virtual machine and run ``python tensorfile.py``. Then use ``tensorboard --logdir=runs``. This will provide output similar to the following. Copy and paste the link into the web browser to access tensorboard.
 
 .. code:: bash
 
@@ -62,3 +53,4 @@ Pytorch
 .. _SRW: https://github.com/ochubar/SRW
 .. _VirtualBox: https://www.virtualbox.org/
 .. _Vagrant: https://www.vagrantup.com
+.. _localhost: http://localhost:8000/en/landing.html
