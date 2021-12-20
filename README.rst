@@ -26,7 +26,7 @@ Installation
 
 - You will see a Vagrantfile containing virtual machine setup information. Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``. To reload the virtual machine use ``vagrant reload`` and to update the machine for any changes use ``vagrant provision``.
 
-```bash
+``` bash
 % vagrant up
 Bringing machine 'default' up with 'virtualbox' provider...
 ==> default: Checking if box 'bento/ubuntu-20.10' version '202107.28.0' is up to date...
@@ -61,7 +61,7 @@ vagrant@vagrant:~$
 
 - It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod`` to start running Mongo DB.
 
-```bash
+``` bash
 vagrant@vagrant:~$ sudo systemctl status mongod
 ● mongod.service - MongoDB Database Server
      Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
@@ -91,13 +91,13 @@ Dec 20 14:13:57 vagrant systemd[1]: Started MongoDB Database Server.
 
 - To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``.
 
-```bash
+``` bash
 (dbs) vagrant@vagrant:~$ cd /vagrant/
 ```
 
 - There will be a conda environment created using the Vagrantfile. Verify this by using ``conda env list``. To activate it use ``conda activate dbs``.
 
-```bash
+``` bash
 vagrant@vagrant:~$ conda env list
  conda environments:
 
@@ -109,7 +109,7 @@ vagrant@vagrant:~$ conda activate dbs
 
 - Use ``pip install .`` to install all requirements and setup necessary packages. 
 
-```bash
+``` bash
 (dbs) vagrant@vagrant:/vagrant$ pip install .
 
 ...
@@ -150,6 +150,16 @@ docker run -it --init --rm --name sirepo        -e SIREPO_AUTH_METHODS=bluesky:g
 
 
 - To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'.
+
+``` bash
+vagrant@vagrant:~$ docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+f0d01fee65cf   radiasoft/sirepo:beta   "bash -l -c 'mkdir -…"   9 minutes ago   Up 9 minutes   0.0.0.0:8000->8000/tcp, :::8000->8000/tcp   sirepo
+
+vagrant@vagrant:~$ docker stop sirepo
+sirepo
+```
+
 
 - Open the interactive website `localhost`_.
 
