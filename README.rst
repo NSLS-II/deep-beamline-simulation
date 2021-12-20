@@ -19,19 +19,135 @@ Installation
 ------------
 
 - Install `VirtualBox`_ on your computer.
+
 - Install `Vagrant`_ using the terminal.
+
 - Git clone this repository. Then use ``cd deep-beamline-simulation`` to move into the top level directory of this repository.
+
 - You will see a Vagrantfile containing virtual machine setup information. Start the virtual machine using ``vagrant up`` followed by ``vagrant ssh``. To reload the virtual machine use ``vagrant reload`` and to update the machine for any changes use ``vagrant provision``.
 
-- It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod.service`` to start running Mongo DB.
+```bash
+% vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'bento/ubuntu-20.10' version '202107.28.0' is up to date...
+==> default: Clearing any previously set forwarded ports...
+==> default: Fixed port collision for 22 => 2222. Now on port 2201.
+
+...
+
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+% vagrant ssh
+Welcome to Ubuntu 20.10 (GNU/Linux 5.8.0-63-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+  System information as of Mon Dec 20 02:09:00 PM UTC 2021
+
+  System load:  0.36               Users logged in:          0
+  Usage of /:   58.6% of 30.88GB   IPv4 address for docker0: 172.17.0.1
+  Memory usage: 30%                IPv4 address for eth0:    10.0.2.15
+  Swap usage:   0%                 IPv4 address for eth1:    10.10.10.10
+  Processes:    120
+
+
+This system is built by the Bento project by Chef Software
+More information can be found at https://github.com/chef/bento
+Last login: Thu Dec  2 17:49:25 2021 from 10.0.2.2
+vagrant@vagrant:~$
+```
+
+- It is recommended to check the status of Mongo DB using ``sudo systemctl status mongod``. If the status is 'dead' use ``sudo systemctl start mongod`` to start running Mongo DB.
+
+```bash
+vagrant@vagrant:~$ sudo systemctl status mongod
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+     Active: inactive (dead) since Mon 2021-12-20 14:13:47 UTC; 3s ago
+       Docs: https://docs.mongodb.org/manual
+    Process: 647 ExecStart=/usr/bin/mongod --config /etc/mongod.conf (code=exited, status=0/SUCCESS)
+   Main PID: 647 (code=exited, status=0/SUCCESS)
+
+Dec 20 14:07:41 vagrant systemd[1]: Started MongoDB Database Server.
+Dec 20 14:13:47 vagrant systemd[1]: Stopping MongoDB Database Server...
+Dec 20 14:13:47 vagrant systemd[1]: mongod.service: Succeeded.
+Dec 20 14:13:47 vagrant systemd[1]: Stopped MongoDB Database Server.
+vagrant@vagrant:~$ sudo systemctl start mongod
+vagrant@vagrant:~$ sudo systemctl status mongod
+● mongod.service - MongoDB Database Server
+     Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2021-12-20 14:13:57 UTC; 1s ago
+       Docs: https://docs.mongodb.org/manual
+   Main PID: 2655 (mongod)
+     Memory: 156.0M
+     CGroup: /system.slice/mongod.service
+             └─2655 /usr/bin/mongod --config /etc/mongod.conf
+
+Dec 20 14:13:57 vagrant systemd[1]: Started MongoDB Database Server.
+```
+
 
 - To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``.
 
+```bash
+(dbs) vagrant@vagrant:~$ cd /vagrant/
+```
+
 - There will be a conda environment created using the Vagrantfile. Verify this by using ``conda env list``. To activate it use ``conda activate dbs``.
+
+```bash
+vagrant@vagrant:~$ conda env list
+ conda environments:
+
+base                  *  /home/vagrant/miniconda3
+dbs                      /home/vagrant/miniconda3/envs/dbs
+
+vagrant@vagrant:~$ conda activate dbs
+```
 
 - Use ``pip install .`` to install all requirements and setup necessary packages. 
 
-- To run the docker container for Sirepo, use command ``bash scripts/start_sirepo.sh -it``. To run the container in the background use ``-d`` instead. The default ``-it`` will run the container in interactive mode. Using interactive mode will force you to open a new terminal window to view code and make changes. In the new window use ``Vagrant ssh`` to join the session created eariler and activate conda using the same command as above. 
+```bash
+(dbs) vagrant@vagrant:/vagrant$ pip install .
+
+...
+
+Successfully built deep-beamline-simulation
+Installing collected packages: deep-beamline-simulation, ...
+
+...
+
+Successfully installed deep-beamline-simulation-0.post246.dev0+g97d4ced ...
+```
+
+- To run the docker container for Sirepo, use command ``bash scripts/start_sirepo.sh -it``. To run the container in the background use ``-d`` instead. The default ``-it`` will run the container in interactive mode. Using interactive mode will force you to open a new terminal window to view code and make changes. In the new window use ``vagrant ssh`` to join the session created eariler and activate conda using the same command as above. 
+
+```bash
+(dbs) vagrant@vagrant:/vagrant$ bash scripts/start_sirepo.sh -it
+Creating Directory /home/vagrant/tmp/data/2021/12/20
+...
+docker.io/radiasoft/sirepo:beta
+REPOSITORY         TAG       IMAGE ID       CREATED       SIZE
+radiasoft/sirepo   beta      5becae748c04   5 days ago    5.76GB
+radiasoft/sirepo   <none>    8117306ff3a6   3 weeks ago   5.76GB
+radiasoft/sirepo   <none>    9b56b3e3a7ff   5 weeks ago   5.76GB
+Command to run:
+
+docker run -it --init --rm --name sirepo        -e SIREPO_AUTH_METHODS=bluesky:guest        -e SIREPO_AUTH_BLUESKY_SECRET=bluesky        -e SIREPO_SRDB_ROOT=/sirepo        -e SIREPO_COOKIE_IS_SECURE=false        -p 8000:8000        radiasoft/sirepo:beta bash -l -c "mkdir -v -p /sirepo && sirepo service http"
+
+...
+
+ * Serving Flask app 'sirepo.server' (lazy loading)
+ * Environment: development
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.2:8000/ (Press CTRL+C to quit)
+ * Restarting with stat
+```
+
 
 - To verify the container is running use ``docker ps -a``. If you chose to shutdown the container use ``docker stop <name of container>``. In our case the docker container is called 'sirepo'.
 
@@ -54,3 +170,4 @@ Interactive Tensorboard
 .. _VirtualBox: https://www.virtualbox.org/
 .. _Vagrant: https://www.vagrantup.com
 .. _localhost: http://localhost:8000/en/landing.html
+
