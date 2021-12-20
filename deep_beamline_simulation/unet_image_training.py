@@ -6,7 +6,7 @@ from pathlib import Path
 from torchinfo import summary
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
-from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
+from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
 
 
 # file path for images
@@ -63,7 +63,7 @@ loss_func = torch.nn.L1Loss()
 
 
 # loop through many epochs
-for e in range(1, 4001):
+for e in range(1, 401):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -74,7 +74,7 @@ for e in range(1, 4001):
     loss.backward()
     optimizer.step()
 
-    if e%1000 == 0:
+    if e%100 == 0:
         # output the loss
         print('Training Loss: ' + str(loss.data.numpy()))
         print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))

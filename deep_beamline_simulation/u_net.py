@@ -63,7 +63,6 @@ class Block(nn.Module):
     """
     Create the basic block architecture with conv2d in and out and RELU activation
     Assumes kernel size is 3, stride is 1, and padding is 1
-
     Parameters
     ----------
     input_channels : int
@@ -97,7 +96,6 @@ class Encoder(nn.Module):
     Creates the Encoder block using the Block class that contracts images
     The encoder is similar to a standard (Convolutional Neural Network CNN)
     Assumes kernel size is 3, stride is 1, and padding is 1 from class Block
-
     Parameters
     ----------
     num_channels : list, tuple
@@ -110,7 +108,7 @@ class Encoder(nn.Module):
         block_list = []
         for i in range(len(num_channels) - 1):
             block_list.append(Block(num_channels[i], num_channels[i + 1]))
-
+        self.num_channels = num_channels
         self.encoder_blocks = nn.ModuleList(block_list)
         self.maxpool = nn.MaxPool2d(2)
 
@@ -122,13 +120,15 @@ class Encoder(nn.Module):
             x = self.maxpool(x)
         return output
 
+    def shape(self):
+        return max(self.num_channels)
+
 
 class Decoder(nn.Module):
     """
     Creates the Decoder block using the Block class to expand images
     Up samples image at each step to increase image from low to high resolution
     Assumes kernel size is 3, stride is 1, and padding is 1 from class Block
-
     Parameters
     ----------
     num_channels : list, tuple
@@ -166,11 +166,13 @@ class Decoder(nn.Module):
         encoder_features = torchvision.transforms.CenterCrop([H, W])(encoder_features)
         return encoder_features
 
+    def shape(self):
+        return max(self.num_channels)
+
 
 class UNet(nn.Module):
     """
     Creates a Unet model using the Block, Encoder, and Decoder classes
-
     Parameters
     ----------
     encoder_channels : list, tuple
@@ -194,6 +196,44 @@ class UNet(nn.Module):
 
     def forward(self, x):
         encoder_features = self.encoder(x)
+        print(encoder_features)
         out = self.decoder(encoder_features[::-1][0], encoder_features[::-1][1:])
+        out = self.head(out)
+        return out
+
+
+
+class ParamUnet(nn.Module):
+    """
+    Creates a Unet model using the Block, Encoder, and Decoder classes
+    Parameters
+    ----------
+    encoder_channels : list, tuple
+        same channels as the encoder class
+    decoder_channels : list, tuple
+        same channels as the decoder class
+    groups : int
+        default is 1 so that all inputs are convolved to all outputs
+    """
+
+    def __init__(
+        self,
+        encoder_channels=(1, 64, 128),
+        decoder_channels=(128, 64),
+        groups=1,
+    ):
+        super().__init__()
+        self.encoder = Encoder(encoder_channels)
+        self.m1 = torch.nn.Parameter(torch.randn(41))
+        self.decoder = Decoder(decoder_channels)
+        self.m2 = torch.nn.Parameter(torch.randn(41))
+        self.head = nn.Conv2d(decoder_channels[-1], groups, 1)
+
+    def forward(self, x):
+        encoder_features = self.encoder(x)
+        encoder_features = torch.mul(self.m1, x)
+        print(encoder_features)
+        out = self.decoder(encoder_features[::-1][0], encoder_features[::-1][1:])
+        out = torch.mul(self.m2, out)
         out = self.head(out)
         return out
