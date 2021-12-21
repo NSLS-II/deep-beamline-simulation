@@ -36,7 +36,7 @@ train_image = torch.from_numpy(train_numpy.astype("f"))
 output_image = torch.from_numpy(resized_output_image.astype("f"))
 
 # create model
-model = UNet()
+model = ParamUnet()
 
 '''
 Sanity check for image sizes
@@ -63,7 +63,7 @@ loss_func = torch.nn.L1Loss()
 
 
 # loop through many epochs
-for e in range(1, 401):
+for e in range(1, 4001):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -74,7 +74,7 @@ for e in range(1, 401):
     loss.backward()
     optimizer.step()
 
-    if e%100 == 0:
+    if e%1000 == 0:
         # output the loss
         print('Training Loss: ' + str(loss.data.numpy()))
         print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))

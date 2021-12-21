@@ -196,11 +196,11 @@ class UNet(nn.Module):
 
     def forward(self, x):
         encoder_features = self.encoder(x)
-        print(encoder_features)
+        #print(encoder_features[::-1][0])
+        print(encoder_features[::-1][1:])
         out = self.decoder(encoder_features[::-1][0], encoder_features[::-1][1:])
         out = self.head(out)
         return out
-
 
 
 class ParamUnet(nn.Module):
@@ -224,9 +224,10 @@ class ParamUnet(nn.Module):
     ):
         super().__init__()
         self.encoder = Encoder(encoder_channels)
-        self.m1 = torch.nn.Parameter(torch.randn(41))
+        x = torch.mul(-1, torch.randn(41))
+        self.m1 = torch.nn.Parameter(x)
         self.decoder = Decoder(decoder_channels)
-        self.m2 = torch.nn.Parameter(torch.randn(41))
+        self.m2 = torch.nn.Parameter(torch.randn(40))
         self.head = nn.Conv2d(decoder_channels[-1], groups, 1)
 
     def forward(self, x):
