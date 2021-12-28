@@ -79,15 +79,16 @@ class Block(nn.Module):
             input_channels, output_channels, 3, stride=1, padding=1
         )
         self.relu = nn.ReLU()
+        self.dropout = torch.nn.Dropout(0.5)
         self.output_layer = nn.Conv2d(
             output_channels, output_channels, 3, stride=1, padding=1
         )
 
     def forward(self, x):
         x = self.input_layer(x)
+        x = self.dropout(x)
         x = self.relu(x)
         x = self.output_layer(x)
-        x = self.relu(x)
         return x
 
 
@@ -103,7 +104,7 @@ class Encoder(nn.Module):
         Later to be decreased by the conv transpose
     """
 
-    def __init__(self, num_channels=(1, 64, 128)):
+    def __init__(self, num_channels=(1, 64, 128, 256)):
         super().__init__()
         block_list = []
         for i in range(len(num_channels) - 1):
@@ -139,7 +140,7 @@ class Decoder(nn.Module):
     crop - Downsizes x to ensure correct output shape
     """
 
-    def __init__(self, num_channels=(128, 64)):
+    def __init__(self, num_channels=(256, 128, 64)):
         super().__init__()
         self.num_channels = num_channels
         # conv transpose for decreasing pairs of channels
@@ -232,8 +233,8 @@ class ParamUnet(nn.Module):
 
     def forward(self, x):
         encoder_features = self.encoder(x)
-        encoder_features = torch.mul(self.m1, x)
-        print(encoder_features)
+        #encoder_features = torch.mul(self.m1, x)
+        #print(encoder_features)
         out = self.decoder(encoder_features[::-1][0], encoder_features[::-1][1:])
         out = torch.mul(self.m2, out)
         out = self.head(out)

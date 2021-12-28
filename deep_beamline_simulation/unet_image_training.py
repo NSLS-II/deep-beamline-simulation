@@ -37,6 +37,7 @@ output_image = torch.from_numpy(resized_output_image.astype("f"))
 
 # create model
 model = ParamUnet()
+#model = UNet()
 
 '''
 Sanity check for image sizes
@@ -58,12 +59,12 @@ print(output_image.shape)
 '''
 
 # define optimizer and loss function
-optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
-loss_func = torch.nn.L1Loss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(1, 4001):
+for e in range(1, 3001):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
