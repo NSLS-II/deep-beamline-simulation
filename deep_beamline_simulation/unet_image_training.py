@@ -9,35 +9,51 @@ from torch.utils.data import DataLoader
 from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
 
 
-# file path for images
+# file path for train images
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
+
+#file path for test images
+test_file = "image_data/initialInt_262.csv"
+test_output_file = "image_data/sample_555.csv"
 
 # read csv using pandas, skip first row for headers
 train_numpy = pandas.read_csv(train_file, skiprows=1).to_numpy()
 output_numpy = pandas.read_csv(output_file, skiprows=1).to_numpy()
 
+test_numpy = pandas.read_csv(test_file, skiprows=1).to_numpy()
+test_output_numpy = pandas.read_csv(test_output_file, skiprows=1).to_numpy()
+
 # create a list to store in ImageProcessing class
-image_list = [train_numpy, output_numpy]
+image_list = [train_numpy, output_numpy, test_numpy, test_output_numpy]
 ip = ImageProcessing(image_list)
 
 # find the size of the smallest image
 height, length = ip.smallest_image_size()
 
 # resize all images bigger than the smallest image size
+resized_train_image = ip.resize(train_numpy, height, length)
 resized_output_image = ip.resize(output_numpy, height, length)
+resized_test_image = ip.resize(test_numpy, height, length)
+resized_test_output_image = ip.resize(test_output_numpy, height, length)
 
-# normalize all training data
-train_numpy = ip.normalize_image(train_numpy)
-resized_output_image = ip.normalize_image(resized_output_image)
+
+# normalize all training and testing data
+train_numpy = ip.normalize_image(resized_train_image)
+output_image = ip.normalize_image(resized_output_image)
+test_numpy = ip.normalize_image(resized_test_image)
+test_output_numpy = ip.normalize_image(resized_test_output_image)
 
 # convert each numpy array into a tensor
 train_image = torch.from_numpy(train_numpy.astype("f"))
-output_image = torch.from_numpy(resized_output_image.astype("f"))
+output_image = torch.from_numpy(output_image.astype("f"))
+test_image = torch.from_numpy(test_numpy.astype("f"))
+test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
+
 
 # create model
-model = ParamUnet()
-#model = UNet()
+#model = ParamUnet()
+model = UNet()
 
 '''
 Sanity check for image sizes
@@ -49,6 +65,9 @@ print(output_image.size())
 
 train_image = train_image[None, None, :]
 output_image = output_image[None, None, :]
+
+test_image = test_image[None, None, :]
+test_output_image = test_output_image[None, None, :]
 
 '''
 Sanity check for image sizes
@@ -85,10 +104,10 @@ for e in range(1, 3001):
 test_predictions = None
 with torch.no_grad():
     model.eval()
-    test_predictions = model(train_image)
-    test_loss = loss_func(test_predictions, output_image)
+    test_predictions = model(test_image)
+    test_loss = loss_func(test_predictions, test_output_image)
     test_pred_cropped = ip.loss_crop(test_predictions)
-    output_cropped = ip.loss_crop(output_image)
+    output_cropped = ip.loss_crop(test_output_image)
     cropped_test_loss = loss_func(test_pred_cropped, output_cropped)
 
 # output test loss
@@ -99,7 +118,7 @@ print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
 
 # remove extra dimenations to plot and view output
 prediction_im = test_predictions[0,0,:,:]
-actual_im = output_image[0,0,:,:]
+actual_im = test_output_image[0,0,:,:]
 
 
 # plot output
