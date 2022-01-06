@@ -6,8 +6,9 @@ from pathlib import Path
 from torchinfo import summary
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
-from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
-
+#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
+#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
+from u_net import ImageProcessing, UNet
 
 # file path for train images
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
@@ -30,6 +31,8 @@ ip = ImageProcessing(image_list)
 
 # find the size of the smallest image
 height, length = ip.smallest_image_size()
+print(height, length)
+
 
 # resize all images bigger than the smallest image size
 resized_train_image = ip.resize(train_numpy, height, length)
@@ -69,13 +72,13 @@ output_image = output_image[None, None, :]
 test_image = test_image[None, None, :]
 test_output_image = test_output_image[None, None, :]
 
-'''
-Sanity check for image sizes
+
+#Sanity check for image sizes
 print("Train Image Size After Adding Channels")
 print(train_image.shape)
 print("Output Image Size After Adding Channels")
 print(output_image.shape)
-'''
+
 
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
