@@ -4,7 +4,7 @@ import pytest
 import pandas
 from pathlib import Path
 import deep_beamline_simulation
-from deep_beamline_simulation.u_net import Block, Encoder, Decoder, UNet, ImageProcessing
+from deep_beamline_simulation.u_net import UNet, ImageProcessing
 
 def test_predictions():
 	'''
@@ -27,6 +27,7 @@ def test_predictions():
 	height, length = ip.smallest_image_size()
 
 	# resize all images bigger than the smallest image size
+	train_numpy = ip.resize(train_numpy, height, length)
 	resized_output_image = ip.resize(output_numpy, height, length)
 
 	# normalize all training data
@@ -40,8 +41,8 @@ def test_predictions():
 	# create model
 	model = UNet()
 
-	train_image = train_image[None, None, :]
-	output_image = output_image[None, None, :]
+	train_image = train_image[:, :, None, None]
+	output_image = output_image[:, :, None, None]
 
 	# define optimizer and loss function
 	optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
@@ -49,7 +50,7 @@ def test_predictions():
 
 	predictions = []
 	# loop through many epochs
-	for e in range(0, 30):
+	for e in range(0, 3):
 	    predictions = model(train_image)
 	    loss = loss_func(predictions, output_image)
 	    optimizer.zero_grad()
@@ -57,6 +58,3 @@ def test_predictions():
 	    optimizer.step()
 
 	assert predictions.size != 0
-
-
-
