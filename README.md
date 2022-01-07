@@ -62,8 +62,9 @@ Use machine learning techniques to simulate beamlines given data from SRW.
        CGroup: /system.slice/mongod.service
                └─2655 /usr/bin/mongod --config /etc/mongod.conf
   Dec 20 14:13:57 vagrant systemd[1]: Started MongoDB Database Server.
+```
 
-- To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``.
+- To view the contents of ``deep-beamline-simulation`` repository use ``cd /vagrant``. 
 
 ``` bash
   (dbs) vagrant@vagrant:~$ cd /vagrant/
