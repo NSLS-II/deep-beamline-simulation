@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 #from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
 #from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
-from u_net import ImageProcessing, UNet
+from u_net import UNet, ImageProcessing
+
 
 # file path for train images
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
@@ -31,7 +32,6 @@ ip = ImageProcessing(image_list)
 
 # find the size of the smallest image
 height, length = ip.smallest_image_size()
-print(height, length)
 
 
 # resize all images bigger than the smallest image size
@@ -65,12 +65,12 @@ print(train_image.size())
 print("Output Image Size")
 print(output_image.size())
 '''
+print(train_image.shape)
+train_image = train_image[:, :, None, None]
+output_image = output_image[:, :, None, None]
 
-train_image = train_image[None, None, :]
-output_image = output_image[None, None, :]
-
-test_image = test_image[None, None, :]
-test_output_image = test_output_image[None, None, :]
+test_image = test_image[:, :, None, None]
+test_output_image = test_output_image[:, :, None, None]
 
 
 #Sanity check for image sizes

@@ -61,76 +61,78 @@ class ImageProcessing:
 
 
 class UNet(Module):
-    def __init__(self, input_size=1, output_size=1):
+    def __init__(self, input_size=136, output_size=40):
         super().__init__()
+        self.input_layer = Conv2d(40, 136, kernel_size=3, groups=1, stride=1, padding=1)
         # for going down the U
-        self.conv_inx64 = Conv2d(input_size, 64, 3, stride=1, padding=1)
-        self.conv_64x128 = Conv2d(64, 128, 3, stride=1, padding=1)
-        self.conv_128x256 = Conv2d(128, 256, 3, stride = 1, padding=1)
-        self.conv_256x512 = Conv2d(256, 512, 3, stride=1, padding=1)
-        self.conv_512x1024 = Conv2d(512, 1024, 3, stride=1, padding=1)
+        self.conv_inx64 = Conv2d(input_size, 64, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_64x128 = Conv2d(64, 128, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_128x256 = Conv2d(128, 256, kernel_size=3, groups=1, stride = 1, padding=1)
+        self.conv_256x512 = Conv2d(256, 512, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_512x1024 = Conv2d(512, 1024, kernel_size=3, groups=1, stride=1, padding=1)
 
         self.relu = ReLU()
         self.dropout = Dropout(0.5)
         self.maxpool = MaxPool2d(2)
 
         # for going up the U
-        self.upconv1024 = ConvTranspose2d(1024, 512, 3, stride=1, padding=1)
-        self.upconv512 = ConvTranspose2d(512, 256, 3, stride=1, padding=1)
-        self.upconv256 = ConvTranspose2d(256, 128, 3, stride=1, padding=1)
-        self.upconv128 = ConvTranspose2d(128, 64, 3, stride=1, padding=1)
+        self.upconv1024 = ConvTranspose2d(1024, 512, kernel_size=3, groups=1, stride=1, padding=1)
+        self.upconv512 = ConvTranspose2d(512, 256, kernel_size=3, groups=1, stride=1, padding=1)
+        self.upconv256 = ConvTranspose2d(256, 128, kernel_size=3, groups=1, stride=1, padding=1)
+        self.upconv128 = ConvTranspose2d(128, 64, kernel_size=3, groups=1, stride=1, padding=1)
 
-        self.conv_1024x512 = Conv2d(1024, 512, 3, stride=1, padding=1)
-        self.conv_512x256 = Conv2d(512, 256, 3, stride=1, padding=1)
-        self.conv_256x128 = Conv2d(256, 128, 3, stride=1, padding=1)
-        self.conv_128x64 = Conv2d(128, 64, 3, stride=1, padding=1)
+        self.conv_1024x512 = Conv2d(1024, 512, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_512x256 = Conv2d(512, 256, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_256x128 = Conv2d(256, 128, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv_128x64 = Conv2d(128, 64, kernel_size=3, groups=1, stride=1, padding=1)
 
 
         # used for blocks 
-        self.conv64 = Conv2d(64, 64, 3, stride=1, padding=1)
-        self.conv128 = Conv2d(128, 128, 3, stride=1, padding=1)
-        self.conv256 = Conv2d(256, 256, 3, stride = 1, padding=1)
-        self.conv512 = Conv2d(512, 512, 3, stride=1, padding=1)
-        self.conv1024 = Conv2d(1024, 1024, 3, stride=1, padding=1)
+        self.conv64 = Conv2d(64, 64, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv128 = Conv2d(128, 128, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv256 = Conv2d(256, 256, kernel_size=3, groups=1, stride = 1, padding=1)
+        self.conv512 = Conv2d(512, 512, kernel_size=3, groups=1, stride=1, padding=1)
+        self.conv1024 = Conv2d(1024, 1024, kernel_size=3, groups=1, stride=1, padding=1)
 
-        self.output_layer = Conv2d(64, output_size, 3, stride=1, padding=1)
+        self.output_layer = Conv2d(64, output_size, kernel_size=3, groups=1, stride=1, padding=1)
 
     def forward(self, inputs):
         # down
         # encoder block 1
-        x = self.conv_inx64(inputs)
+        x = self.input_layer(inputs)
+        x = self.conv_inx64(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv64(x)
-        x = self.maxpool(x)
+        #x = self.maxpool(x)
 
         # encoder block 2
         x = self.conv_64x128(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv128(x)
-        x = self.maxpool(x)
+        #x = self.maxpool(x)
 
         # encoder block 3
         x = self.conv_128x256(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv256(x)
-        x = self.maxpool(x)
+        #x = self.maxpool(x)
 
         # encoder block 4
         x = self.conv_256x512(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv512(x)
-        x = self.maxpool(x)
+        #x = self.maxpool(x)
 
         # encoder block 5
         x = self.conv_512x1024(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv1024(x)
-        x = self.maxpool(x)
+        #x = self.maxpool(x)
 
         # up
         # decoder block 1
