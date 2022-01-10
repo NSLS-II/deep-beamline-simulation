@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 #from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
 #from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
 from u_net import UNet, ImageProcessing
+from torchinfo import summary
 
 
 # file path for train images
@@ -58,6 +59,8 @@ test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
 #model = ParamUnet()
 model = UNet()
 
+print(summary(model, input_size=(136, 40, 1, 1)))
+
 '''
 Sanity check for image sizes
 print("Train Image Size")
@@ -81,12 +84,12 @@ print(output_image.shape)
 
 
 # define optimizer and loss function
-optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(1, 3001):
+for e in range(1, 5001):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -120,8 +123,8 @@ print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
 
 
 # remove extra dimenations to plot and view output
-prediction_im = test_predictions[0,0,:,:]
-actual_im = test_output_image[0,0,:,:]
+prediction_im = test_predictions[:,:,0,0]
+actual_im = test_output_image[:,:,0,0]
 
 
 # plot output

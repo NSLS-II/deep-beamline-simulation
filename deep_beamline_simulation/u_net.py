@@ -6,7 +6,7 @@ from PIL import Image
 import torch
 from torchinfo import summary
 from torch.utils.data import DataLoader
-from torch.nn import ConvTranspose2d, Conv2d, MaxPool2d, Module, ModuleList, ReLU, Dropout
+from torch.nn import Upsample, ConvTranspose2d, Conv2d, MaxPool2d, Module, ModuleList, ReLU, Dropout
 from torchvision.transforms import CenterCrop
 
 
@@ -50,7 +50,7 @@ class ImageProcessing:
         return (image - im_mean) / im_std
 
     def loss_crop(self, image):
-        image = (image[0, 0, :, :]).numpy()
+        image = (image[:, :,0, 0]).numpy()
         cropped_image = []
         for row in image:
             crop = row[17:25]
@@ -127,20 +127,20 @@ class UNet(Module):
         x = self.conv512(x)
         #x = self.maxpool(x)
 
-        # encoder block 5
-        x = self.conv_512x1024(x)
-        x = self.dropout(x)
-        x = self.relu(x)
-        x = self.conv1024(x)
-        #x = self.maxpool(x)
+        # # encoder block 5
+        # x = self.conv_512x1024(x)
+        # x = self.dropout(x)
+        # x = self.relu(x)
+        # x = self.conv1024(x)
+        # x = self.maxpool(x)
 
-        # up
-        # decoder block 1
-        x = self.upconv1024(x)
-        #x = self.conv_1024x512(x)
-        x = self.dropout(x)
-        x = self.relu(x)
-        x = self.conv512(x)
+        # # up
+        # # decoder block 1
+        # x = self.upconv1024(x)
+        # #x = self.conv_1024x512(x)
+        # x = self.dropout(x)
+        # x = self.relu(x)
+        # x = self.conv512(x)
 
         # decoder block 2
         x = self.upconv512(x)
