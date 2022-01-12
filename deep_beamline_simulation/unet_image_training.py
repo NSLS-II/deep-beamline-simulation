@@ -59,7 +59,7 @@ test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
 #model = ParamUnet()
 model = UNet()
 
-print(summary(model, input_size=(136, 40, 1, 1)))
+print(summary(model, input_size=(1, 1, 136, 40)))
 
 '''
 Sanity check for image sizes
@@ -69,18 +69,24 @@ print("Output Image Size")
 print(output_image.size())
 '''
 print(train_image.shape)
-train_image = train_image[:, :, None, None]
-output_image = output_image[:, :, None, None]
+train_image = train_image[None, None, :, :]
+output_image = output_image[None, None, :, :]
 
-test_image = test_image[:, :, None, None]
-test_output_image = test_output_image[:, :, None, None]
+test_image = test_image[None, None, :, :]
+test_output_image = test_output_image[None, None, :, :]
 
 
-#Sanity check for image sizes
+#Sanity check for train image sizes
 print("Train Image Size After Adding Channels")
 print(train_image.shape)
 print("Output Image Size After Adding Channels")
 print(output_image.shape)
+
+#Sanity check for test image sizes
+print("Test Image Size After Adding Channels")
+print(test_image.shape)
+print("Output Image Size After Adding Channels")
+print(test_output_image.shape)
 
 
 # define optimizer and loss function
