@@ -41,8 +41,8 @@ def test_predictions():
 	# create model
 	model = UNet()
 
-	train_image = train_image[:, :, None, None]
-	output_image = output_image[:, :, None, None]
+	train_image = train_image[None, None, :, :]
+	output_image = output_image[None, None, :, :]
 
 	# define optimizer and loss function
 	optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
