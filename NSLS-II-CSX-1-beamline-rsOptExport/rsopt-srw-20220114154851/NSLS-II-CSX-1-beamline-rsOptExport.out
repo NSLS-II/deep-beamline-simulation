@@ -1,0 +1,49 @@
+[0]  2022-01-14 15:48:54,065 libensemble.manager (ERROR): ---- Received error message from worker 1 ----
+[0]  2022-01-14 15:48:54,066 libensemble.manager (ERROR): Message: ModuleNotFoundError: No module named 'srwl_bl'
+[0]  2022-01-14 15:48:54,066 libensemble.manager (ERROR): Traceback (most recent call last):
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/worker.py", line 364, in run
+    response = self._handle(Work)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/worker.py", line 319, in _handle
+    calc_out, persis_info, calc_status = self._handle_calc(Work, calc_in)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/worker.py", line 240, in _handle_calc
+    out = calc(calc_in, Work['persis_info'], Work['libE_info'])
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/worker.py", line 149, in run_sim
+    return sim_f(calc_in, persis_info, sim_specs, libE_info)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/simulation.py", line 156, in __call__
+    f = job.execute(**kwargs)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/configuration/jobs.py", line 80, in execute
+    return self._setup.function
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/configuration/setup.py", line 227, in function
+    module = pkrunpy.run_path_as_module(self.setup['input_file'])
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/pykern/pkrunpy.py", line 30, in run_path_as_module
+    exec(code, m.__dict__)
+  File "NSLS-II-CSX-1-beamline-rsOptExport.py", line 10, in <module>
+    import srwl_bl
+ModuleNotFoundError: No module named 'srwl_bl'
+
+[0]  2022-01-14 15:48:54,067 libensemble.libE (ERROR): Manager exception raised .. aborting ensemble:
+[0]  2022-01-14 15:48:54,068 libensemble.libE (ERROR): Dumping ensemble history with 0 sims evaluated:
+Traceback (most recent call last):
+  File "/home/vagrant/miniconda3/envs/dbs/bin/rsopt", line 8, in <module>
+    sys.exit(main())
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/rsopt_console.py", line 15, in main
+    return pkcli.main('rsopt')
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/pykern/pkcli/__init__.py", line 108, in main
+    res = argh.dispatch(parser, argv=argv)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/argh/dispatching.py", line 174, in dispatch
+    for line in lines:
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/argh/dispatching.py", line 277, in _execute_command
+    for line in result:
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/argh/dispatching.py", line 260, in _call
+    result = function(*positional, **keywords)
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/pkcli/sample.py", line 16, in configuration
+    H, persis_info, _ = runner.run()
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/rsopt/libe_tools/optimizer.py", line 72, in run
+    H, persis_info, flag = libE(self.sim_specs, self.gen_specs, self.exit_criteria, self.persis_info,
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/libE.py", line 238, in libE
+    return libE_funcs[comms_type](sim_specs, gen_specs, exit_criteria,
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/libE.py", line 460, in libE_local
+    return manager(wcomms, sim_specs, gen_specs, exit_criteria,
+  File "/home/vagrant/miniconda3/envs/dbs/lib/python3.8/site-packages/libensemble/libE.py", line 275, in manager
+    raise LoggedException(*e.args, 'See error details above and in ensemble.log') from None
+libensemble.manager.LoggedException: ('Received error message from worker 1', "ModuleNotFoundError: No module named 'srwl_bl'", 'See error details above and in ensemble.log')
