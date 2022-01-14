@@ -4,6 +4,7 @@ bluesky-live
 databroker
 entrypoints
 intake
+h5py
 matplotlib
 numconv
 numpy
