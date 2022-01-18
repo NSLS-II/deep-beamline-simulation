@@ -1,2 +1,0 @@
-Worker     1: Gen no     1: gen Time: 0.004 Start: 2022-01-14 15:48:54.030 End: 2022-01-14 15:48:54.034 Status: Not set
-Worker     1: sim_id     0: sim Time: 0.019 Start: 2022-01-14 15:48:54.037 End: 2022-01-14 15:48:54.056 Status: Exception occurred
