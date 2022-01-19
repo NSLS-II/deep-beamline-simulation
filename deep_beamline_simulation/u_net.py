@@ -6,16 +6,7 @@ from PIL import Image
 import torch
 from torchinfo import summary
 from torch.utils.data import DataLoader
-from torch.nn import (
-    Upsample,
-    ConvTranspose2d,
-    Conv2d,
-    MaxPool2d,
-    Module,
-    ModuleList,
-    ReLU,
-    Dropout,
-)
+from torch.nn import Upsample, ConvTranspose2d, Conv2d, MaxPool2d, Module, ModuleList, ReLU, Dropout
 from torchvision.transforms import CenterCrop
 
 
@@ -76,7 +67,7 @@ class UNet(Module):
         # for going down the U
         self.conv_inx64 = Conv2d(1, 64, kernel_size=3, stride=1, padding=1)
         self.conv_64x128 = Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
-        self.conv_128x256 = Conv2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.conv_128x256 = Conv2d(128, 256, kernel_size=3, stride = 1, padding=1)
         self.conv_256x512 = Conv2d(256, 512, kernel_size=3, stride=1, padding=1)
         self.conv_512x1024 = Conv2d(512, 1024, kernel_size=3, stride=1, padding=1)
 
@@ -86,8 +77,8 @@ class UNet(Module):
 
         self.maxpool = MaxPool2d(2)
 
-        self.upsample = Upsample(scale_factor=2, mode="nearest")
-        self.upsample_final = Upsample(size=(input_size, output_size))
+        self.upsample = Upsample(scale_factor=2, mode='nearest')
+        self.upsample_final = Upsample(size=(input_size,output_size))
 
         # for going up the U
         self.upconv1024 = ConvTranspose2d(1024, 512, kernel_size=3, stride=1, padding=1)
@@ -100,19 +91,20 @@ class UNet(Module):
         self.conv_256x128 = Conv2d(256, 128, kernel_size=3, stride=1, padding=1)
         self.conv_128x64 = Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
 
-        # used for down blocks
+        # used for down blocks 
         self.conv64 = Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
         self.conv128 = Conv2d(128, 128, kernel_size=3, stride=1, padding=1)
-        self.conv256 = Conv2d(256, 256, kernel_size=3, stride=1, padding=1)
+        self.conv256 = Conv2d(256, 256, kernel_size=3, stride = 1, padding=1)
         self.conv512 = Conv2d(512, 512, kernel_size=3, stride=1, padding=1)
         self.conv1024 = Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1)
 
-        # used for up blocks
+        # used for up blocks 
         self.conv64_1 = Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
         self.conv128_1 = Conv2d(128, 128, kernel_size=3, stride=1, padding=1)
-        self.conv256_1 = Conv2d(256, 256, kernel_size=3, stride=1, padding=1)
+        self.conv256_1 = Conv2d(256, 256, kernel_size=3, stride = 1, padding=1)
         self.conv512_1 = Conv2d(512, 512, kernel_size=3, stride=1, padding=1)
         self.conv1024_1 = Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1)
+
 
         self.output_layer = Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
 
@@ -145,34 +137,34 @@ class UNet(Module):
         x = self.dropout(x)
         x = self.relu(x)
         x = self.conv512(x)
-        # x = self.maxpool(x)
+        #x = self.maxpool(x)
 
-        # # encoder block 5
-        x = self.conv_512x1024(x)
-        x = self.dropout(x)
-        x = self.relu(x)
-        x = self.conv1024(x)
-        # x = self.maxpool(x)
+        # # # encoder block 5
+        # x = self.conv_512x1024(x)
+        # x = self.dropout(x)
+        # x = self.relu(x)
+        # x = self.conv1024(x)
+        # # x = self.maxpool(x)
 
-        # # up
-        # # decoder block 1
-        x = self.upconv1024(x)
-        # x = self.conv_1024x512(x)
-        x = self.dropout(x)
-        x = self.relu(x)
-        x = self.conv512_1(x)
+        # # # up
+        # # # decoder block 1
+        # x = self.upconv1024(x)
+        # # x = self.conv_1024x512(x)
+        # x = self.dropout(x)
+        # x = self.relu(x)
+        # x = self.conv512_1(x)
 
         # decoder block 2
         x = self.upconv512(x)
-        # x = self.conv_512x256(x)
+        #x = self.conv_512x256(x)
         x = self.dropout(x)
         x = self.relu(x)
-        x = self.upsample(x)
+        x= self.upsample(x)
         x = self.conv256_1(x)
 
         # decoder block 3
         x = self.upconv256(x)
-        # x = self.conv_256x128(x)
+        #x = self.conv_256x128(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.upsample(x)
@@ -180,7 +172,7 @@ class UNet(Module):
 
         # decoder block 4
         x = self.upconv128(x)
-        # x = self.conv_128x64(x)
+        #x = self.conv_128x64(x)
         x = self.dropout(x)
         x = self.relu(x)
         x = self.upsample_final(x)
@@ -189,7 +181,7 @@ class UNet(Module):
         output = self.output_layer(x)
         return output
 
-        """
+        '''
         Going down the U
         conv 2d 64 
         relu, dropout, maxpool (to reduce dims)
@@ -219,4 +211,9 @@ class UNet(Module):
         relu, dropout
 
         output layer conv2d (64 ...)
-        """
+        '''
+
+
+
+
+

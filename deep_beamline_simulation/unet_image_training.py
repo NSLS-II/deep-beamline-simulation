@@ -4,11 +4,12 @@ import pandas
 import numpy as np
 from pathlib import Path
 from torchinfo import summary
+import matplotlib
+matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
-
-# from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
-# from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
+#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
+#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
@@ -17,7 +18,7 @@ from torchinfo import summary
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
 
-# file path for test images
+#file path for test images
 test_file = "image_data/initialInt_262.csv"
 test_output_file = "image_data/sample_555.csv"
 
@@ -57,18 +58,18 @@ test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
 
 
 # create model
-# model = ParamUnet()
-model = UNet(136, 40)
+#model = ParamUnet()
+model = UNet(136,40)
 
 print(summary(model, input_size=(1, 1, 136, 40)))
 
-"""
+'''
 Sanity check for image sizes
 print("Train Image Size")
 print(train_image.size())
 print("Output Image Size")
 print(output_image.size())
-"""
+'''
 
 train_image = train_image[None, None, :, :]
 output_image = output_image[None, None, :, :]
@@ -76,7 +77,7 @@ output_image = output_image[None, None, :, :]
 test_image = test_image[None, None, :, :]
 test_output_image = test_output_image[None, None, :, :]
 
-"""
+'''
 #Sanity check for train image sizes
 print("Train Image Size After Adding Channels")
 print(train_image.shape)
@@ -88,7 +89,7 @@ print("Test Image Size After Adding Channels")
 print(test_image.shape)
 print("Output Image Size After Adding Channels")
 print(test_output_image.shape)
-"""
+'''
 
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
@@ -96,7 +97,7 @@ loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(1, 3001):
+for e in range(1, 3000):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -107,10 +108,10 @@ for e in range(1, 3001):
     loss.backward()
     optimizer.step()
 
-    if e % 1000 == 0:
+    if e%1000 == 0:
         # output the loss
-        print("Training Loss: " + str(loss.data.numpy()))
-        print("Cropped Training Loss: " + str(cropped_train_loss.numpy()))
+        print('Training Loss: ' + str(loss.data.numpy()))
+        print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))
 
 
 # test the model (same image for now)
@@ -130,15 +131,15 @@ print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
 
 
 # remove extra dimenations to plot and view output
-prediction_im = test_predictions[0, 0, :, :]
-actual_im = test_output_image[0, 0, :, :]
+prediction_im = test_predictions[0,0,:,:]
+actual_im = test_output_image[0,0,:,:]
 
 
 # plot output
 plt.subplot(121)
-plt.imshow(actual_im, extent=[0, 100, 0, 1], aspect="auto")
+plt.imshow(actual_im, extent=[0,100,0,1], aspect='auto')
 plt.subplot(122)
-plt.imshow(prediction_im, extent=[0, 100, 0, 1], aspect="auto")
+plt.imshow(prediction_im, extent=[0,100,0,1], aspect='auto')
 plt.colorbar()
 plt.tight_layout()
 plt.show()
