@@ -11,7 +11,7 @@ def test_predictions():
 	Simple test function to ensure the model returns an 
 	output image when given and input image
 	'''
-	dbs_dir = (Path(deep_beamline_simulation.__path__[0]).parent / 'deep_beamline_simulation/image_data')
+	dbs_dir = (Path(deep_beamline_simulation.__path__[0]).parent / 'image_data')
 	train_file = dbs_dir / 'Initial-Intensity-33-1798m.csv'
 	output_file = dbs_dir / "Intensity-At-Sample-63-3m.csv"
 
