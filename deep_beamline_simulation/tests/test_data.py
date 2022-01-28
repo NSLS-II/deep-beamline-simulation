@@ -4,6 +4,7 @@ from pathlib import Path
 import deep_beamline_simulation
 from deep_beamline_simulation.data_collection import open_beam, open_dat, load_params
 
+@pytest.mark.skip(reason="binary files removed")
 def test_beam():
     dbs_dir = (
         Path(deep_beamline_simulation.__path__[0]).parent
@@ -14,7 +15,7 @@ def test_beam():
     expected = 14255822848.0
     assert actual == expected
 
-
+@pytest.mark.skip(reason="binary files removed")
 def test_dat():
     dbs_dir = (
         Path(deep_beamline_simulation.__path__[0]).parent
@@ -23,7 +24,7 @@ def test_dat():
     data = open_dat(dbs_dir / 'data_files/res_int_se_0.dat')
     assert len(data) != 0
 
-
+@pytest.mark.skip(reason="binary files removed")
 def test_params():
     dbs_dir = (
         Path(deep_beamline_simulation.__path__[0]).parent
