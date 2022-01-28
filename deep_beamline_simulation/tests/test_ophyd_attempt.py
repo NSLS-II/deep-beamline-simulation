@@ -108,6 +108,7 @@ def test_runSimulation():
         "fieldIntensityRange": [210561.34375, 1.8392213897609216e16],
         "fieldRange": [100.0, 20000.0, 10000, 0.0, 0.0, 1, 0.0, 0.0, 1],
     }
+
     actual_summary_data = response_run_simulation.json()["summaryData"]
     assert expected_summary_data == actual_summary_data
 
