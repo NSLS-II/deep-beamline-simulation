@@ -145,11 +145,22 @@ class UNet(Module):
         # x = self.relu(x)
         # x = self.conv1024(x)
         # # x = self.maxpool(x)
-        parameters = torch.rand(85)
+
+        # the aperature horizonal/vertical position
+        parameters = torch.rand(2)
+        #print(parameters)
+        # expand and make into 86 parameters (we need 85 to preserve shape)
+        parameters = parameters.expand(43,2)
+        #print(parameters)
         #parameters = parameters[None, :, :, :]
         
+        # flatten original tensor out of bottom of u_net
         flat = torch.flatten(x)
+        # flatten the 85 params and remove the last one to preserve shape
+        parameters = (torch.flatten(parameters))[:-1]
+        # concatenate
         x = torch.cat((flat, parameters))
+        # reshape with one more value than before to preserve final shape
         x = torch.reshape(x, (513,17,5))
 
         x = x[None, :, :, :]
