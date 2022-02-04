@@ -13,7 +13,6 @@ from torch.utils.data import DataLoader
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
-
 # file path for train images
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
@@ -91,13 +90,14 @@ print("Output Image Size After Adding Channels")
 print(test_output_image.shape)
 '''
 
+
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(0, 3001):
+for e in range(1, 3):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
