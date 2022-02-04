@@ -97,7 +97,7 @@ loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(1, 3000):
+for e in range(0, 3001):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
