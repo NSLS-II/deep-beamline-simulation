@@ -82,7 +82,7 @@ class UNet(Module):
 
         # for going up the U
         self.upconv1024 = ConvTranspose2d(1024, 512, kernel_size=3, stride=1, padding=1)
-        self.upconv512 = ConvTranspose2d(512, 256, kernel_size=3, stride=1, padding=1)
+        self.upconv512 = ConvTranspose2d(513, 256, kernel_size=3, stride=1, padding=1)
         self.upconv256 = ConvTranspose2d(256, 128, kernel_size=3, stride=1, padding=1)
         self.upconv128 = ConvTranspose2d(128, 64, kernel_size=3, stride=1, padding=1)
 
@@ -145,6 +145,14 @@ class UNet(Module):
         # x = self.relu(x)
         # x = self.conv1024(x)
         # # x = self.maxpool(x)
+        parameters = torch.rand(85)
+        #parameters = parameters[None, :, :, :]
+        
+        flat = torch.flatten(x)
+        x = torch.cat((flat, parameters))
+        x = torch.reshape(x, (513,17,5))
+
+        x = x[None, :, :, :]
 
         # # # up
         # # # decoder block 1
@@ -212,8 +220,3 @@ class UNet(Module):
 
         output layer conv2d (64 ...)
         '''
-
-
-
-
-
