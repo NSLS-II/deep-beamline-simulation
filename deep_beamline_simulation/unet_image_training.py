@@ -82,7 +82,6 @@ print("Train Image Size After Adding Channels")
 print(train_image.shape)
 print("Output Image Size After Adding Channels")
 print(output_image.shape)
-
 #Sanity check for test image sizes
 print("Test Image Size After Adding Channels")
 print(test_image.shape)
