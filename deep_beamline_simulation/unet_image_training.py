@@ -13,11 +13,20 @@ from torch.utils.data import DataLoader
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
-# file path for train images
+'''
+file path for train images
+training images are the initial intensity of SRX beamline
+the output is the output of the SRX beamline
+'''
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
 
-#file path for test images
+'''
+file path for test images
+testing images are the initial intensity of CSX
+the output is the output of the CSX beamline with varied aperture 
+horizontal and vertical is 0.1
+'''
 test_file = "image_data/initialInt_262.csv"
 test_output_file = "image_data/sample_555.csv"
 
@@ -96,7 +105,7 @@ loss_func = torch.nn.MSELoss()
 
 
 # loop through many epochs
-for e in range(1, 3):
+for e in range(0, 5000):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
