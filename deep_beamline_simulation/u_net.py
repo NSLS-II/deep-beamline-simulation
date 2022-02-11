@@ -147,7 +147,7 @@ class UNet(Module):
         # # x = self.maxpool(x)
 
         # the aperature horizonal/vertical position
-        parameters = torch.rand(2)
+        parameters = torch.tensor([0.1,0.1])
         #print(parameters)
         # expand and make into 86 parameters (we need 85 to preserve shape)
         parameters = parameters.expand(43,2)
