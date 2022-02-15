@@ -105,8 +105,9 @@ class UNet(Module):
         self.conv512_1 = Conv2d(512, 512, kernel_size=3, stride=1, padding=1)
         self.conv1024_1 = Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1)
 
-
         self.output_layer = Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
+
+        self.param_layer = torch.nn.Linear(2, 85)
 
     def forward(self, inputs):
         # down
@@ -150,14 +151,15 @@ class UNet(Module):
         parameters = torch.tensor([0.1,0.1])
         #print(parameters)
         # expand and make into 86 parameters (we need 85 to preserve shape)
-        parameters = parameters.expand(43,2)
+        #parameters = parameters.expand(43,2)
         #print(parameters)
         #parameters = parameters[None, :, :, :]
+        parameters = self.param_layer(parameters)
         
         # flatten original tensor out of bottom of u_net
         flat = torch.flatten(x)
         # flatten the 85 params and remove the last one to preserve shape
-        parameters = (torch.flatten(parameters))[:-1]
+        #parameters = (torch.flatten(parameters))[:-1]
         # concatenate
         x = torch.cat((flat, parameters))
         # reshape with one more value than before to preserve final shape
@@ -211,7 +213,6 @@ class UNet(Module):
         conv 2d 512
         relu, dropout, maxpool (to reduce dims)
         conv 2d 1024
-
         Going up the U
         ConvTranspose2d 1024, 512
         conv 2d 1024, 512
@@ -228,6 +229,5 @@ class UNet(Module):
         ConvTranspose2d 128, 64
         conv 2d 128, 64
         relu, dropout
-
         output layer conv2d (64 ...)
         '''

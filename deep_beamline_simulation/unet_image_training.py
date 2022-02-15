@@ -21,6 +21,9 @@ the output is the output of the SRX beamline
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
 
+#test_file_1 = "image_data/Initial-Intensity-33-1798m.csv"
+#test_output_file_1 = "image_data/Intensity-At-Sample-63-3m.csv"
+
 '''
 file path for test images
 testing images are the initial intensity of CSX
@@ -30,12 +33,16 @@ horizontal and vertical is 0.1
 test_file = "image_data/initialInt_262.csv"
 test_output_file = "image_data/sample_555.csv"
 
+
 # read csv using pandas, skip first row for headers
 train_numpy = pandas.read_csv(train_file, skiprows=1).to_numpy()
 output_numpy = pandas.read_csv(output_file, skiprows=1).to_numpy()
-
+print(train_numpy.shape)
+print(output_numpy.shape)
 test_numpy = pandas.read_csv(test_file, skiprows=1).to_numpy()
 test_output_numpy = pandas.read_csv(test_output_file, skiprows=1).to_numpy()
+print(test_numpy.shape)
+print(test_output_numpy.shape)
 
 # create a list to store in ImageProcessing class
 image_list = [train_numpy, output_numpy, test_numpy, test_output_numpy]
@@ -69,7 +76,7 @@ test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
 #model = ParamUnet()
 model = UNet(136,40)
 
-print(summary(model, input_size=(1, 1, 136, 40)))
+summary(model, input_size=(1, 1, 136, 40))
 
 '''
 Sanity check for image sizes
@@ -102,10 +109,11 @@ print(test_output_image.shape)
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 loss_func = torch.nn.MSELoss()
+#loss_func = torch.nn.CrossEntropyLoss()
 
 
 # loop through many epochs
-for e in range(0, 5000):
+for e in range(0, 10000):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -122,20 +130,24 @@ for e in range(0, 5000):
         print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))
 
 
-# test the model (same image for now)
+
+# test plotting
+tloss_list = []
+# test the model 
 test_predictions = None
 with torch.no_grad():
     model.eval()
     test_predictions = model(test_image)
     test_loss = loss_func(test_predictions, test_output_image)
+    tloss_list.append(test_loss.data.numpy())
     test_pred_cropped = ip.loss_crop(test_predictions)
     output_cropped = ip.loss_crop(test_output_image)
     cropped_test_loss = loss_func(test_pred_cropped, output_cropped)
 
-# output test loss
-print("Test Loss: " + str(test_loss.data.numpy()))
-# cropped output test loss
-print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
+    # output test loss
+    print("Test Loss: " + str(test_loss.data.numpy()))
+    # cropped output test loss
+    print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
 
 
 # remove extra dimenations to plot and view output
@@ -148,6 +160,7 @@ plt.subplot(121)
 plt.imshow(actual_im, extent=[0,100,0,1], aspect='auto')
 plt.subplot(122)
 plt.imshow(prediction_im, extent=[0,100,0,1], aspect='auto')
+plt.title('Actual Image VS Prediction Image')
 plt.colorbar()
 plt.tight_layout()
 plt.show()
