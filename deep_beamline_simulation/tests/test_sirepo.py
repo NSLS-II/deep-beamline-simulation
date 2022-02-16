@@ -68,8 +68,9 @@ def _test_simids(sim_id, server_name):
     }
     assert id_dict == actual_dict
 
-#@pytest.mark.xfail
-@vcr.use_cassette(f'{cassette_location}/simids_test.yml')
+
+# @pytest.mark.xfail
+@vcr.use_cassette(f"{cassette_location}/simids_test.yml")
 def test_simids_vcr():
     _test_simids(sim_id="avw4qnNw", server_name="http://10.10.10.10:8000")
 
@@ -95,6 +96,6 @@ def _test_components(sim_id, server_name):
     assert component_dict == actual_dict
 
 
-@vcr.use_cassette(f'{cassette_location}/components_test.yml')
+@vcr.use_cassette(f"{cassette_location}/components_test.yml")
 def test_components_vcr():
     _test_components(sim_id="avw4qnNw", server_name="http://10.10.10.10:8000")
