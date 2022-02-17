@@ -5,31 +5,27 @@ import numpy as np
 from pathlib import Path
 from torchinfo import summary
 import matplotlib
+
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
-#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing, ParamUnet
-#from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
-'''
-file path for train images
+"""
+File path for train images
 training images are the initial intensity of SRX beamline
 the output is the output of the SRX beamline
-'''
+"""
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
 
-#test_file_1 = "image_data/Initial-Intensity-33-1798m.csv"
-#test_output_file_1 = "image_data/Intensity-At-Sample-63-3m.csv"
-
-'''
+"""
 file path for test images
 testing images are the initial intensity of CSX
 the output is the output of the CSX beamline with varied aperture 
 horizontal and vertical is 0.1
-'''
+"""
 test_file = "image_data/initialInt_262.csv"
 test_output_file = "image_data/sample_555.csv"
 
@@ -37,12 +33,8 @@ test_output_file = "image_data/sample_555.csv"
 # read csv using pandas, skip first row for headers
 train_numpy = pandas.read_csv(train_file, skiprows=1).to_numpy()
 output_numpy = pandas.read_csv(output_file, skiprows=1).to_numpy()
-print(train_numpy.shape)
-print(output_numpy.shape)
 test_numpy = pandas.read_csv(test_file, skiprows=1).to_numpy()
 test_output_numpy = pandas.read_csv(test_output_file, skiprows=1).to_numpy()
-print(test_numpy.shape)
-print(test_output_numpy.shape)
 
 # create a list to store in ImageProcessing class
 image_list = [train_numpy, output_numpy, test_numpy, test_output_numpy]
@@ -51,13 +43,11 @@ ip = ImageProcessing(image_list)
 # find the size of the smallest image
 height, length = ip.smallest_image_size()
 
-
 # resize all images bigger than the smallest image size
 resized_train_image = ip.resize(train_numpy, height, length)
 resized_output_image = ip.resize(output_numpy, height, length)
 resized_test_image = ip.resize(test_numpy, height, length)
 resized_test_output_image = ip.resize(test_output_numpy, height, length)
-
 
 # normalize all training and testing data
 train_numpy = ip.normalize_image(resized_train_image)
@@ -71,20 +61,10 @@ output_image = torch.from_numpy(output_image.astype("f"))
 test_image = torch.from_numpy(test_numpy.astype("f"))
 test_output_image = torch.from_numpy(test_output_numpy.astype("f"))
 
-
 # create model
-#model = ParamUnet()
-model = UNet(136,40)
+model = UNet(136, 40)
 
 summary(model, input_size=(1, 1, 136, 40))
-
-'''
-Sanity check for image sizes
-print("Train Image Size")
-print(train_image.size())
-print("Output Image Size")
-print(output_image.size())
-'''
 
 train_image = train_image[None, None, :, :]
 output_image = output_image[None, None, :, :]
@@ -92,28 +72,14 @@ output_image = output_image[None, None, :, :]
 test_image = test_image[None, None, :, :]
 test_output_image = test_output_image[None, None, :, :]
 
-'''
-#Sanity check for train image sizes
-print("Train Image Size After Adding Channels")
-print(train_image.shape)
-print("Output Image Size After Adding Channels")
-print(output_image.shape)
-#Sanity check for test image sizes
-print("Test Image Size After Adding Channels")
-print(test_image.shape)
-print("Output Image Size After Adding Channels")
-print(test_output_image.shape)
-'''
-
 
 # define optimizer and loss function
 optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 loss_func = torch.nn.MSELoss()
-#loss_func = torch.nn.CrossEntropyLoss()
-
+# loss_func = torch.nn.CrossEntropyLoss()
 
 # loop through many epochs
-for e in range(0, 10000):
+for e in range(0, 1):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
@@ -124,16 +90,14 @@ for e in range(0, 10000):
     loss.backward()
     optimizer.step()
 
-    if e%1000 == 0:
+    if e % 1000 == 0:
         # output the loss
-        print('Training Loss: ' + str(loss.data.numpy()))
-        print('Cropped Training Loss: ' + str(cropped_train_loss.numpy()))
-
-
+        print("Training Loss: " + str(loss.data.numpy()))
+        print("Cropped Training Loss: " + str(cropped_train_loss.numpy()))
 
 # test plotting
 tloss_list = []
-# test the model 
+# test the model
 test_predictions = None
 with torch.no_grad():
     model.eval()
@@ -151,16 +115,16 @@ with torch.no_grad():
 
 
 # remove extra dimenations to plot and view output
-prediction_im = test_predictions[0,0,:,:]
-actual_im = test_output_image[0,0,:,:]
+prediction_im = test_predictions[0, 0, :, :]
+actual_im = test_output_image[0, 0, :, :]
 
 
 # plot output
 plt.subplot(121)
-plt.imshow(actual_im, extent=[0,100,0,1], aspect='auto')
+plt.imshow(actual_im, extent=[0, 100, 0, 1], aspect="auto")
 plt.subplot(122)
-plt.imshow(prediction_im, extent=[0,100,0,1], aspect='auto')
-plt.title('Actual Image VS Prediction Image')
+plt.imshow(prediction_im, extent=[0, 100, 0, 1], aspect="auto")
+plt.title("Actual Image VS Prediction Image")
 plt.colorbar()
 plt.tight_layout()
 plt.show()
