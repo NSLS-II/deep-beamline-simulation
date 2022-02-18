@@ -68,7 +68,8 @@ jobs:
           # line 1: GSETTINGS_SCHEMA_DIR_CONDA_BACKUP: unbound variable
           set -vxeo pipefail
           conda env list
-          conda install -c conda-forge shadow3 srwpy
+          conda install -c conda-forge mamba
+          mamba install -c conda-forge shadow3 srwpy
           conda install pytorch torchvision torchaudio cpuonly -c pytorch
           pip install --upgrade pip wheel
           pip install .
