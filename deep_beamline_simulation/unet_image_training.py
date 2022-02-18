@@ -12,7 +12,6 @@ from torch.utils.data import DataLoader
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
-
 """
 File path for train images
 training images are the initial intensity of SRX beamline
@@ -20,6 +19,7 @@ the output is the output of the SRX beamline
 """
 train_file = "image_data/Initial-Intensity-33-1798m.csv"
 output_file = "image_data/Intensity-At-Sample-63-3m.csv"
+
 
 """
 file path for test images

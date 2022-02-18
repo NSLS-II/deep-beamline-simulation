@@ -6,7 +6,6 @@ from pathlib import Path
 import deep_beamline_simulation
 from deep_beamline_simulation.u_net import UNet, ImageProcessing
 
-
 def test_predictions():
     """
     Simple test function to ensure the model returns an
