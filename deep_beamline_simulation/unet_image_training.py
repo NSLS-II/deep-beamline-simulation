@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader
 from u_net import UNet, ImageProcessing
 from torchinfo import summary
 
+
 """
 File path for train images
 training images are the initial intensity of SRX beamline
@@ -78,32 +79,48 @@ optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
 loss_func = torch.nn.MSELoss()
 # loss_func = torch.nn.CrossEntropyLoss()
 
+'''
+Tensorboard implementation
+'''
+tb_loss = []
+crop_loss = []
+tb_path = "/vagrant/loss.txt"
+crop_path = "/vagrant/crop.txt"
+
+# Clear file from previous run
+with open(tb_path, "r+") as f:
+    f.truncate(0)
+# open to write new information
+loss_file = open(tb_path, "w")
+crop_file = open(crop_path, "w")
+
 # loop through many epochs
-for e in range(0, 1):
+for e in range(0, 1000):
     predictions = model(train_image)
     crop_pred = predictions.detach()
     crop_train = ip.loss_crop(train_image)
     crop_out = ip.loss_crop(crop_pred)
     loss = loss_func(predictions, output_image)
+    tb_loss.append(loss.data.numpy())
     cropped_train_loss = loss_func(crop_train, crop_out)
+    crop_loss.append(cropped_train_loss.data.numpy())
     optimizer.zero_grad()
     loss.backward()
     optimizer.step()
 
-    if e % 1000 == 0:
+    if e % 100 == 0:
         # output the loss
         print("Training Loss: " + str(loss.data.numpy()))
         print("Cropped Training Loss: " + str(cropped_train_loss.numpy()))
 
-# test plotting
-tloss_list = []
+
 # test the model
 test_predictions = None
 with torch.no_grad():
     model.eval()
     test_predictions = model(test_image)
     test_loss = loss_func(test_predictions, test_output_image)
-    tloss_list.append(test_loss.data.numpy())
+    tb_loss.append(test_loss.data.numpy())
     test_pred_cropped = ip.loss_crop(test_predictions)
     output_cropped = ip.loss_crop(test_output_image)
     cropped_test_loss = loss_func(test_pred_cropped, output_cropped)
@@ -113,11 +130,18 @@ with torch.no_grad():
     # cropped output test loss
     print("Cropped Test Loss: " + str(cropped_test_loss.data.numpy()))
 
+for element in tb_loss:
+    loss_file.write(str(element) + "\n")
+
+for element in crop_loss:
+    crop_file.write(str(element) + "\n")
+
+loss_file.close()
+crop_file.close()
 
 # remove extra dimenations to plot and view output
 prediction_im = test_predictions[0, 0, :, :]
 actual_im = test_output_image[0, 0, :, :]
-
 
 # plot output
 plt.subplot(121)
