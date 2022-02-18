@@ -10,8 +10,8 @@ from u_net import Block, Encoder, Decoder, UNet, ImageProcessing
 
 
 # file path for images
-train_file = "image_data/Initial-Intensity-33-1798m.csv"
-output_file = "image_data/Intensity-At-Sample-63-3m.csv"
+train_file = "../image_data/Initial-Intensity-33-1798m.csv"
+output_file = "../image_data/Intensity-At-Sample-63-3m.csv"
 
 # read csv using pandas, skip first row for headers
 train_numpy = pandas.read_csv(train_file, skiprows=1).to_numpy()
