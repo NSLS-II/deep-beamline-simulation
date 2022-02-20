@@ -51,7 +51,6 @@ Vagrant.configure("2") do |config|
     # /home/vagrant/miniconda3/bin/mamba install -y -n dbs pytorch torchvision torchaudio cpuonly -c pytorch
     # use installation method from pytorch.org
     /home/vagrant/miniconda3/envs/dbs/bin/pip install torch==1.10.2+cpu torchvision==0.11.3+cpu torchaudio==0.10.2+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
-    /home/vagrant/miniconda3/envs/dbs/bin/pip install torchinfo
     # install deep-beamline-simulation
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -e /vagrant
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -r /vagrant/requirements-dev.txt

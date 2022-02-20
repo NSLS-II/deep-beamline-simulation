@@ -20,4 +20,4 @@ opencv-python
 #torch>=1.10.0+cpu
 #torchaudio>=0.10.0+cpu
 #torchvision>=0.11.1+cpu
-#torchinfo>=1.5.4
+torchinfo
