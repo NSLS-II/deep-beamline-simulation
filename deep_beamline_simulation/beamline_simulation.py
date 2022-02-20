@@ -45,12 +45,14 @@ sim_list_results = response_sim_list.json()
 
 simulation_folder = None
 sim_id_to_name = {}
-for sim_details in sorted(sim_list_results, key=lambda sim_details: sim_details["folder"]):
+for sim_details in sorted(
+    sim_list_results, key=lambda sim_details: sim_details["folder"]
+):
     if simulation_folder != sim_details["folder"]:
         print(f"simulation folder: {sim_details['folder']}")
         simulation_folder = sim_details["folder"]
     print(f"  {sim_details['simulationId']} : {sim_details['name']}")
-    sim_id_to_name[sim_details['name']] = sim_details['simulationId']
+    sim_id_to_name[sim_details["name"]] = sim_details["simulationId"]
 
 pprint.pprint(sim_id_to_name)
 print(f"TES simulation id: {sim_id_to_name['NSLS-II TES beamline']}")
@@ -68,4 +70,4 @@ pprint.pprint(response_simulation_data.json())
 # response_run_simulation = session.post(
 #     "http://localhost:8000/run-simulation", json={"simulationId": sim_id_to_name['NSLS-II TES beamline']}
 # )
-#print(f"run-simulation response:\n{pprint.pformat(response_run_simulation.json())}")
+# print(f"run-simulation response:\n{pprint.pformat(response_run_simulation.json())}")

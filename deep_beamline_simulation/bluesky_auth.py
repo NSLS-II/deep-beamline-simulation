@@ -26,22 +26,18 @@ input("press enter to continue")
 print("bluesky login")
 req = dict(simulationType="srw", simulationId="")
 r = random.SystemRandom()
-req['authNonce'] = str(int(ttime.time())) + '-' + ''.join(r.choice(numconv.BASE62) for x in range(32))
+req["authNonce"] = (
+    str(int(ttime.time())) + "-" + "".join(r.choice(numconv.BASE62) for x in range(32))
+)
 h = hashlib.sha256()
 h.update(
-    ':'.join(
-        [
-            req['authNonce'],
-            req['simulationType'],
-            req['simulationId'],
-            "bluesky"
-        ]
-    ).encode())
-
-req['authHash'] = 'v1:' + base64.urlsafe_b64encode(h.digest()).decode()
-
-#self.cookies = None
-#res = self._post_json('bluesky-auth', req)
-session.post(
-    "http://localhost:8000/bluesky-auth", data=req
+    ":".join(
+        [req["authNonce"], req["simulationType"], req["simulationId"], "bluesky"]
+    ).encode()
 )
+
+req["authHash"] = "v1:" + base64.urlsafe_b64encode(h.digest()).decode()
+
+# self.cookies = None
+# res = self._post_json('bluesky-auth', req)
+session.post("http://localhost:8000/bluesky-auth", data=req)

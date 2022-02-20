@@ -53,7 +53,7 @@ print(f"output from {response_import_file.url}")
 # the json from the request is the data we need
 uploaded_sim = response_import_file.json()
 pprint.pprint(uploaded_sim)
-#pprint.pprint(f"uploaded simulation:\n{uploaded_sim}")
+# pprint.pprint(f"uploaded simulation:\n{uploaded_sim}")
 input("press enter to continue")
 
 print("\nlook for the uploaded simulation in the list of simulations")
@@ -67,7 +67,9 @@ print(f"response from {response_sim_list.url}")
 sim_list_results = response_sim_list.json()
 
 simulation_folder = None
-for sim_details in sorted(sim_list_results, key=lambda sim_details: sim_details["folder"]):
+for sim_details in sorted(
+    sim_list_results, key=lambda sim_details: sim_details["folder"]
+):
     if simulation_folder != sim_details["folder"]:
         print(f"simulation folder: {sim_details['folder']}")
         simulation_folder = sim_details["folder"]
@@ -75,7 +77,7 @@ for sim_details in sorted(sim_list_results, key=lambda sim_details: sim_details[
 
 input("press enter to continue")
 
-#pprint.pprint(sim_list_results)
+# pprint.pprint(sim_list_results)
 # get sim id from uploaded_sim
 sim_id = uploaded_sim["models"]["simulation"]["simulationId"]
 print("Simulation ID of uploaded sim: " + str(sim_id))

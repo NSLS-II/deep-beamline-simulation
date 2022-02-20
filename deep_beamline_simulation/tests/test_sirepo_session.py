@@ -5,12 +5,16 @@ def test_connect(sirepo_server_url):
     """
     This test is successful if no exception is raised.
     """
-    with SirepoGuestSession(sirepo_server_url=sirepo_server_url) as sirepo_session:
+    with SirepoGuestSession(
+        sirepo_server_url=sirepo_server_url, simulation_type="srw"
+    ) as sirepo_session:
         pass
 
 
 def test_simulation_list(sirepo_server_url):
-    with SirepoGuestSession(sirepo_server_url=sirepo_server_url) as sirepo_session:
+    with SirepoGuestSession(
+        sirepo_server_url=sirepo_server_url, simulation_type="srw"
+    ) as sirepo_session:
         simulation_table = sirepo_session.simulation_list()
 
         # look for some known simulations
@@ -28,7 +32,9 @@ def test_simulation_list(sirepo_server_url):
 
 
 def test_simulation_data(sirepo_server_url):
-    with SirepoGuestSession(sirepo_server_url=sirepo_server_url) as sirepo_session:
+    with SirepoGuestSession(
+        sirepo_server_url=sirepo_server_url, simulation_type="srw"
+    ) as sirepo_session:
         simulation_table = sirepo_session.simulation_list()
         # pick a known simulation
         simulation_id = simulation_table[
@@ -40,7 +46,9 @@ def test_simulation_data(sirepo_server_url):
 
 
 def test_run_simulation(sirepo_server_url):
-    with SirepoGuestSession(sirepo_server_url=sirepo_server_url) as sirepo_session:
+    with SirepoGuestSession(
+        sirepo_server_url=sirepo_server_url, simulation_type="srw"
+    ) as sirepo_session:
         simulation_table = sirepo_session.simulation_list()
         # pick a known simulation
         simulation_id = simulation_table["/Wavefront Propagation"][
@@ -53,13 +61,13 @@ def test_run_simulation(sirepo_server_url):
         run_simulation_response = sirepo_session.run_simulation(
             simulation_id=simulation_id,
             simulation_report="intensityReport",
-            simulation_data=aperture_simulation_data
+            simulation_data=aperture_simulation_data,
         )
         sirepo_session.wait_for_simulation(run_simulation_response)
 
         run_simulation_response = sirepo_session.run_simulation(
             simulation_id=simulation_id,
             simulation_report="watchpointReport6",
-            simulation_data=aperture_simulation_data
+            simulation_data=aperture_simulation_data,
         )
         sirepo_session.wait_for_simulation(run_simulation_response)

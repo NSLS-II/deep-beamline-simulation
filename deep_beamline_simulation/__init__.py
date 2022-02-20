@@ -7,7 +7,8 @@ from urllib.parse import urlparse
 import requests
 
 from ._version import get_versions
-__version__ = get_versions()['version']
+
+__version__ = get_versions()["version"]
 del get_versions
 
 
@@ -32,7 +33,7 @@ class SirepoGuestSession(ContextDecorator):
         self._response_auth_guest_login = None
 
     def login(self):
-        """ Take the necessary steps to log in to sirepo as a guest.
+        """Take the necessary steps to log in to sirepo as a guest.
 
         Client code should prefer the context manager protocol to calling this method directly, for example:
 
@@ -46,20 +47,21 @@ class SirepoGuestSession(ContextDecorator):
 
         # get cookies by calling simulation-list
         response_simulation_list = self._post_to_sirepo(
-            f"{self._server_url}/simulation-list", json={"simulationType": self.simulation_type}
+            f"{self._server_url}/simulation-list",
+            json={"simulationType": self.simulation_type},
         )
         log.debug("response_simulation_list: %s", response_simulation_list)
 
         log.debug("logging in as guest to '%s'", self._server_url)
         # store the response for troubleshooting and automatic tests
         self._response_auth_guest_login = self._post_to_sirepo(
-            #"http://localhost:8000/auth-guest-login/srw"
+            # "http://localhost:8000/auth-guest-login/srw"
             f"{self._server_url}/auth-guest-login/{self.simulation_type}"
         )
         log.debug("response_auth_guest_login: '%s'", self._response_auth_guest_login)
 
     def logout(self):
-        """ Close the HTTP session.
+        """Close the HTTP session.
 
         This is the counterpart to `login`. Client code should prefer the context manager protocol.
 
@@ -82,7 +84,7 @@ class SirepoGuestSession(ContextDecorator):
         log.debug(
             "response: '%s', elapsed time: '%s's, ",
             sirepo_response,
-            sirepo_response.elapsed
+            sirepo_response.elapsed,
         )
         return sirepo_response
 
@@ -114,18 +116,22 @@ class SirepoGuestSession(ContextDecorator):
         """
         response_sim_list = self._post_to_sirepo(
             f"{self._server_url}/simulation-list",
-            json={"simulationType": self.simulation_type}
+            json={"simulationType": self.simulation_type},
         )
         sim_list_results = response_sim_list.json()
 
         # build a dictionary from the simulation list results
         # sim_folder_name_to_id means "folder" -> "name" -> simulation id
         sim_folder_name_to_id = {}
-        for sim_details in sorted(sim_list_results, key=lambda sim_details_: sim_details_["folder"]):
+        for sim_details in sorted(
+            sim_list_results, key=lambda sim_details_: sim_details_["folder"]
+        ):
             simulation_folder = sim_details["folder"]
             if simulation_folder not in sim_folder_name_to_id:
                 sim_folder_name_to_id[simulation_folder] = {}
-            sim_folder_name_to_id[simulation_folder][sim_details["name"]] = sim_details["simulationId"]
+            sim_folder_name_to_id[simulation_folder][sim_details["name"]] = sim_details[
+                "simulationId"
+            ]
 
         return sim_folder_name_to_id
 
@@ -155,7 +161,7 @@ class SirepoGuestSession(ContextDecorator):
             "run-simulation response: state '%s', nextRequest: '%s', nextRequestSeconds '%s'",
             run_simulation_response.json()["state"],
             run_simulation_response.json()["nextRequest"],
-            run_simulation_response.json()["nextRequestSeconds"]
+            run_simulation_response.json()["nextRequestSeconds"],
         )
         return run_simulation_response
 
@@ -192,6 +198,6 @@ class SirepoGuestSession(ContextDecorator):
         log.debug(
             "after successful completion run_status_response: %s\n  json:\n %s",
             run_status_response,
-            run_status_response.json()
+            run_status_response.json(),
         )
         return run_status_response

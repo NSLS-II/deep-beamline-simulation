@@ -3,7 +3,10 @@ from bluesky import RunEngine
 from bluesky.plans import count
 import ophyd
 
-from deep_beamline_simulation.ophyd import build_sirepo_simulation, build_sirepo_optical_element_class
+from deep_beamline_simulation.ophyd import (
+    build_sirepo_simulation,
+    build_sirepo_optical_element_class,
+)
 
 
 def test_build_sirepo_optical_element_component():
@@ -18,7 +21,7 @@ def test_build_sirepo_optical_element_component():
         "normalVectorY": 0,
         "normalVectorZ": -0.002499997395834147,
         "orientation": "x",
-        "position": 34.2608, # <--- must change "position" to something else because ophyd.DEVICE_RESERVED_ATTRS
+        "position": 34.2608,  # <--- must change "position" to something else because ophyd.DEVICE_RESERVED_ATTRS
         "radius": 8871.45,
         "sagittalSize": 0.005,
         "tangentialSize": 0.95,
@@ -26,9 +29,11 @@ def test_build_sirepo_optical_element_component():
         "tangentialVectorY": 0,
         "title": "HFM",
         "type": "sphericalMirror",
-        "verticalOffset": 0
+        "verticalOffset": 0,
     }
-    optical_element_name, optical_element_class = build_sirepo_optical_element_class(sirepo_optical_element_data=optical_element_data)
+    optical_element_name, optical_element_class = build_sirepo_optical_element_class(
+        sirepo_optical_element_data=optical_element_data
+    )
 
     assert optical_element_name == "HFM"
     assert optical_element_class.__name__ == "sphericalMirror"
@@ -52,9 +57,11 @@ def test_build_sirepo_optical_element_component():
         assert type(getattr(optical_element_instance, parameter_name)) == ophyd.Signal
         assert isinstance(
             getattr(optical_element_instance, parameter_name).get(),
-            type(parameter_value)
+            type(parameter_value),
         )
-        assert getattr(optical_element_instance, parameter_name).get() == parameter_value
+        assert (
+            getattr(optical_element_instance, parameter_name).get() == parameter_value
+        )
 
     optical_element_instance.read()
 
@@ -70,7 +77,9 @@ def test_build_sirepo_simulation(sirepo_guest_session):
         srx_simulation_data = sirepo_session.simulation_data(
             simulation_id=simulation_id
         )
-        sirepo_simulation_class = build_sirepo_simulation(sirepo_simulation_data=srx_simulation_data)
+        sirepo_simulation_class = build_sirepo_simulation(
+            sirepo_simulation_data=srx_simulation_data
+        )
 
     sirepo_simulation_instance = sirepo_simulation_class(name="srx")
     sirepo_simulation_instance.read()
@@ -87,7 +96,9 @@ def test_count_sirepo_simulation(sirepo_guest_session):
         srx_simulation_data = sirepo_session.simulation_data(
             simulation_id=simulation_id
         )
-        sirepo_simulation_class = build_sirepo_simulation(sirepo_simulation_data=srx_simulation_data)
+        sirepo_simulation_class = build_sirepo_simulation(
+            sirepo_simulation_data=srx_simulation_data
+        )
 
     # this function will store all documents
     # published by the RunEngine in a list

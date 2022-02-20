@@ -21,7 +21,10 @@ def sirepo_guest_session(sirepo_server_url):
     """
     A factory-as-a-fixture.
     """
+
     def sirepo_guest_session_(simulation_type):
-        return SirepoGuestSession(sirepo_server_url=sirepo_server_url, simulation_type=simulation_type)
+        return SirepoGuestSession(
+            sirepo_server_url=sirepo_server_url, simulation_type=simulation_type
+        )
 
     return sirepo_guest_session_
