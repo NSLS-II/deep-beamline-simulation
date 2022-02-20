@@ -42,14 +42,16 @@ Vagrant.configure("2") do |config|
     rm /tmp/Miniconda3-latest-Linux-x86_64.sh
     /home/vagrant/miniconda3/bin/conda init --system
     /home/vagrant/miniconda3/bin/conda update conda -y
+    /home/vagrant/miniconda3/bin/conda install mamba -c conda-forge
     # create a conda environment for development
-    /home/vagrant/miniconda3/bin/conda create -y -n dbs python=3.8
-    # install mamba
-    /home/vagrant/miniconda3/bin/conda install -y -n dbs mamba -c conda-forge
-    # install pytorch and dependencies
-    /home/vagrant/miniconda3/envs/dbs/bin/mamba install -y -n dbs pytorch torchvision torchaudio cpuonly -c pytorch
+    /home/vagrant/miniconda3/bin/mamba create -y -n dbs python=3.9
     # install SRW and shadow
-    /home/vagrant/miniconda3/envs/dbs/bin/mamba install -y -n dbs shadow3 srwpy -c conda-forge
+    /home/vagrant/miniconda3/bin/mamba install -y -n dbs shadow3 srwpy -c conda-forge
+    # install pytorch and dependencies
+    # /home/vagrant/miniconda3/bin/mamba install -y -n dbs pytorch torchvision torchaudio cpuonly -c pytorch
+    # use installation method from pytorch.org
+    /home/vagrant/miniconda3/envs/dbs/bin/pip install torch==1.10.2+cpu torchvision==0.11.3+cpu torchaudio==0.10.2+cpu -f https://download.pytorch.org/whl/cpu/torch_stable.html
+    /home/vagrant/miniconda3/envs/dbs/bin/pip install torchinfo
     # install deep-beamline-simulation
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -e /vagrant
     /home/vagrant/miniconda3/envs/dbs/bin/pip install -r /vagrant/requirements-dev.txt
