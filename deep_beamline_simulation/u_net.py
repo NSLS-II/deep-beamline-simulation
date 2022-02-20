@@ -1,32 +1,44 @@
 import cv2
-import torch
-import numpy as np
-import torchvision
-from PIL import Image
-import torch.nn as nn
-from torchinfo import summary
 import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+
+import torch
+from torchinfo import summary
 from torch.utils.data import DataLoader
+from torch.nn import (
+    Upsample,
+    ConvTranspose2d,
+    Conv2d,
+    MaxPool2d,
+    Module,
+    ModuleList,
+    ReLU,
+    Dropout,
+)
+from torchvision.transforms import CenterCrop
 
 
 class ImageProcessing:
     """
-    Processes images for proper training specifications 
+    Processes images for proper training specifications
     Prevents issues with size and shape of all images in a dataset
     Normalizes values in images to prevent training issues
     Parameters
     ----------
-    image_list : list 
+    image_list : list
         holds the list of images to transform with following methods
     """
 
     def __init__(self, image_list):
+        # stores a list of images to process for training or testing
         self.image_list = image_list
 
     def smallest_image_size(self):
+        # set to values that will be instantly changed
         min_height = 10e4
         min_length = 10e4
-
+        # loop through the images to get the minimum and maximum to resize
         for s in self.image_list:
             shape = s.shape
             height = shape[0]
@@ -38,148 +50,147 @@ class ImageProcessing:
         return min_height, min_length
 
     def resize(self, image, height, length):
-        res = cv2.resize(image, dsize=(length-1, height-1), interpolation=cv2.INTER_CUBIC)
+        # use CV2 to resize images to desired shape and interpolate if needed
+        res = cv2.resize(
+            image, dsize=(length - 1, height - 3), interpolation=cv2.INTER_CUBIC
+        )
         return res
 
-
     def normalize_image(self, image):
+        # normalize image by the mean and standard deviation to improve training
         im_mean = np.mean(image)
-        im_std  = np.std(image)
+        im_std = np.std(image)
         return (image - im_mean) / im_std
 
+    def loss_crop(self, image):
+        # crop images to recompute the loss to avoid all of th extra empty space
+        image = (image[0, 0, :, :]).numpy()
+        cropped_image = []
+        for row in image:
+            crop = row[17:25]
+            cropped_image.append(crop)
+        cropped_image = np.asarray(cropped_image[55:80])
+        cropped_image = torch.from_numpy(cropped_image.astype("f"))
+        return cropped_image
 
-class Block(nn.Module):
-    """ 
-    Create the basic block architecture with conv2d in and out and RELU activation
-    Assumes kernel size is 3, stride is 1, and padding is 1
-    
-    Parameters
-    ----------
-    input_channels : int
-        The number of channels in the input image
-        Set to 1 if no channels necessary
-    output_channels : int
-        The number of channels in the output image
-        Set to 1 if no channels necessary
+
+class UNet(Module):
+    """
+    Defines the UNet architecture
     """
 
-    def __init__(self, input_channels=1, output_channels=3):
+    def __init__(self, input_size, output_size):
         super().__init__()
-        self.input_layer = nn.Conv2d(
-            input_channels, output_channels, 3, stride=1, padding=1
-        )
-        self.relu = nn.ReLU()
-        self.output_layer = nn.Conv2d(
-            output_channels, output_channels, 3, stride=1, padding=1
-        )
+        # define input layer
+        self.input_layer = Conv2d(1, 1, kernel_size=3, stride=1, padding=1)
+        # for going down the U
+        self.conv_inx64 = Conv2d(1, 64, kernel_size=3, stride=1, padding=1)
+        self.conv_64x128 = Conv2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.conv_128x256 = Conv2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.conv_256x512 = Conv2d(256, 512, kernel_size=3, stride=1, padding=1)
 
-    def forward(self, x):
-        x = self.input_layer(x)
+        self.relu = ReLU()
+
+        self.dropout = Dropout(0.5)
+
+        self.maxpool = MaxPool2d(2)
+
+        self.upsample = Upsample(scale_factor=2, mode="nearest")
+        self.upsample_final = Upsample(size=(input_size, output_size))
+
+        # for going up the U
+        self.upconv1024 = ConvTranspose2d(1024, 512, kernel_size=3, stride=1, padding=1)
+        self.upconv512 = ConvTranspose2d(513, 256, kernel_size=3, stride=1, padding=1)
+        self.upconv256 = ConvTranspose2d(256, 128, kernel_size=3, stride=1, padding=1)
+        self.upconv128 = ConvTranspose2d(128, 64, kernel_size=3, stride=1, padding=1)
+
+        # used for down blocks
+        self.conv64 = Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
+        self.conv128 = Conv2d(128, 128, kernel_size=3, stride=1, padding=1)
+        self.conv256 = Conv2d(256, 256, kernel_size=3, stride=1, padding=1)
+        self.conv512 = Conv2d(512, 512, kernel_size=3, stride=1, padding=1)
+        self.conv1024 = Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1)
+
+        # used for up blocks
+        self.conv64_1 = Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
+        self.conv128_1 = Conv2d(128, 128, kernel_size=3, stride=1, padding=1)
+        self.conv256_1 = Conv2d(256, 256, kernel_size=3, stride=1, padding=1)
+        self.conv512_1 = Conv2d(512, 512, kernel_size=3, stride=1, padding=1)
+        self.conv1024_1 = Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1)
+
+        # define output layer
+        self.output_layer = Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
+
+        # define parameter layer for exapanding parameters of the change
+        self.param_layer = torch.nn.Linear(2, 85)
+
+    def forward(self, inputs):
+        # down
+        # encoder block 1
+        x = self.input_layer(inputs)
+        x = self.conv_inx64(x)
+        x = self.dropout(x)
         x = self.relu(x)
-        x = self.output_layer(x)
+        x = self.conv64(x)
+        x = self.maxpool(x)
+
+        # encoder block 2
+        x = self.conv_64x128(x)
+        x = self.dropout(x)
         x = self.relu(x)
-        return x
+        x = self.conv128(x)
+        x = self.maxpool(x)
 
+        # encoder block 3
+        x = self.conv_128x256(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.conv256(x)
+        x = self.maxpool(x)
 
-class Encoder(nn.Module):
-    """ 
-    Creates the Encoder block using the Block class that contracts images
-    The encoder is similar to a standard (Convolutional Neural Network CNN)
-    Assumes kernel size is 3, stride is 1, and padding is 1 from class Block
-    
-    Parameters
-    ----------
-    num_channels : list, tuple
-        As the image trains the number of channels will be increased
-        Later to be decreased by the conv transpose
-    """
+        # encoder block 4
+        x = self.conv_256x512(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.conv512(x)
 
-    def __init__(self, num_channels=(1, 64, 128)):
-        super().__init__()
-        block_list = []
-        for i in range(len(num_channels) - 1):
-            block_list.append(Block(num_channels[i], num_channels[i + 1]))
+        # the aperature horizonal/vertical position
+        parameters = torch.tensor([0.1, 0.1])
+        parameters = self.param_layer(parameters)
 
-        self.encoder_blocks = nn.ModuleList(block_list)
-        self.maxpool = nn.MaxPool2d(2)
+        # flatten original tensor out of bottom of u_net
+        flat = torch.flatten(x)
+        # concatenate
+        x = torch.cat((flat, parameters))
+        # reshape with one more value than before to preserve final shape
+        x = torch.reshape(x, (513, 17, 5))
 
-    def forward(self, x):
-        output = []
-        for block in self.encoder_blocks:
-            x = block(x)
-            output.append(x)
-            x = self.maxpool(x)
+        x = x[None, :, :, :]
+
+        # up
+        # decoder block 1
+        x = self.upconv512(x)
+        # x = self.conv_512x256(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.upsample(x)
+        x = self.conv256_1(x)
+
+        # decoder block 2
+        x = self.upconv256(x)
+        # x = self.conv_256x128(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.upsample(x)
+        x = self.conv128_1(x)
+
+        # decoder block 3
+        x = self.upconv128(x)
+        # x = self.conv_128x64(x)
+        x = self.dropout(x)
+        x = self.relu(x)
+        x = self.upsample_final(x)
+        x = self.conv64_1(x)
+
+        output = self.output_layer(x)
         return output
-
-
-class Decoder(nn.Module):
-    """ 
-    Creates the Decoder block using the Block class to expand images
-    Up samples image at each step to increase image from low to high resolution
-    Assumes kernel size is 3, stride is 1, and padding is 1 from class Block
-    
-    Parameters
-    ----------
-    num_channels : list, tuple
-        As the image trains the number of channels will be decreased from 
-        the maximum size from the encoder
-    Methods
-    -------
-    crop - Downsizes x to ensure correct output shape
-    """
-
-    def __init__(self, num_channels=(128, 64)):
-        super().__init__()
-        self.num_channels = num_channels
-        # conv transpose for decreasing pairs of channels
-        upconv_list = []
-        decblock_list = []
-        for i in range(len(num_channels) - 1):
-            upconv_list.append(
-                nn.ConvTranspose2d(num_channels[i], num_channels[i + 1], 2, 2)
-            )
-            decblock_list.append(Block(num_channels[i], num_channels[i + 1]))
-        self.upconv_modules = nn.ModuleList(upconv_list)
-        self.decoder_blocks = nn.ModuleList(decblock_list)
-
-    def forward(self, x, encoder_features):
-        for i in range(len(self.num_channels) - 1):
-            x = self.upconv_modules[i](x)
-            encoder_features = self.crop(encoder_features[i], x)
-            x = torch.cat([x, encoder_features], dim=1)
-            x = self.decoder_blocks[i](x)
-        return x
-
-    def crop(self, encoder_features, x):
-        _, _, H, W = x.shape
-        encoder_features = torchvision.transforms.CenterCrop([H, W])(encoder_features)
-        return encoder_features
-
-
-class UNet(nn.Module):
-    """ 
-    Creates a Unet model using the Block, Encoder, and Decoder classes
-    
-    Parameters
-    ----------
-    encoder_channels : list, tuple
-        same channels as the encoder class
-    decoder_channels : list, tuple
-        same channels as the decoder class
-    groups : int
-        default is 1 so that all inputs are convolved to all outputs
-    """
-
-    def __init__(
-        self, encoder_channels=(1, 64, 128), decoder_channels=(128, 64), groups=1,
-    ):
-        super().__init__()
-        self.encoder = Encoder(encoder_channels)
-        self.decoder = Decoder(decoder_channels)
-        self.head = nn.Conv2d(decoder_channels[-1], groups, 1)
-
-    def forward(self, x):
-        encoder_features = self.encoder(x)
-        out = self.decoder(encoder_features[::-1][0], encoder_features[::-1][1:])
-        out = self.head(out)
-        return out
