@@ -13,7 +13,7 @@ def test_predictions():
     """
     dbs_dir = (
         Path(deep_beamline_simulation.__path__[0]).parent
-        / "deep_beamline_simulation/image_data"
+        / "image_data"
     )
     train_file = dbs_dir / "Initial-Intensity-33-1798m.csv"
     output_file = dbs_dir / "Intensity-At-Sample-63-3m.csv"

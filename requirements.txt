@@ -17,7 +17,7 @@ requests
 sirepo-bluesky
 urllib3
 opencv-python
-torch>=1.10.0
-torchinfo>=1.5.4
-torchaudio>=0.10.0
-torchvision>=0.11.1
+#torch>=1.10.0+cpu
+#torchaudio>=0.10.0+cpu
+#torchvision>=0.11.1+cpu
+torchinfo
