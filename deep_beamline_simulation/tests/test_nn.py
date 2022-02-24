@@ -47,6 +47,8 @@ def test_predictions():
     train_image = train_image[None, None, :, :]
     output_image = output_image[None, None, :, :]
 
+    train_parameters = torch.tensor([1.0, 2.0])
+
     # define optimizer and loss function
     optimizer = torch.optim.Adam(model.parameters(), lr=0.1)
     loss_func = torch.nn.MSELoss()
@@ -54,7 +56,7 @@ def test_predictions():
     predictions = []
     # loop through many epochs
     for e in range(0, 3):
-        predictions = model(train_image)
+        predictions = model(train_image, train_parameters)
         loss = loss_func(predictions, output_image)
         optimizer.zero_grad()
         loss.backward()
