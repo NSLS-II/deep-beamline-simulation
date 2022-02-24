@@ -1,5 +1,8 @@
+import os
 import cv2
+import h5py
 import matplotlib.pyplot as plt
+from torch.utils.data import Dataset
 import numpy as np
 from PIL import Image
 
@@ -124,7 +127,7 @@ class UNet(Module):
         # define parameter layer for exapanding parameters of the change
         self.param_layer = torch.nn.Linear(2, 85)
 
-    def forward(self, inputs):
+    def forward(self, inputs, input_params):
         # down
         # encoder block 1
         x = self.input_layer(inputs)
@@ -155,7 +158,7 @@ class UNet(Module):
         x = self.conv512(x)
 
         # the aperature horizonal/vertical position
-        parameters = torch.tensor([0.1, 0.1])
+        parameters = torch.tensor(input_params)
         parameters = self.param_layer(parameters)
 
         # flatten original tensor out of bottom of u_net
@@ -194,3 +197,34 @@ class UNet(Module):
 
         output = self.output_layer(x)
         return output
+
+
+class ImageDataset(Dataset):
+    """
+    Allows pytorch to access images for training
+    """
+
+    def __init__(self, path):
+        self.data_path = path
+        self.file = None
+        self.beamIntensities = None
+        self.parameters = None
+        self.image_count = 0
+
+    def find_images(self):
+        self.file = h5py.File(self.data_path)
+        self.beamIntensities = file["/beamIntensities"]
+        self.image_count = len(self.beamIntensities)
+        self.parameters = file["paramVals"][:]
+
+    def __del__(self):
+        self.file.close()
+
+    def __getitem__(self, index):
+        """
+        Returns initial intensity (for beam), parameters and intensity for given index
+        """
+        return (self.parameters[index], self.beamIntensities[index])
+
+    def __len__(self):
+        return len(self.image_count)
