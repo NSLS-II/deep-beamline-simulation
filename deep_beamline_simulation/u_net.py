@@ -125,7 +125,7 @@ class UNet(Module):
         self.output_layer = Conv2d(64, 1, kernel_size=3, stride=1, padding=1)
 
         # define parameter layer for exapanding parameters of the change
-        self.param_layer = torch.nn.Linear(2, 85)
+        self.param_layer = torch.nn.Linear(2, 850)
 
     def forward(self, inputs, input_params):
         # down
@@ -166,9 +166,9 @@ class UNet(Module):
         # concatenate
         x = torch.cat((flat, parameters))
         # reshape with one more value than before to preserve final shape
-        x = torch.reshape(x, (513, 17, 5))
+        x = torch.reshape(x, (10, 513, 17, 5))
 
-        x = x[None, :, :, :]
+        x = torch.squeeze(x)
 
         # up
         # decoder block 1
