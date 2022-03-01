@@ -1,4 +1,5 @@
 NSLS-II-*-*/
+notebooks/preprocessed_results.h5
 
 requirements.in
 *.zip
