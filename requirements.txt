@@ -5,6 +5,7 @@ databroker
 entrypoints
 intake
 h5py
+jupyterlab
 matplotlib
 numconv
 numpy
