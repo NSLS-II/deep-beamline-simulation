@@ -50,12 +50,12 @@ def train(model, optimizer, loss_function, train_dataloader, test_dataloader, ep
     for e in range(0, epochs):
         training_loss = 0.0 
         model.train()
-        for correct_images, images, something in train_dataloader:
+        for correct_images, images, input_params in train_dataloader:
             optimizer.zero_grad()
             images = images.to(device)
             correct_images = correct_images.to(device)
 
-            predicted_images  = model(images)
+            predicted_images  = model(images, input_params)
 
             loss = loss_function(predicted_images, correct_images)
             loss.backward()
@@ -67,10 +67,10 @@ def train(model, optimizer, loss_function, train_dataloader, test_dataloader, ep
         testing_loss = 0.0
         model.eval()
 
-        for correct_images, images in test_dataloader:
+        for correct_images, images, input_params in test_dataloader:
             images = images.to(device)
             correct_images = correct_images.to(device)
-            predicted_images - model(images)
+            predicted_images = model(images, input_params)
             loss = loss_function(predicted_images, correct_images)
             testing_loss += loss.data.item()
 

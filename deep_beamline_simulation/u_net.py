@@ -341,7 +341,7 @@ class UNet(Module):
         #x = torch.cat((flat, parameters))
         # reshape with one more value than before to preserve final shape
         #x = torch.reshape(x, (513, 17, 5))
-        print(x.shape)
+        #print(x.shape)
         x = x[:, :, None, None]
 
         # up
@@ -455,8 +455,6 @@ def build_dataloaders(data_path, batch_size):
             )
 
     return training_intensity_dataloader, testing_intensity_dataloader
-
-
 
 
 
