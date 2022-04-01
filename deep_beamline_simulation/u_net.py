@@ -7,9 +7,7 @@ from torch.utils.data import Dataset
 import numpy as np
 import pandas as pd
 from PIL import Image
-
 import deep_beamline_simulation
-
 import torch
 from torchinfo import summary
 from torch.utils.data import DataLoader
@@ -69,15 +67,13 @@ class ImageProcessing:
         im_std = np.std(image)
         return (image - im_mean) / im_std
 
-    def loss_crop(self, image):
+    def loss_crop(self, image, x1, x2):
         # crop images to recompute the loss to avoid all of th extra empty space
-        image = (image[0, 0, :, :]).numpy()
         cropped_image = []
         for row in image:
-            crop = row[17:25]
+            crop = row[x1:x2]
             cropped_image.append(crop)
-        cropped_image = np.asarray(cropped_image[55:80])
-        cropped_image = torch.from_numpy(cropped_image.astype("f"))
+        cropped_image = np.asarray(cropped_image)
         return cropped_image
 
     def preprocess(self, filename):
@@ -99,19 +95,17 @@ class ImageProcessing:
             print(f"Parameter Shape: {f['params'].shape}" )
             _parameter_count = f["params"].shape[0]
 
-            # can call loss_crop or crop manually
-            h = beam_intensities.shape[1]
-            w = beam_intensities.shape[2]
-            hi = 0 + (h // 3)
-            hj = h - (h // 3)
-            wi = 0 + (w // 3)
-            wj = w - (w // 3)
+            cropped_beam_intensities = []
+            for image in beam_intensities:
+                cropped_beam_intensities.append(self.loss_crop(image, 400, 650))
 
-            cropped_beam_intensities = beam_intensities[:, hi:hj, wi:wj]
-            plt.figure()
-            plt.imshow(beam_intensities[0], aspect='auto')
-            plt.title('Cropped Image')
+            fig, axs = plt.subplots(nrows=1, ncols=2)
+            axs[0].imshow(beam_intensities[0], aspect='auto')
+            axs[0].set_title('Uncropped Image')
+            axs[1].imshow(cropped_beam_intensities[0], aspect='auto')
+            axs[1].set_title('Cropped Image')
 
+            cropped_beam_intensities = np.array(cropped_beam_intensities)
             log_cropped_beam_intensities = np.log(cropped_beam_intensities + 1e-10)
             plt.figure()
             plt.hist(log_cropped_beam_intensities.flatten(), bins=100)
@@ -140,18 +134,6 @@ class ImageProcessing:
                 else:
                     print(f"rejecting image {i} with std {std:.3e}")
                     bad_image_indices.append(i)
-                    # don't plot all bad images, there are about 50
-                    if len(bad_image_indices) < 3:
-                        plt.figure()
-                        plt.imshow(
-                            ip.resize(
-                                normalized_log_cropped_beam_intensities[i],
-                                height=128 + 3,
-                                length=128 + 1
-                            ),
-                            aspect="equal"
-                        )
-                        plt.show()
                 resized_images.append(
                     self.resize(
                         normalized_log_cropped_beam_intensities[i],
@@ -216,27 +198,16 @@ class ImageProcessing:
                 )
 
                 normalized_param_vals = (f["paramVals"] - np.mean(f["paramVals"])) / np.std(f["paramVals"])
-                print(f"normalized_param_vals\n{normalized_param_vals}")
 
                 for i, good_i in enumerate(good_image_indices):
                     normalized_param_vals_ds[i] = normalized_param_vals[good_i]
                     pbi_ds[i] = resized_images[good_i]
-
-                for good_i in good_image_indices[:10]:
-                    print(f"std: {np.std(pbi_ds[good_i])}")
-                    f, ax = plt.subplots(nrows=1, ncols=3)
-                    ax[0].imshow(beam_intensities[good_i], aspect="equal")
-                    ax[1].imshow(normalized_log_cropped_beam_intensities[good_i], aspect="equal")
-                    ax[2].imshow(resized_images[good_i], aspect="equal")
-                    plt.title(f"{params_ds[:]}\n{normalized_param_vals[good_i, :]}")
-                    plt.show()
 
             with h5py.File("preprocessed_results.h5", mode="r") as preprocessed_results:
                 print(preprocessed_results.keys())
                 print(preprocessed_results["params"])
                 print(preprocessed_results["params"][:])
                 print(preprocessed_results["preprocessed_param_vals"])
-                # print(preprocessed_results["preprocessed_initial_beam_intensity"][0:2, :10])
 
         return _parameter_count, resized_images
 
@@ -326,22 +297,10 @@ class UNet(Module):
 
         # the aperature horizonal/vertical position
         parameters = torch.tensor(input_params)
-        #print(parameters.shape)
         parameters = self.param_layer(parameters)
-        #print(parameters.shape)
-        #parameters = torch.permute(parameters, (1, 0))
-        #print(parameters.shape)
 
         x = self.param_layer_256(parameters)
         x = self.param_layer_512(x)
-
-        # flatten original tensor out of bottom of u_net
-        #flat = torch.flatten(x)
-        # concatenate
-        #x = torch.cat((flat, parameters))
-        # reshape with one more value than before to preserve final shape
-        #x = torch.reshape(x, (513, 17, 5))
-        #print(x.shape)
         x = x[:, :, None, None]
 
         # up
@@ -455,6 +414,4 @@ def build_dataloaders(data_path, batch_size):
             )
 
     return training_intensity_dataloader, testing_intensity_dataloader
-
-
 

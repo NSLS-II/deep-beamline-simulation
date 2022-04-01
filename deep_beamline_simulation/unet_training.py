@@ -6,7 +6,6 @@ import numpy as np
 from pathlib import Path
 from torchinfo import summary
 import matplotlib
-
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
@@ -49,7 +48,7 @@ def train(model, optimizer, loss_function, train_dataloader, test_dataloader, ep
 
     # want to visualize images and output
     num_rows = round((epochs-1)/50)
-    fig, axs = plt.subplots(nrows=num_rows, ncols=3)
+    fig, axs = plt.subplots(nrows=num_rows+1, ncols=3)
     count  = 0
 
     for e in range(0, epochs):
@@ -86,16 +85,18 @@ def train(model, optimizer, loss_function, train_dataloader, test_dataloader, ep
             print(
                 'Epoch:{}, Training Loss: {:.5f}, Test Loss: {:.5f}'.format(e, training_loss, testing_loss)
                 )
+            images = images.numpy()
+            #print(images.shape)
             axs[count, 0].imshow(images[0, 0, :, :], origin="lower")
-            axs[count, 0].set_title("initial")
+            axs[count, 0].set_title("initial, e= "+str(e))
             axs[count,0].axis("off")
             axs[count, 1].imshow(correct_images[0, 0, :, :], origin="lower")
-            axs[count, 1].set_title("target")
+            axs[count, 1].set_title("target, e= "+str(e))
             axs[count, 1].axis("off")
             #axs[1].set_xlabel(radius_scale_factor[0, :])
             predicted_images = predicted_images.cpu().detach().numpy()
             axs[count, 2].imshow(predicted_images[0, 0, :, :], origin="lower")
-            axs[count, 2].set_title("output")
+            axs[count, 2].set_title("output, e= "+str(e))
             axs[count, 2].axis("off")
             count += 1
     return train_loss, test_loss
@@ -103,12 +104,10 @@ def train(model, optimizer, loss_function, train_dataloader, test_dataloader, ep
 sim_count = len(resized_images)
 beamline = 'TES'
 
-epoch_count = 201
+epoch_count = 301
 
 print(f"training_intensity_dataloader length {len(training_intensity_dataloader)}")
 print(f"testing_intensity_dataloader length {len(testing_intensity_dataloader)}")
-
-print(list(training_intensity_dataloader))
 
 train_loss, test_loss = train(
     model,
@@ -118,7 +117,6 @@ train_loss, test_loss = train(
     testing_intensity_dataloader,
     epochs = epoch_count
     )
-
 
 plt.figure()
 plt.plot(train_loss)
@@ -133,8 +131,3 @@ plt.title(f"{beamline} {sim_count} Simulations Testing Loss")
 plt.xlabel("Epoch")
 plt.ylabel("Loss")
 plt.show()
-
-
-
-
-
